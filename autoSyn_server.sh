@@ -1,3 +1,3 @@
 #!/bin/sh
 git stash
-git pull --rebase origin master   #domnload data
+git pull --rebase origin main   #domnload data
