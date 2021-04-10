@@ -51,7 +51,9 @@ def _preprocess_depth(depth):
 class Exploration_Env(habitat.RLEnv):
 
     def __init__(self, args, config_env, config_baseline, dataset, run_dir):
-
+        
+        import pdb
+        pdb.set_trace()
         self.args = args
         self.run_dir = run_dir
 
