@@ -159,6 +159,8 @@ class Exploration_Env(habitat.RLEnv):
                                               self.agent_state[agent_id].rotation])
 
     def reset(self):
+        import pdb
+        pdb.set_trace()
         self.reward_gamma = 1
         self.episode_no += 1
         self.timestep = 0
