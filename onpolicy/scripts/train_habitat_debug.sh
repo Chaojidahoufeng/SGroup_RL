@@ -1,7 +1,7 @@
 #!/bin/sh
 env="Habitat"
 scenario="pointnav_gibson"
-num_agents=2
+num_agents=1
 algo="mappo"
 exp="no_repeat_penalty_scene_7_different_location"
 seed_max=1
