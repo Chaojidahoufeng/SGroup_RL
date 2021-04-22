@@ -189,7 +189,7 @@ class Exploration_Env(habitat.RLEnv):
         self.agent_st = []
 
         obs = super().reset()
-        full_map_size = self.map_size_cm//self.map_resolution
+        full_map_size = self.map_size_cm//self.map_resolution # 480
         for agent_id in range(self.num_agents):
             mapp, n_rot, n_trans, init_theta = self._get_gt_map(full_map_size, agent_id)
             self.explorable_map.append(mapp)
@@ -784,7 +784,7 @@ class Exploration_Env(habitat.RLEnv):
 
         print(self._env.sim.get_agent_state(agent_id).position.tolist())
         
-        agent_y = self._env.sim.get_agent_state(agent_id).position.tolist()[1]*100.
+        agent_y = self._env.sim.get_agent_state(agent_id).position.tolist()[1]*100. # cm
 
         if self.use_restrict_map:
             sim_map = self.map_obj.get_restrict_map(agent_y, -50., 50.0)
@@ -1001,6 +1001,7 @@ class Exploration_Env(habitat.RLEnv):
         return gt_action
     
     def render(self, inputs, grid, map_pred, gif_dir):
+  
         for agent_id in range(self.num_agents):
             goal = inputs['goal'][agent_id]
             goal = pu.threshold_poses(goal, grid.shape)

@@ -6,7 +6,7 @@ from . import depth_utils as du
 class MapBuilder(object):
     def __init__(self, params):
         self.params = params
-        frame_width = params['frame_width']
+        frame_width = paramsh
         frame_height = params['frame_height']
         fov = params['fov']
         self.camera_matrix = du.get_camera_matrix(
@@ -38,7 +38,7 @@ class MapBuilder(object):
         if self.timestep % self.num_local_steps == 0:
             self.current_explored_map = np.zeros((self.map_size_cm // self.resolution,
                              self.map_size_cm // self.resolution,
-                             len(self.z_bins) + 1), dtype=np.float32)
+                             len(self.z_bins) + 1), dtype=np.float32) # 480,480,3
         self.timestep  += 1
         with np.errstate(invalid="ignore"):
             depth[depth > self.vision_range * self.resolution] = np.NaN
