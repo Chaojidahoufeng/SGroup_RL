@@ -252,7 +252,7 @@ class Exploration_Env(habitat.RLEnv):
         self.current_explored_gt = []
         # Update ground_truth map and explored area
         for agent_id in range(self.num_agents):
-            fp_proj_t, map_t, fp_explored_t, explored_map_t, current_explored_gt = \
+            fp_proj_t, map_t, fp_explored_t, explored_map_t, current_explored_gt = \ 
                 self.mapper[agent_id].update_map(depth[agent_id], mapper_gt_pose[agent_id])
             fp_proj.append(fp_proj_t)
             self.map.append(map_t)
