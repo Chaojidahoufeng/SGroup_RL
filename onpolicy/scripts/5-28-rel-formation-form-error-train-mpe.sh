@@ -1,10 +1,10 @@
 #!/bin/sh
 env="MPE"
-scenario="rel_formation_only" 
-num_landmarks=3
-num_agents=3
+scenario="rel_formation_form_error" 
+num_landmarks=1
+num_agents=4
 algo="rmappo"
-exp="debug"
+exp="5-28-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -20,8 +20,8 @@ do
     --num_agents ${num_agents} \
     --num_landmarks ${num_landmarks} \
     --seed 50 \
-    --n_training_threads 5 \
-    --n_rollout_threads 32 \
+    --n_training_threads 1 \
+    --n_rollout_threads 1 \
     --num_mini_batch 1 \
     --episode_length 250 \
     --num_env_steps 20000000 \
