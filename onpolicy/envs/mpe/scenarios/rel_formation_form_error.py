@@ -600,8 +600,10 @@ class Scenario(BaseScenario):
         # ideal topo: [-15,0] [0,15] [15,0] [0,-15]
         # pos_rel = [0,0] [9,6] [-15,4] [12,7]
         #formation_reward = 
+
+        rew = navigation_reward + avoidance_reward + formation_reward + neighbor_dist_reward
        
-        return navigation_reward, avoidance_reward, formation_reward, neighbor_dist_reward
+        return rew
 
 
     def leader_reward(self, agent, world):
