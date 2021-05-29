@@ -59,6 +59,17 @@ def parse_args(args, parser):
     parser.add_argument("--num_landmarks", type=int, default=3)
     parser.add_argument('--num_agents', type=int,
                         default=2, help="number of players")
+                        
+    parser.add_argument("--map_max_size", type=int, default=2400)
+    parser.add_argument("--agent_init_bound", type=int, default=400)
+    parser.add_argument("--ideal_side_len", type=int, default=400)
+
+    parser.add_argument("--nav_rew_weight", type=float, default=1)
+    parser.add_argument("--avoid_rew_weight", type=float, default=5)
+    parser.add_argument("--form_rew_weight", type=float, default=0.005)
+    parser.add_argument("--dist_rew_weight", type=float, default=0.002)
+    parser.add_argument("--action_space_dim",  type=int, default=4)
+
 
     all_args = parser.parse_known_args(args)[0]
 
