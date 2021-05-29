@@ -23,7 +23,7 @@ srun -p gpu -N 1 -n 1 python -u train/train_mpe.py \
 --n_training_threads 5 \
 --n_rollout_threads 32 \
 --num_mini_batch 1 \
---episode_length 250 \
+--episode_length 25 \
 --num_env_steps 20000000 \
 --ppo_epoch 10 \
 --gain 0.01 \
