@@ -5,10 +5,10 @@ import numpy as np
 import math as math
 import random as random
 from numpy.linalg import norm
-from multiagent.core import World, Agent, Landmark, Static_obs, Dynamic_obs
-from multiagent.scenario import BaseScenario
+from onpolicy.envs.mpe.core import World, Agent, Landmark
+from onpolicy.envs.mpe.scenario import BaseScenario
 
-import maddpg.util.MDS as MDS
+import onpolicy.utils.MDS as MDS
 
 class Scenario(BaseScenario):
     def make_world(self, arglist):
