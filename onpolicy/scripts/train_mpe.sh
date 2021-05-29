@@ -12,8 +12,7 @@ for seed in `seq ${seed_max}`;
 do
     let "seed=$seed+1"
     echo "seed is ${seed}:"
-    srun -p gpu -N 1 -n 1 --export=ALL\ 
-    python -u train/train_mpe.py \
+    srun -p gpu -N 1 -n 1 python -u train/train_mpe.py \ 
     --env_name ${env} \
     --algorithm_name ${algo} \
     --experiment_name ${exp} \
