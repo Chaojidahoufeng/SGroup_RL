@@ -12,6 +12,7 @@ for seed in `seq ${seed_max}`;
 do
     let "seed=$seed+1"
     echo "seed is ${seed}:"
+    srun -p gpu -N 1 -n 2 \ 
     CUDA_VISIBLE_DEVICES=1 python train/train_mpe.py \
     --env_name ${env} \
     --algorithm_name ${algo} \
