@@ -14,6 +14,9 @@ from onpolicy.config import get_config
 from onpolicy.envs.mpe.MPE_env import MPEEnv
 from onpolicy.envs.env_wrappers import SubprocVecEnv, DummyVecEnv
 
+import pdb
+pdb.set_trace()
+
 def make_train_env(all_args):
     def get_env_fn(rank):
         def init_env():
