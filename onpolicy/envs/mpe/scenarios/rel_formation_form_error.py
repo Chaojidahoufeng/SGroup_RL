@@ -44,7 +44,7 @@ class Scenario(BaseScenario):
             # check if agent already collided
             agent.collide = True
             agent.leader = False
-            agent.silent = False #if i > 0 else False
+            agent.silent = True #if i > 0 else False
             #agent.adversary = True if i < num_adversaries else False
             agent.boundary = False
             agent.size = 10*np.sqrt(2)
