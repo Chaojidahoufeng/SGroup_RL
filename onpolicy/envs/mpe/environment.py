@@ -19,6 +19,9 @@ class MultiAgentEnv(gym.Env):
                  done_callback=None, post_step_callback=None,
                  shared_viewer=True, discrete_action=True):
 
+        import pdb
+        pdb.set_trace()
+
         self.world = world
         self.world_length = self.world.world_length
         self.current_step = 0
