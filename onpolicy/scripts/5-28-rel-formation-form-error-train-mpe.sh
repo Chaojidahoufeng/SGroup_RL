@@ -20,11 +20,11 @@ do
     --num_agents ${num_agents} \
     --num_landmarks ${num_landmarks} \
     --seed 50 \
-    --n_training_threads 1 \
-    --n_rollout_threads 1 \
+    --n_training_threads 5 \
+    --n_rollout_threads 32 \
     --num_mini_batch 1 \
     --episode_length 250 \
-    --num_env_steps 20000000 \
+    --num_env_steps 200000000 \
     --ppo_epoch 10 \
     --gain 0.01 \
     --lr 7e-4 \
