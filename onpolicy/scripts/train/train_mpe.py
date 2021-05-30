@@ -145,8 +145,6 @@ def main(args):
     np.random.seed(all_args.seed)
 
     # env init
-    import pdb
-    pdb.set_trace()
     envs = make_train_env(all_args)
     eval_envs = make_eval_env(all_args) if all_args.use_eval else None
     num_agents = all_args.num_agents
