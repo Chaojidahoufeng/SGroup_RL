@@ -30,5 +30,8 @@ do
     --gain 0.01 \
     --lr 7e-4 \
     --critic_lr 7e-4 \
-    --user_name "mapping"
+    --user_name "mapping" \
+    --avoid-rew-weight 5 \
+    --form-rew-weight 0.05 \
+    --dist-rew-weight 0. 
 done
