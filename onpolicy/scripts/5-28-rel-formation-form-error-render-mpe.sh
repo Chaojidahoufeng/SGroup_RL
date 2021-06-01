@@ -21,7 +21,7 @@ do
     --n_training_threads 1 \
     --n_rollout_threads 1 \
     --use_render \
-    --episode_length 250 
+    --episode_length 250 \
     --render_episodes 5 \
-    --model_dir "/home/yuchao/project/onpolicy/onpolicy/scripts/results/MPE/simple_spread/rmappo/newcode/wandb/run-20201130_161745-2tagw0g7/files/"
+    --model_dir "~/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/5-28-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run-14/models/"
 done
