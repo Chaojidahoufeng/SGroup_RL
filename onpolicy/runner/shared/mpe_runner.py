@@ -18,8 +18,6 @@ class MPERunner(Runner):
         super(MPERunner, self).__init__(config)
 
     def run(self):
-        import pdb
-        pdb.set_trace()
         self.warmup()   
 
         start = time.time()
@@ -191,9 +189,6 @@ class MPERunner(Runner):
     def render(self):
         envs = self.envs
 
-        import pdb
-        pdb.set_trace()
-
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
@@ -246,6 +241,8 @@ class MPERunner(Runner):
                         time.sleep(self.all_args.ifi - elapsed)
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
-
+        
+        import pdb
+        pdb.set_trace()
         if self.all_args.save_gifs:
             imageio.mimsave(str(self.gif_dir) + 'render.gif', all_frames, duration=self.all_args.ifi)
