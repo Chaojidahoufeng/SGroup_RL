@@ -190,6 +190,9 @@ class MPERunner(Runner):
     def render(self):
         envs = self.envs
 
+        import pdb
+        pdb.set_trace()
+
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
