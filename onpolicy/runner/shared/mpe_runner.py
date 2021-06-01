@@ -188,21 +188,20 @@ class MPERunner(Runner):
     @torch.no_grad()
     def render(self):
         envs = self.envs
-
+        
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
             if self.all_args.save_gifs:
-                image = envs.render('rgb_array')[0]
+                image = envs.render('rgb_array')[0][0]
                 all_frames.append(image)
+            else:
+                envs.render('human')
 
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
             
             episode_rewards = []
-
-            import pdb
-            pdb.set_trace()
             
             for step in range(self.episode_length):
                 calc_start = time.time()
@@ -236,16 +235,16 @@ class MPERunner(Runner):
                 masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
 
                 if self.all_args.save_gifs:
-                    image = envs.render('rgb_array')[0]
+                    image = envs.render('rgb_array')[0][0]
                     all_frames.append(image)
                     calc_end = time.time()
                     elapsed = calc_end - calc_start
                     if elapsed < self.all_args.ifi:
                         time.sleep(self.all_args.ifi - elapsed)
+                else:
+                    envs.render('human')
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
-        
-        import pdb
-        pdb.set_trace()
+
         if self.all_args.save_gifs:
-            imageio.mimsave(str(self.gif_dir) + 'render.gif', all_frames, duration=self.all_args.ifi)
+            imageio.mimsave(str(self.gif_dir) + '/render.gif', all_frames, duration=self.all_args.ifi)
