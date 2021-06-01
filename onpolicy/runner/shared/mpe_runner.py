@@ -193,6 +193,8 @@ class MPERunner(Runner):
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
             if self.all_args.save_gifs:
+                import pdb
+                pdb.set_trace()
                 image = envs.render('rgb_array')[0][0]
                 all_frames.append(image)
             else:
