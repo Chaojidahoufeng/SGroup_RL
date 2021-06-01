@@ -5,7 +5,7 @@ import numpy as np
 from .multi_discrete import MultiDiscrete
 
 # update bounds to center around agent
-cam_range = 2
+cam_range = 1000
 
 # environment for all agents in the multiagent world
 # currently code assumes that no agents will be created/destroyed at runtime!
