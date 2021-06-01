@@ -23,5 +23,5 @@ do
     --use_render \
     --episode_length 250 \
     --render_episodes 5 \
-    --model_dir "~/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/5-28-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run14/models/"
+    --model_dir "~/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/5-28-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run14/models"
 done
