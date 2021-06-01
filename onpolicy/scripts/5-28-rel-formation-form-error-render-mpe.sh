@@ -10,7 +10,7 @@ seed_max=1
 echo "env is ${env}"
 for seed in `seq ${seed_max}`
 do
-    CUDA_VISIBLE_DEVICES=4 python render/render_mpe.py \
+    CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
     --env_name ${env} \
     --algorithm_name ${algo} \
     --experiment_name ${exp} \
