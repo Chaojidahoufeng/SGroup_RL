@@ -200,6 +200,9 @@ class MPERunner(Runner):
             masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
             
             episode_rewards = []
+
+            import pdb
+            pdb.set_trace()
             
             for step in range(self.episode_length):
                 calc_start = time.time()
