@@ -32,6 +32,5 @@ do
     --user_name "mapping" \
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
-    --dist-rew-weight 0. \
-    --save_gifs
+    --dist-rew-weight 0.
 done
