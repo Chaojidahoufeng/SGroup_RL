@@ -64,7 +64,7 @@ class SoftCategorical(nn.Module):
             return init(m, init_method, lambda x: nn.init.constant_(x, 0), gain)
 
         self.linear = init_(nn.Linear(num_inputs, num_outputs))
-        self.softmax_layer = init_(nn.Softmax(num_outputs))
+        self.softmax_layer = nn.Softmax(num_outputs)
 
     def forward(self, x, available_actions=None):
         x = self.linear(x)
