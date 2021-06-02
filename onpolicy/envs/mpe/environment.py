@@ -81,7 +81,7 @@ class MultiAgentEnv(gym.Env):
             # total action space
             import pdb
             pdb.set_trace()
-            if len(total_action_space) >= 1:
+            if len(total_action_space) > 1:
                 # all action spaces are discrete, so simplify to MultiDiscrete action space
                 if all([isinstance(act_space, spaces.Discrete) for act_space in total_action_space]):
                     act_space = MultiDiscrete(

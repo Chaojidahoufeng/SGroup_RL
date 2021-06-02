@@ -29,6 +29,8 @@ class MPERunner(Runner):
 
             for step in range(self.episode_length):
                 # Sample actions
+                import pdb
+                pdb.set_trace()
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
                     
                 # Obser reward and next obs
