@@ -7,6 +7,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+'''
+    ****************************************************************************
+    SoftCategorical
+    Author: Yuzi Yan
+    Date: 2021.6.2
+    line 28: Change the 'Categorical' to 'SoftCategorical'
+    ****************************************************************************
+'''
+
 class ACTLayer(nn.Module):
     def __init__(self, action_space, inputs_dim, use_orthogonal, gain):
         super(ACTLayer, self).__init__()
