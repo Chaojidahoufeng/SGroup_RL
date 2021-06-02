@@ -1,5 +1,5 @@
 
-from .distributions import Bernoulli, Categorical, DiagGaussian
+from .distributions import Bernoulli, Categorical, DiagGaussian, SoftCategorical
 import math
 import numpy as np
 
@@ -16,7 +16,7 @@ class ACTLayer(nn.Module):
 
         if action_space.__class__.__name__ == "Discrete":
             action_dim = action_space.n
-            self.action_out = Categorical(inputs_dim, action_dim, use_orthogonal, gain)
+            self.action_out = SoftCategorical(inputs_dim, action_dim, use_orthogonal, gain)
         elif action_space.__class__.__name__ == "Box":
             self.continuous_action = True
             action_dim = action_space.shape[0]

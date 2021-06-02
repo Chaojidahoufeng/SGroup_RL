@@ -56,6 +56,22 @@ class FixedBernoulli(torch.distributions.Bernoulli):
         return torch.gt(self.probs, 0.5).float()
 
 
+class SoftCategorical(nn.Module):
+    def __init__(self, num_inputs, num_outputs, use_orthogonal=True, gain=0.01):
+        super(Categorical, self).__init__()
+        init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][use_orthogonal]
+        def init_(m): 
+            return init(m, init_method, lambda x: nn.init.constant_(x, 0), gain)
+
+        self.softmax = init_(nn.Softmax(num_inputs, num_outputs))
+
+    def forward(self, x, available_actions=None):
+        x = self.softmax(x)
+        if available_actions is not None:
+            x[available_actions == 0] = -1e10
+        return x
+
+
 class Categorical(nn.Module):
     def __init__(self, num_inputs, num_outputs, use_orthogonal=True, gain=0.01):
         super(Categorical, self).__init__()
