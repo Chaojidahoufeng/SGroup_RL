@@ -58,7 +58,7 @@ class FixedBernoulli(torch.distributions.Bernoulli):
 
 class SoftCategorical(nn.Module):
     def __init__(self, num_inputs, num_outputs, use_orthogonal=True, gain=0.01):
-        super(Categorical, self).__init__()
+        super(SoftCategorical, self).__init__()
         init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][use_orthogonal]
         def init_(m): 
             return init(m, init_method, lambda x: nn.init.constant_(x, 0), gain)
