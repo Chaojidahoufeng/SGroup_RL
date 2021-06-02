@@ -70,6 +70,7 @@ class SoftCategorical(nn.Module):
         import pdb
         pdb.set_trace()
         x = self.linear(x)
+        x = x.unsqueeze(-1)
         x = self.softmax_layer(x)
         if available_actions is not None:
             x[available_actions == 0] = -1e10
