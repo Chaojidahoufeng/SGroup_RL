@@ -28,8 +28,7 @@ class MPERunner(Runner):
                 self.trainer.policy.lr_decay(episode, episodes)
 
             for step in range(self.episode_length):
-                import pdb
-                pdb.set_trace()
+
                 # Sample actions
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
                     
@@ -100,6 +99,8 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def collect(self, step):
+        import pdb
+        pdb.set_trace()
         self.trainer.prep_rollout()
         value, action, action_log_prob, rnn_states, rnn_states_critic \
             = self.trainer.policy.get_actions(np.concatenate(self.buffer.share_obs[step]),
