@@ -51,6 +51,8 @@ class ACTLayer(nn.Module):
         if self.mixed_action :
             actions = []
             action_log_probs = []
+            import pdb
+            pdb.set_trace()
             for action_out in self.action_outs:
                 action_logit = action_out(x)
                 action = action_logit.mode() if deterministic else action_logit.sample()
