@@ -113,6 +113,8 @@ class MultiAgentEnv(gym.Env):
 
     # step  this is  env.step()
     def step(self, action_n):
+        import pdb
+        pdb.set_trace()
         self.current_step += 1
         obs_n = []
         reward_n = []
