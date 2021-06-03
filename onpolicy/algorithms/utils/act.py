@@ -25,7 +25,7 @@ class ACTLayer(nn.Module):
 
         if action_space.__class__.__name__ == "Discrete":
             action_dim = action_space.n
-            self.action_out = SoftCategorical(inputs_dim, action_dim, use_orthogonal, gain)
+            self.action_out = Categorical(inputs_dim, action_dim, use_orthogonal, gain)
         elif action_space.__class__.__name__ == "Box":
             self.continuous_action = True
             action_dim = action_space.shape[0]
@@ -48,11 +48,11 @@ class ACTLayer(nn.Module):
                 inputs_dim, discrete_dim, use_orthogonal, gain)])
     
     def forward(self, x, available_actions=None, deterministic=False):
+        import pdb
+        pdb.set_trace()
         if self.mixed_action :
             actions = []
             action_log_probs = []
-            import pdb
-            pdb.set_trace()
             for action_out in self.action_outs:
                 action_logit = action_out(x)
                 action = action_logit.mode() if deterministic else action_logit.sample()
