@@ -82,7 +82,7 @@ class Categorical(nn.Module):
 class YuziClass(torch.distributions.Normal):
     def __init__(self, logits=None):
         self.logits = logits
-    def log_probs(self, value):
+    def log_probs(self, actions):
         return super().log_prob(actions).sum(-1, keepdim=True)
     def sample(self):
         return self.logits
