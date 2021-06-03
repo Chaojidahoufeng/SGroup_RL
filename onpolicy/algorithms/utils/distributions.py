@@ -82,6 +82,8 @@ class Categorical(nn.Module):
 class YuziClass(torch.distributions.Normal):
     def __init__(self, logits=None):
         self.logits = logits
+    def log_prob(self, value):
+        return super().log_prob(actions).sum(-1, keepdim=True)
     def sample(self):
         return self.logits
     def mode(self):
@@ -101,7 +103,7 @@ class SoftCategorical(nn.Module):
     def forward(self, x, available_actions=None):
         import pdb
         pdb.set_trace()
-        
+
         x = self.linear(x)
         x = self.softmax_layer(x)
         if available_actions is not None:
