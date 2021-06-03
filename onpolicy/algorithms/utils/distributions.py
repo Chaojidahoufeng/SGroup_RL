@@ -79,6 +79,14 @@ class Categorical(nn.Module):
     Function: Put the tensor into softmax category
     ****************************************************************************
 '''
+class YuziClass(nn.Module):
+    def __init__(self, logits=None):
+        self.logits = logits
+    def sample(self):
+        return self.logits
+    def mode(self):
+        return self.logits
+
 
 class SoftCategorical(nn.Module):
     def __init__(self, num_inputs, num_outputs, use_orthogonal=True, gain=0.01):
@@ -97,7 +105,7 @@ class SoftCategorical(nn.Module):
         x = self.softmax_layer(x)
         if available_actions is not None:
             x[available_actions == 0] = -1e10
-        return x
+        return YuziClass(x)
 
 
 
