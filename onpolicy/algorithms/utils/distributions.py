@@ -73,10 +73,11 @@ class Categorical(nn.Module):
 
 '''
     ****************************************************************************
-    SoftCategorical
+    SoftCategorical; YuziClass
     Author: Yuzi Yan
     Date: 2021.6.2
     Function: Put the tensor into softmax category
+    Not used yet
     ****************************************************************************
 '''
 class YuziClass(torch.distributions.Normal):
