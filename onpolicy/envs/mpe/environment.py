@@ -466,6 +466,8 @@ class MultiAgentEnv(gym.Env):
             '''for j in range(len(self.viewers)):
                 self.viewers[i].geoms.pop(-1)'''
         #print(pos[0])
+        import pdb
+        pdb.set_trace()
         return results
 
     def render_origin(self, mode='human', close=False):
