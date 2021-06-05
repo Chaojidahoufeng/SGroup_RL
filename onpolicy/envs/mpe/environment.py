@@ -288,12 +288,13 @@ class MultiAgentEnv(gym.Env):
 
         for i in range(len(self.viewers)):
             # create viewers (if necessary)
-
+            WINDOW_W = 700
+            WINDOW_H = 700
             if self.viewers[i] is None:
                 # import rendering only if we need it (and don't import for headless machines)
                 #from gym.envs.classic_control import rendering
                 from . import rendering
-                self.viewers[i] = rendering.Viewer(700, 700)
+                self.viewers[i] = rendering.Viewer(WINDOW_W, WINDOW_H)
 
         self.agents_geoms = []
         self.agents_geoms_xform = []
