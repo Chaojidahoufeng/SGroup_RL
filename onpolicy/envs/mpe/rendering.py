@@ -266,10 +266,20 @@ def make_capsule(length, width):
     return geom
 
 '''
-make_square
+make_square, make_triangle
 Author: Yuzi Yan
 Date: 2021.6.5
 '''
+
+def make_triangle(radius=10, res=3, angle=0, filled=True):
+    points = []
+    for i in range(res):
+        ang = 2 * math.pi * i / res + angle
+        points.append((math.cos(ang) * radius, math.sin(ang) * radius))
+    if filled:
+        return FilledPolygon(points)
+    else:
+        return PolyLine(points, True)
 
 def make_square(radius=10, res=4, angle=0, filled=True):
     points = []
