@@ -458,6 +458,8 @@ class MultiAgentEnv(gym.Env):
             self.viewers[i].add_label(distance)
             self.viewers[i].add_label(time)
             # render to display or array
+            import pdb
+            pdb.set_trace()
             for line in lines:
                 self.viewers[i].add_geom(line)
             results.append(self.viewers[i].render(return_rgb_array = mode=='rgb_array'))
@@ -466,8 +468,6 @@ class MultiAgentEnv(gym.Env):
             '''for j in range(len(self.viewers)):
                 self.viewers[i].geoms.pop(-1)'''
         #print(pos[0])
-        import pdb
-        pdb.set_trace()
         return results
 
     def render_origin(self, mode='human', close=False):
