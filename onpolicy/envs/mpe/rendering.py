@@ -265,32 +265,6 @@ def make_capsule(length, width):
     geom = Compound([box, circ0, circ1])
     return geom
 
-'''
-make_square, make_triangle
-Author: Yuzi Yan
-Date: 2021.6.5
-'''
-
-def make_triangle(radius=10, res=3, angle=0, filled=True):
-    points = []
-    for i in range(res):
-        ang = 2 * math.pi * i / res + angle
-        points.append((math.cos(ang) * radius, math.sin(ang) * radius))
-    if filled:
-        return FilledPolygon(points)
-    else:
-        return PolyLine(points, True)
-
-def make_square(radius=10, res=4, angle=0, filled=True):
-    points = []
-    for i in range(res):
-        ang = 2 * math.pi * i / res + angle
-        points.append((math.cos(ang) * radius, math.sin(ang) * radius))
-    if filled:
-        return FilledPolygon(points)
-    else:
-        return PolyLine(points, True)
-
 class Compound(Geom):
     def __init__(self, gs):
         Geom.__init__(self)
@@ -368,3 +342,66 @@ class SimpleImageViewer(object):
             self.isopen = False
     def __del__(self):
         self.close()
+
+'''
+########################
+Text, DisplayText, make_text
+Author: Yuzi Yan
+2021.6.5
+########################
+'''
+
+class Text(object):
+    def __init__(self):
+        self._color=Color((0, 0, 0, 255))
+        self.attrs = [self._color]
+    def render(self):
+        for attr in reversed(self.attrs):
+            attr.enable()
+        self.render1()
+        for attr in self.attrs:
+            attr.disable()
+    def render1(self):
+        raise NotImplementedError
+    def add_attr(self, attr):
+        self.attrs.append(attr)
+    def set_color(self, r, g, b, alpha=255.0):
+        self._color.vec4 = (r, g, b, alpha)
+
+class DisplayText(Text):
+    def __init__(self, t):
+        Text.__init__(self)
+        self.t = t
+    def render1(self):
+        self.t.draw()
+
+def make_text(text='', font_size=36, x=None, y=None, anchor_x='center', anchor_y='center', color=(0,0,0,255)):
+    label = pyglet.text.Label(text=text, font_size=font_size, x=x, y=y, anchor_x=anchor_x, anchor_y=anchor_y, color=color)
+    return DisplayText(label)
+
+
+'''
+make_square, make_triangle
+Author: Yuzi Yan
+Date: 2021.6.5
+'''
+
+def make_triangle(radius=10, res=3, angle=0, filled=True):
+    points = []
+    for i in range(res):
+        ang = 2 * math.pi * i / res + angle
+        points.append((math.cos(ang) * radius, math.sin(ang) * radius))
+    if filled:
+        return FilledPolygon(points)
+    else:
+        return PolyLine(points, True)
+
+def make_square(radius=10, res=4, angle=0, filled=True):
+    points = []
+    for i in range(res):
+        ang = 2 * math.pi * i / res + angle
+        points.append((math.cos(ang) * radius, math.sin(ang) * radius))
+    if filled:
+        return FilledPolygon(points)
+    else:
+        return PolyLine(points, True)
