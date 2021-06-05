@@ -271,6 +271,7 @@ class MultiAgentEnv(gym.Env):
     '''
 
     def render(self, mode='human', close=False):
+        from . import rendering
         if mode == 'human':
             alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             message = ''
