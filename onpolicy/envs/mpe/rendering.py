@@ -406,6 +406,9 @@ def make_square(radius=10, res=4, angle=0, filled=True):
     else:
         return PolyLine(points, True)
 
+def make_line(start, end):
+    return Line(start, end)
+
 class Viewer(object):
     def __init__(self, width, height, display=None):
         self.width = width
