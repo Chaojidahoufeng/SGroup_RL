@@ -48,8 +48,6 @@ class ACTLayer(nn.Module):
                 inputs_dim, discrete_dim, use_orthogonal, gain)])
     
     def forward(self, x, available_actions=None, deterministic=False):
-        import pdb
-        pdb.set_trace()
         if self.mixed_action:
             actions = []
             action_log_probs = []

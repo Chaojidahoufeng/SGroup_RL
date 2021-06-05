@@ -99,8 +99,6 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def collect(self, step):
-        import pdb
-        pdb.set_trace()
         self.trainer.prep_rollout()
         value, action, action_log_prob, rnn_states, rnn_states_critic \
             = self.trainer.policy.get_actions(np.concatenate(self.buffer.share_obs[step]),
@@ -196,8 +194,6 @@ class MPERunner(Runner):
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
             if self.all_args.save_gifs:
-                import pdb
-                pdb.set_trace()
                 image = envs.render('rgb_array')[0][0]
                 all_frames.append(image)
             else:

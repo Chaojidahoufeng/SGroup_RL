@@ -102,8 +102,6 @@ class SoftCategorical(nn.Module):
         self.softmax_layer = nn.Softmax(dim=1)
 
     def forward(self, x, available_actions=None):
-        import pdb
-        pdb.set_trace()
 
         x = self.linear(x)
         x = self.softmax_layer(x)

@@ -113,8 +113,6 @@ class MultiAgentEnv(gym.Env):
 
     # step  this is  env.step()
     def step(self, action_n):
-        import pdb
-        pdb.set_trace()
         self.current_step += 1
         obs_n = []
         reward_n = []
@@ -459,8 +457,6 @@ class MultiAgentEnv(gym.Env):
             self.viewers[i].add_label(distance)
             self.viewers[i].add_label(time)
             # render to display or array
-            import pdb
-            pdb.set_trace()
             for line in lines:
                 self.viewers[i].add_geom(line)
             results.append(self.viewers[i].render(return_rgb_array = mode=='rgb_array'))
