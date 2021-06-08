@@ -262,6 +262,31 @@ class World(object):
                         p_force[a] = p_force[a] + wf
         return p_force
 
+    '''
+    #####################################################
+    integrate_state_11_discrete 
+    p_force[0]: vel  （速度）
+    p_force[1]: omg  （directly controlled by angular, instead of angular velocity）
+    Name: Yuzi Yan
+    Date: 2021.06.08
+    #####################################################
+    '''
+
+    def integrate_state_11_discrete(self, p_force):
+        for i, entity in enumerate(self.entities):
+            if not entity.movable:
+                continue
+            entity.state.p_vel = p_force[i][0]
+            if (p_force[i] is not None):
+                entity.state.p_omg += p_force[i][1]
+            
+            if entity.max_speed is not None:
+                speed = np.sqrt(np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
+                if speed > entity.max_speed:
+                    entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
+                                                                  np.square(entity.state.p_vel[1])) * entity.max_speeds
+        
+
     def integrate_state(self, p_force):
         for i, entity in enumerate(self.entities):
             if not entity.movable:
@@ -275,7 +300,12 @@ class World(object):
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
                                                                       np.square(entity.state.p_vel[1])) * entity.max_speed
+            entity.state.p_pos_prev = entity.state.p_pos
+            entity.state.p_ang_prev = entity.state.p_ang
             entity.state.p_pos += entity.state.p_vel * self.dt
+            entity.state.p_ang -= entity.state.p_omg * self.dt
+            if abs(entity.state.p_ang) >= np.pi:
+                entity.state.p_ang -= np.sign(entity.state.p_ang) *2 * np.pi
 
     def update_agent_state(self, agent):
         # set communication state (directly for now)
