@@ -1,0 +1,1 @@
+srun -p gpu -n 1 -N 2 python debug.py
