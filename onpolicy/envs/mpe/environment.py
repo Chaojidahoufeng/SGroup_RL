@@ -68,7 +68,7 @@ class MultiAgentEnv(gym.Env):
                 Date: 2021.06.08
                 ###########################
                 '''
-                u_action_apace = spaces.Discrete(12)
+                u_action_space = spaces.Discrete(12)
             else:
                 u_action_space = spaces.Box(
                     low=-agent.u_range, high=+agent.u_range, shape=(world.dim_p,), dtype=np.float32)  # [-1,1]
