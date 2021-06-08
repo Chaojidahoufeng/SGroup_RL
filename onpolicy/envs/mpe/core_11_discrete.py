@@ -1,3 +1,12 @@
+'''
+##################################################################
+integrate_state(p_force)
+specially designed for 11 discrete action environment
+Author: Yuzi Yan
+Date: 2021.06.08
+##################################################################
+'''
+
 import numpy as np
 import seaborn as sns
 
@@ -218,7 +227,6 @@ class World(object):
         p_force = self.apply_environment_force(p_force)
         # integrate physical state
 
-
         self.integrate_state(p_force)
         # update agent state
         for agent in self.agents:
@@ -263,21 +271,39 @@ class World(object):
                             p_force[a] = 0.0
                         p_force[a] = p_force[a] + wf
         return p_force
-        
+
+    '''
+    #####################################################
+    integrate_state
+    p_force[0]: vel  （velocity）
+    p_force[1]: omg  （directly controlled by angular, instead of angular velocity）
+    Name: Yuzi Yan
+    Date: 2021.06.08
+    #####################################################
+    '''
 
     def integrate_state(self, p_force):
         for i, entity in enumerate(self.entities):
             if not entity.movable:
                 continue
-            entity.state.p_vel = entity.state.p_vel * (1 - self.damping)
             if (p_force[i] is not None):
-                entity.state.p_vel += (p_force[i] / entity.mass) * self.dt
+                entity.state.p_omg += p_force[i][1]
+
+            entity.state.p_vel[0] = p_force[i][0] * np.cos(entity.state.p_omg)
+            entity.state.p_vel[1] = p_force[i][1] * np.sin(entity.state.p_omg)
+            
             if entity.max_speed is not None:
-                speed = np.sqrt(
-                    np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
+                speed = np.sqrt(np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
-                                                                      np.square(entity.state.p_vel[1])) * entity.max_speed
+                                                                  np.square(entity.state.p_vel[1])) * entity.max_speed
+            entity.state.p_pos_prev = entity.state.p_pos
+            entity.state.p_ang_prev = entity.state.p_ang
+            entity.state.p_pos += entity.state.p_vel * self.dt
+            entity.state.p_ang -= entity.state.p_omg * self.dt
+            if abs(entity.state.p_ang) >= np.pi:
+                entity.state.p_ang -= np.sign(entity.state.p_ang) *2 * np.pi
+        
 
     def update_agent_state(self, agent):
         # set communication state (directly for now)

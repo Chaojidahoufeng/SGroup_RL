@@ -61,8 +61,14 @@ class MultiAgentEnv(gym.Env):
             total_action_space = []
             # physical action space
             if self.discrete_action_space:
-                u_action_space = spaces.Discrete(world.dim_p * 2 + 1)
-
+                # u_action_space = spaces.Discrete(world.dim_p * 2 + 1)
+                '''
+                ###########################
+                Author: Yuzi Yan
+                Date: 2021.06.08
+                ###########################
+                '''
+                u_action_space = spaces.Discrete(12)
             else:
                 u_action_space = spaces.Box(
                     low=-agent.u_range, high=+agent.u_range, shape=(world.dim_p,), dtype=np.float32)  # [-1,1]
@@ -122,7 +128,14 @@ class MultiAgentEnv(gym.Env):
         self.agents = self.world.policy_agents
         # set action for each agent
         for i, agent in enumerate(self.agents):
-            self._set_action(action_n[i], agent, self.action_space[i])
+            #self._set_action(action_n[i], agent, self.action_space[i])
+            '''
+            ###########################
+            Author: Yuzi Yan
+            Date: 2021.06.08
+            ###########################
+            '''
+            self._set_action_11_discrete(action_n[i], agent, self.action_space[i])
         # advance world state
         self.world.step()  # core.step()
         # record observation for each agent
@@ -188,6 +201,98 @@ class MultiAgentEnv(gym.Env):
         if self.reward_callback is None:
             return 0.0
         return self.reward_callback(agent, self.world)
+
+    '''
+    ####################################################
+    _set_action_12_discrete:
+    v：6 headings evenly spaced between -pi/6, pi/6
+    1/2v:  [−π/6, 0, π/6]
+    0: [−π/6, 0, π/6]
+    
+    Author: Yuzi Yan
+    Date: 2021.06.08
+    ####################################################
+    '''
+    def _set_action_11_discrete(self, action, agent, action_space, time=None):
+        v_pref = agent.max_speed
+        action_num = np.argmax(action)+1
+        agent.action.u = np.zeros(self.world.dim_p)
+        agent.action.c = np.zeros(self.world.dim_c)
+        if isinstance(action_space, MultiDiscrete):
+            act = []
+            size = action_space.high - action_space.low + 1
+            index = 0
+            for s in size:
+                act.append(action[index:(index+s)])
+                index += s
+            action = act
+        else:
+            action = [action]
+
+        if agent.movable:
+            # physical action
+            agent.action.u = np.zeros(self.world.dim_p)
+            if action_num == 1:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 0 * np.pi / 15
+            if action_num == 2:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 1 * np.pi / 15
+            if action_num == 3:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 2 * np.pi / 15
+            if action_num == 4:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 3 * np.pi / 15
+            if action_num == 5:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 4 * np.pi / 15
+            if action_num == 6:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 5 * np.pi / 15
+            if action_num == 7:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = - np.pi / 6
+            if action_num == 8:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = 0
+            if action_num == 9:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = np.pi / 6
+            if action_num == 10:
+                agent.action.u[0] = 0
+                agent.action.u[1] = - np.pi / 6
+            if action_num == 11:
+                agent.action.u[0] = 0
+                agent.action.u[1] = 0
+            if action_num == 12:
+                agent.action.u[0] = 0
+                agent.action.u[1] = np.pi / 6
+
+            #print('velocity: '+str(agent.action.u[0]))
+            # print(action_num)
+            sensitivity = 5.0
+            if agent.accel is None:
+                sensitivity = agent.accel
+            agent.action.u *= sensitivity
+
+            if (not agent.silent) and (not isinstance(action_space, MultiDiscrete)):
+                action[0] = action[0][d:]
+            else:
+                action = action[1:]
+
+        if not agent.silent:
+            # communication action
+            if self.discrete_action_input:
+                agent.action.c = np.zeros(self.world.dim_c)
+                agent.action.c[action[0]] = 1.0
+            else:
+                agent.action.c = action[0]
+
+            action = action[1:]
+
+        # make sure we used all elements of action
+        assert len(action) == 0
 
     # set env action for a particular agent
     def _set_action(self, action, agent, action_space, time=None):

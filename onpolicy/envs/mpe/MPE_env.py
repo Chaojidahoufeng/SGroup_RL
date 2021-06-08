@@ -1,7 +1,3 @@
-from .environment import MultiAgentEnv
-from .scenarios import load
-
-
 def MPEEnv(args):
     '''
     Creates a MultiAgentEnv object as env. This can be used similar to a gym
@@ -19,6 +15,12 @@ def MPEEnv(args):
         .action_space       :   Returns the action space for each agent
         .n                  :   Returns the number of Agents
     '''
+    if args.use_11_discrete_action:
+        from .environment_11_discrete_action import MultiAgentEnv
+        from .scenarios import load
+    else:
+        from .environment import MultiAgentEnv
+        from .scenarios import load
 
     # load scenario from script
     scenario = load(args.scenario_name + ".py").Scenario()

@@ -32,5 +32,6 @@ do
     --user_name "mapping" \
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
-    --dist-rew-weight 0.
+    --dist-rew-weight 0. \
+    --use_11_discrete_action
 done
