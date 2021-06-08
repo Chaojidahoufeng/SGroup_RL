@@ -135,8 +135,6 @@ class MultiAgentEnv(gym.Env):
             Date: 2021.06.08
             ###########################
             '''
-            import pdb
-            pdb.set_trace()
             self._set_action_11_discrete(action_n[i], agent, self.action_space[i])
         # advance world state
         self.world.step()  # core.step()
