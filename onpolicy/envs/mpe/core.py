@@ -225,8 +225,6 @@ class World(object):
         ##################################################################
         '''
         #self.integrate_state(p_force)
-        import pdb
-        pdb.set_trace()
         self.integrate_state_11_discrete(p_force)
         # update agent state
         for agent in self.agents:
