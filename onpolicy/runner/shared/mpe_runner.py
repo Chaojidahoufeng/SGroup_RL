@@ -205,7 +205,6 @@ class MPERunner(Runner):
             episode_rewards = []
             
             for step in range(self.episode_length):
-                print(step)
                 calc_start = time.time()
 
                 self.trainer.prep_rollout()
