@@ -231,47 +231,44 @@ class MultiAgentEnv(gym.Env):
 
         if agent.movable:
             # physical action
-            if self.discrete_action_input:
-                agent.action.u = np.zeros(self.world.dim_p)
-                if action_num == 1:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 0 * np.pi / 15
-                if action_num == 2:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 1 * np.pi / 15
-                if action_num == 3:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 2 * np.pi / 15
-                if action_num == 4:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 3 * np.pi / 15
-                if action_num == 5:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 4 * np.pi / 15
-                if action_num == 6:
-                    agent.action.u[0] = v_pref
-                    agent.action.u[1] = - np.pi / 6 + 5 * np.pi / 15
-                if action_num == 7:
-                    agent.action.u[0] = v_pref / 2
-                    agent.action.u[1] = - np.pi / 6
-                if action_num == 8:
-                    agent.action.u[0] = v_pref / 2
-                    agent.action.u[1] = 0
-                if action_num == 9:
-                    agent.action.u[0] = v_pref / 2
-                    agent.action.u[1] = np.pi / 6
-                if action_num == 10:
-                    agent.action.u[0] = 0
-                    agent.action.u[1] = - np.pi / 6
-                if action_num == 11:
-                    agent.action.u[0] = 0
-                    agent.action.u[1] = 0
-                if action_num == 12:
-                    agent.action.u[0] = 0
-                    agent.action.u[1] = np.pi / 6
-                
-            else:
-                pass
+            agent.action.u = np.zeros(self.world.dim_p)
+            if action_num == 1:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 0 * np.pi / 15
+            if action_num == 2:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 1 * np.pi / 15
+            if action_num == 3:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 2 * np.pi / 15
+            if action_num == 4:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 3 * np.pi / 15
+            if action_num == 5:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 4 * np.pi / 15
+            if action_num == 6:
+                agent.action.u[0] = v_pref
+                agent.action.u[1] = - np.pi / 6 + 5 * np.pi / 15
+            if action_num == 7:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = - np.pi / 6
+            if action_num == 8:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = 0
+            if action_num == 9:
+                agent.action.u[0] = v_pref / 2
+                agent.action.u[1] = np.pi / 6
+            if action_num == 10:
+                agent.action.u[0] = 0
+                agent.action.u[1] = - np.pi / 6
+            if action_num == 11:
+                agent.action.u[0] = 0
+                agent.action.u[1] = 0
+            if action_num == 12:
+                agent.action.u[0] = 0
+                agent.action.u[1] = np.pi / 6
+
             #print('velocity: '+str(agent.action.u[0]))
             print(action_num)
             sensitivity = 5.0
