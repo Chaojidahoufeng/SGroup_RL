@@ -294,7 +294,7 @@ class World(object):
                 speed = np.sqrt(np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
-                                                                  np.square(entity.state.p_vel[1])) * entity.max_speeds
+                                                                  np.square(entity.state.p_vel[1])) * entity.max_speed
             entity.state.p_pos_prev = entity.state.p_pos
             entity.state.p_ang_prev = entity.state.p_ang
             entity.state.p_pos += entity.state.p_vel * self.dt
