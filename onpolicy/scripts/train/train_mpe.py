@@ -70,7 +70,7 @@ def parse_args(args, parser):
     parser.add_argument("--form-rew-weight", type=float, default=0.005)
     parser.add_argument("--dist-rew-weight", type=float, default=0.002)
     parser.add_argument("--action_space_dim",  type=int, default=4)
-    
+
 
 
     all_args = parser.parse_known_args(args)[0]
@@ -166,7 +166,8 @@ def main(args):
         from onpolicy.runner.separated.mpe_runner import MPERunner as Runner
 
     runner = Runner(config)
-    runner.run()
+    #runner.run()
+    runner.render()
     
     # post process
     envs.close()
