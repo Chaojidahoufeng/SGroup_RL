@@ -290,7 +290,7 @@ class World(object):
                 entity.state.p_omg += p_force[i][1]
 
             entity.state.p_vel[0] = p_force[i][0] * np.cos(entity.state.p_omg)
-            entity.state.o_vel[1] = p_force[i][1] * np.sin(entity.state.p_omg)
+            entity.state.p_vel[1] = p_force[i][1] * np.sin(entity.state.p_omg)
             
             if entity.max_speed is not None:
                 speed = np.sqrt(np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
