@@ -15,8 +15,6 @@ def MPEEnv(args):
         .action_space       :   Returns the action space for each agent
         .n                  :   Returns the number of Agents
     '''
-    import pdb
-    pdb.set_trace()
     if args.use_11_discrete_action:
         from .environment_11_discrete_action import MultiAgentEnv
         from .scenarios import load
