@@ -217,7 +217,7 @@ class MultiAgentEnv(gym.Env):
     '''
     def _set_action_11_discrete(self, action, agent, action_space, time=None):
         v_pref = 20
-        action_num = action.find(1)+1
+        action_num = np.argmax(action)+1
         agent.action.u = np.zeros(self.world.dim_p)
         agent.action.c = np.zeros(self.world.dim_c)
         if isinstance(action_space, MultiDiscrete):
