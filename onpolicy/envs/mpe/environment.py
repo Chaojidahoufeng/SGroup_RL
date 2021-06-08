@@ -40,7 +40,7 @@ class MultiAgentEnv(gym.Env):
         self.discrete_action_space = discrete_action
 
         # if true, action is a number 0...N, otherwise action is a one-hot N-dimensional vector
-        self.discrete_action_input = True
+        self.discrete_action_input = False
         # if true, even the action is continuous, action will be performed discretely
         self.force_discrete_action = world.discrete_action if hasattr(
             world, 'discrete_action') else False
@@ -234,40 +234,40 @@ class MultiAgentEnv(gym.Env):
             # physical action
             if self.discrete_action_input:
                 agent.action.u = np.zeros(self.world.dim_p)
-                if action[0] == 1:
+                if action_num == 1:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 0 * np.pi / 15
-                if action[0] == 2:
+                if action_num == 2:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 1 * np.pi / 15
-                if action[0] == 3:
+                if action_num == 3:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 2 * np.pi / 15
-                if action[0] == 4:
+                if action_num == 4:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 3 * np.pi / 15
-                if action[0] == 5:
+                if action_num == 5:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 4 * np.pi / 15
-                if action[0] == 6:
+                if action_num == 6:
                     agent.action.u[0] = v_pref
                     agent.action.u[1] = - np.pi / 6 + 5 * np.pi / 15
-                if action[0] == 7:
+                if action_num == 7:
                     agent.action.u[0] = v_pref / 2
                     agent.action.u[1] = - np.pi / 6
-                if action[0] == 8:
+                if action_num == 8:
                     agent.action.u[0] = v_pref / 2
                     agent.action.u[1] = 0
-                if action[0] == 9:
+                if action_num == 9:
                     agent.action.u[0] = v_pref / 2
                     agent.action.u[1] = np.pi / 6
-                if action[0] == 10:
+                if action_num == 10:
                     agent.action.u[0] = 0
                     agent.action.u[1] = - np.pi / 6
-                if action[0] == 11:
+                if action_num == 11:
                     agent.action.u[0] = 0
                     agent.action.u[1] = 0
-                if action[0] == 12:
+                if action_num == 12:
                     agent.action.u[0] = 0
                     agent.action.u[1] = np.pi / 6
                 
