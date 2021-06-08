@@ -217,7 +217,15 @@ class World(object):
         # apply environment forces
         p_force = self.apply_environment_force(p_force)
         # integrate physical state
-        self.integrate_state(p_force)
+        '''
+        ##################################################################
+        integrate_state_11_discrete(p_force)
+        Author: Yuzi Yan
+        Date: 2021.06.08
+        ##################################################################
+        '''
+        #self.integrate_state(p_force)
+        integrate_state_11_discrete(p_force)
         # update agent state
         for agent in self.agents:
             self.update_agent_state(agent)
