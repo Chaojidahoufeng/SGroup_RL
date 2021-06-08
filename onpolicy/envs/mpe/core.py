@@ -273,7 +273,7 @@ class World(object):
     '''
     #####################################################
     integrate_state_11_discrete 
-    p_force[0]: vel  （速度）
+    p_force[0]: vel  （velocity）
     p_force[1]: omg  （directly controlled by angular, instead of angular velocity）
     Name: Yuzi Yan
     Date: 2021.06.08
@@ -293,6 +293,12 @@ class World(object):
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
                                                                   np.square(entity.state.p_vel[1])) * entity.max_speeds
+            entity.state.p_pos_prev = entity.state.p_pos
+            entity.state.p_ang_prev = entity.state.p_ang
+            entity.state.p_pos += entity.state.p_vel * self.dt
+            entity.state.p_ang -= entity.state.p_omg * self.dt
+            if abs(entity.state.p_ang) >= np.pi:
+                entity.state.p_ang -= np.sign(entity.state.p_ang) *2 * np.pi
         
 
     def integrate_state(self, p_force):
@@ -308,12 +314,6 @@ class World(object):
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
                                                                       np.square(entity.state.p_vel[1])) * entity.max_speed
-            entity.state.p_pos_prev = entity.state.p_pos
-            entity.state.p_ang_prev = entity.state.p_ang
-            entity.state.p_pos += entity.state.p_vel * self.dt
-            entity.state.p_ang -= entity.state.p_omg * self.dt
-            if abs(entity.state.p_ang) >= np.pi:
-                entity.state.p_ang -= np.sign(entity.state.p_ang) *2 * np.pi
 
     def update_agent_state(self, agent):
         # set communication state (directly for now)
