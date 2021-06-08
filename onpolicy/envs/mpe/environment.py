@@ -272,7 +272,8 @@ class MultiAgentEnv(gym.Env):
                 
             else:
                 pass
-            print('velocity: '+str(agent.action.u[0]))
+            #print('velocity: '+str(agent.action.u[0]))
+            print(action_num)
             sensitivity = 5.0
             if agent.accel is None:
                 sensitivity = agent.accel
