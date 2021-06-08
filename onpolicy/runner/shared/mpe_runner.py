@@ -207,7 +207,7 @@ class MPERunner(Runner):
             episode_rewards = []
             
             for step in range(self.episode_length):
-                if step >= 48:
+                if step >= 49:
                     import pdb
                     pdb.set_trace()
                 print(step)
