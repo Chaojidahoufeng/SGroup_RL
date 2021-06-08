@@ -5,7 +5,7 @@ import numpy as np
 import math as math
 import random as random
 from numpy.linalg import norm
-from onpolicy.envs.mpe.core import World, Agent, Landmark
+
 from onpolicy.envs.mpe.scenario import BaseScenario
 
 import onpolicy.utils.MDS as MDS
@@ -13,6 +13,10 @@ import onpolicy.utils.MDS as MDS
 class Scenario(BaseScenario):
     def make_world(self, arglist):
         self.args = arglist
+        if self.args.use_11_discrete_action:
+            from onpolicy.envs.mpe.core_11_discrete import World, Agent, Landmark
+        else:
+            from onpolicy.envs.mpe.core import World, Agent, Landmark
         #rendering unit is in centimeter
         world = World()
         # set any world properties first
