@@ -192,8 +192,6 @@ class MPERunner(Runner):
         
         all_frames = []
         for episode in range(self.all_args.render_episodes):
-            import pdb
-            pdb.set_trace()
             obs = envs.reset()
             if self.all_args.save_gifs:
                 image = envs.render('rgb_array')[0][0]
@@ -207,9 +205,6 @@ class MPERunner(Runner):
             episode_rewards = []
             
             for step in range(self.episode_length):
-                if step >= 49:
-                    import pdb
-                    pdb.set_trace()
                 print(step)
                 calc_start = time.time()
 
