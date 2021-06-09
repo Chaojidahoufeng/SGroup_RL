@@ -463,8 +463,8 @@ class MultiAgentEnv(gym.Env):
             agent_x_min = min([agent.state.p_pos[0] for agent in self.agents])
             agent_y_max = max([agent.state.p_pos[1] for agent in self.agents])
             agent_y_min = min([agent.state.p_pos[1] for agent in self.agents])
-            cam_range_width = agent_x_max - agent_x_min + 100
-            cam_range_height = agent_y_max - agent_y_min + 100
+            cam_range_width = agent_x_max - agent_x_min + 300
+            cam_range_height = agent_y_max - agent_y_min + 300
             '''if self.shared_viewer:
                 pos = np.zeros(self.world.dim_p)
             else:
