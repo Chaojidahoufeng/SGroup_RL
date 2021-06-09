@@ -168,7 +168,8 @@ def main(args):
         from onpolicy.runner.separated.mpe_runner import MPERunner as Runner
 
     runner = Runner(config)
-    runner.run()
+    #runner.run()
+    runner.render()
     
     # post process
     envs.close()
