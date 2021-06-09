@@ -486,7 +486,7 @@ class MultiAgentEnv(gym.Env):
             arrow_xform = rendering.Transform()
             arrow.add_attr(arrow_xform)
             arrow_xform.set_translation(*self.world.agents[0].state.p_pos + goal_dir)
-            self.viewers[i].add_geom(arrow)
+            #self.viewers[i].add_geom(arrow)
             # add formation center to render
             ctr = []
             ctr_xform = []
