@@ -12,7 +12,7 @@ for seed in `seq ${seed_max}`;
 do
     let "seed=$seed+1"
     echo "seed is ${seed}:"
-    CUDA_VISIBLE_DEVICES=1 python train/train_mpe.py \
+    CUDA_VISIBLE_DEVICES=1 python train/train_mpe_render.py \
     --env_name ${env} \
     --algorithm_name ${algo} \
     --experiment_name ${exp} \
