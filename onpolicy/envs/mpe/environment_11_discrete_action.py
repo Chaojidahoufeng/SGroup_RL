@@ -460,7 +460,7 @@ class MultiAgentEnv(gym.Env):
             from . import rendering
             # update bounds to center around agent
             agent_x_max = max([agent.state.p_pos[0] for agent in self.agents])
-            agent_x_mix = min([agent.state.p_pos[0] for agent in self.agents])
+            agent_x_min = min([agent.state.p_pos[0] for agent in self.agents])
             agent_y_max = max([agent.state.p_pos[1] for agent in self.agents])
             agent_y_min = min([agent.state.p_pos[1] for agent in self.agents])
             cam_range_width = agent_x_max - agent_x_min + 100
