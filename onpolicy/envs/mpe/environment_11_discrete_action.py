@@ -490,7 +490,7 @@ class MultiAgentEnv(gym.Env):
             # add formation center to render
             ctr = []
             ctr_xform = []
-            ctr = rendering.make_circle(1)
+            ctr = rendering.make_circle(5)
             ctr_xform = rendering.Transform()
             ctr.add_attr(ctr_xform)
             ctr_xform.set_translation(*self.agents[0].agents_ctr)
