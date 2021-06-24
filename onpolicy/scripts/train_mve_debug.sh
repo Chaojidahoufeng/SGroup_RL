@@ -1,6 +1,6 @@
 #!/bin/sh
 env="MVE"
-scenario="3p1t2f"  # simple_speaker_listener # simple_spread
+scenario="relative_formation"
 num_landmarks=2
 num_agents=3
 algo="mappo"
