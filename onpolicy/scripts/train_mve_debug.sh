@@ -5,7 +5,7 @@ num_landmarks=2
 num_agents=3
 algo="mappo"
 exp="MAPPO"
-seed_max=10
+seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 for seed in `seq ${seed_max}`;
