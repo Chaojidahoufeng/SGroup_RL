@@ -15,7 +15,7 @@ do
     --algorithm_name ${algo} --experiment_name ${exp} --scenario_name ${scenario} \
     --user_name "yuzi" --num_agents ${num_agents} --num_landmarks ${num_landmarks} \
     --seed ${seed} --n_training_threads 1 --n_rollout_threads 1 --num_mini_batch 1 \
-    --episode_length 25 --num_env_steps 5000000 --ppo_epoch 10 --gain 0.01 \
+    --episode_length 250 --num_env_steps 5000000 --ppo_epoch 10 --gain 0.01 \
     --lr 7e-4 --critic_lr 7e-4 --use_recurrent_policy \
     --direction_alpha 0.1 
     #ß--wandb_name "tartrl"
