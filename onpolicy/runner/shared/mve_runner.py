@@ -33,8 +33,8 @@ class MVERunner(Runner):
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
                     
                 # Obser reward and next obs
-                import pdb
-                pdb.set_trace()
+                # import pdb
+                # pdb.set_trace()
                 obs, rewards, dones, infos = self.envs.step(actions_env)
                 pdb.set_trace()
 
