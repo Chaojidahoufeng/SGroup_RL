@@ -85,7 +85,7 @@ def parse_args(args, parser):
     parser.add_argument('--direction_alpha', type=float, default=0.1)
     parser.add_argument('--add_direction_encoder',type=str, default='train')
 
-    parser.add_argument('--ideal_topo_poiint', type=int, default=300)
+    parser.add_argument('--ideal_side_len', type=int, default=300)
     all_args = parser.parse_known_args(args)[0]
 
     return all_args
