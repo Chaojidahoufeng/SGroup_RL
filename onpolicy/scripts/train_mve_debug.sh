@@ -2,7 +2,7 @@
 env="MVE"
 scenario="relative_formation"
 num_landmarks=2
-num_agents=3
+num_agents=4
 algo="mappo"
 exp="MAPPO"
 seed_max=1
