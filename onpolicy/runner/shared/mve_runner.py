@@ -233,8 +233,8 @@ class MVERunner(Runner):
                     raise NotImplementedError
 
                 # Obser reward and next obs
-                import pdb
-                pdb.set_trace()
+                # import pdb
+                # pdb.set_trace()
                 obs, rewards, dones, infos = envs.step(actions_env)
                 episode_rewards.append(rewards)
 
