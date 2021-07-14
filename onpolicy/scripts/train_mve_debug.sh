@@ -11,7 +11,7 @@ echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, ma
 for seed in `seq ${seed_max}`;
 do
     echo "seed is ${seed}:"
-    CUDA_VISIBLE_DEVICES=0 python train/train_mve.py --env_name ${env} \
+    CUDA_VISIBLE_DEVICES=0 python train/train_mve_render.py --env_name ${env} \
     --algorithm_name ${algo} --experiment_name ${exp} --scenario_name ${scenario} \
     --user_name "yuzi" --num_agents ${num_agents} --num_landmarks ${num_landmarks} \
     --seed ${seed} --n_training_threads 1 --n_rollout_threads 1 --num_mini_batch 1 \

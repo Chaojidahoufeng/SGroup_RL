@@ -75,12 +75,11 @@ def make_eval_env(all_args):
 def parse_args(args, parser):
     parser.add_argument('--scenario_name', type=str,
                         default='3p1t2f', help="Which scenario to run on")
-    parser.add_argument("--num_landmarks", type=int, default=0)
+    parser.add_argument("--num_landmarks", type=int, default=1)
     parser.add_argument('--num_agents', type=int,
                         default=4, help="number of players")
-    parser.add_argument('--num_obstacles', type=int, default=0)
     parser.add_argument('--guiport',type=str,default='/dev/shm/gui_port')
-    parser.add_argument('--usegui', action='store_true', default=False)
+    parser.add_argument('--usegui', action='store_true', default=True)
     parser.add_argument('--step-t',type=float,default=1.0)
     parser.add_argument('--sim-step',type=int,default=100)
     parser.add_argument('--direction_alpha', type=float, default=0.1)
@@ -182,8 +181,8 @@ def main(args):
         from onpolicy.runner.separated.mve_runner import MVERunner as Runner
 
     runner = Runner(config)
-    runner.run()
-    # runner.render()
+    #runner.run()
+    runner.render()
     
     # post process
     envs.close()
