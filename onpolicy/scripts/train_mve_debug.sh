@@ -1,7 +1,7 @@
 #!/bin/sh
 env="MVE"
 scenario="relative_formation"
-num_landmarks=0
+num_landmarks=1
 num_agents=4
 num_obstacles=0
 algo="mappo"
