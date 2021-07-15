@@ -196,6 +196,8 @@ class MVERunner(Runner):
         envs = self.envs
         
         all_frames = []
+        import pdb
+        pdb.set_trace()
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
             if self.all_args.save_gifs:
