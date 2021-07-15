@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=4
 num_obstacles=0
 algo="mappo"
-exp="MAPPO"
+exp="7_14_form_crash"
 seed_max=10
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
