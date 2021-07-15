@@ -19,6 +19,8 @@ class MVERunner(Runner):
         super(MVERunner, self).__init__(config)
 
     def run(self):
+        import pdb
+        pdb.set_trace()
         self.warmup()   
 
         start = time.time()
