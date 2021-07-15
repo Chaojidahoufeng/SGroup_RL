@@ -19,8 +19,6 @@ class MVERunner(Runner):
         super(MVERunner, self).__init__(config)
 
     def run(self):
-        import pdb
-        pdb.set_trace()
         self.warmup()   
 
         start = time.time()
@@ -257,4 +255,6 @@ class MVERunner(Runner):
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
         if self.all_args.save_gifs:
+            import pdb
+            pdb.set_trace()
             imageio.mimsave(str(self.gif_dir) + '/render.gif', all_frames, duration=self.all_args.ifi)
