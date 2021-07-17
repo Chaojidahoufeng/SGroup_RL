@@ -24,7 +24,7 @@ do
     --use_render \
     --episode_length 25 \
     --render_episodes 5 \
-    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/scripts/results/MVE/relative_formation/mappo/7_14_form_crash/run1/models" \
+    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/7_14_form_crash/run1/models" \
     --use_recurrent_policy \
     --usegui
 done
