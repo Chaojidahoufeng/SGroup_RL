@@ -1,8 +1,8 @@
 #!/bin/sh
 env="MVE"
 scenario="relative_formation"  # simple_speaker_listener # simple_spread
-num_landmarks=2
-num_agents=3
+num_landmarks=1
+num_agents=4
 algo="mappo"
 exp="7_14_form_crash"
 seed_max=2
