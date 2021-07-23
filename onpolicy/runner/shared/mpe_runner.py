@@ -28,6 +28,8 @@ class MPERunner(Runner):
                 self.trainer.policy.lr_decay(episode, episodes)
 
             for step in range(self.episode_length):
+                import pdb
+                pdb.set_trace()
 
                 # Sample actions
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
