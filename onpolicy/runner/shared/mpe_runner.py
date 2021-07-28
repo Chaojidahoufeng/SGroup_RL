@@ -101,7 +101,7 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def collect(self, step):
-        self.trainer.prep_rollout()
+        self.trainer.prep_rollout() # 启动emodel的val()模式
         value, action, action_log_prob, rnn_states, rnn_states_critic \
             = self.trainer.policy.get_actions(np.concatenate(self.buffer.share_obs[step]),
                             np.concatenate(self.buffer.obs[step]),
