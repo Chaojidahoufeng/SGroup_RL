@@ -89,9 +89,6 @@ class SharedReplayBuffer(object):
             self.share_obs[self.step + 1] = share_obs.copy()
             self.obs[self.step + 1] = obs.copy()
 
-        import pdb
-        pdb.set_trace()
-
         self.rnn_states[self.step + 1] = rnn_states.copy()
         self.rnn_states_critic[self.step + 1] = rnn_states_critic.copy()
         self.actions[self.step] = actions.copy()
