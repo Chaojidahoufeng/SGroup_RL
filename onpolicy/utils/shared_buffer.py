@@ -97,7 +97,8 @@ class SharedReplayBuffer(object):
         self.actions[self.step] = actions.copy()
         self.action_log_probs[self.step] = action_log_probs.copy()
         self.value_preds[self.step] = value_preds.copy()
-        self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
+        #self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
+        self.rewards[self.step] = rewards.copy()
         self.masks[self.step + 1] = masks.copy()
         if bad_masks is not None:
             self.bad_masks[self.step + 1] = bad_masks.copy()
