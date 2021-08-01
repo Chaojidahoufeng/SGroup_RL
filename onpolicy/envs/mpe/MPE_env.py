@@ -19,7 +19,7 @@ def MPEEnv(args):
         from .environment_11_discrete_action import MultiAgentEnv
         from .scenarios import load
     else:
-        from .environment import MultiAgentEnv
+        from .environment_alpha import MultiAgentEnv
         from .scenarios import load
 
     # load scenario from script
