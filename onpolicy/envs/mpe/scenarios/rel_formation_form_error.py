@@ -16,7 +16,7 @@ class Scenario(BaseScenario):
         if self.args.use_11_discrete_action:
             from onpolicy.envs.mpe.core_11_discrete import World, Agent, Landmark
         else:
-            from onpolicy.envs.mpe.core import World, Agent, Landmark
+            from onpolicy.envs.mpe.core_alpha import World, Agent, Landmark
         #rendering unit is in centimeter
         world = World()
         # set any world properties first
