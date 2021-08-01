@@ -40,8 +40,8 @@ class MPERunner(Runner):
                 # insert data into buffer
                 self.insert(data)
 
-            import pdb
-            pdb.set_trace()
+            # import pdb
+            # pdb.set_trace()
 
             # compute return and update network
             self.compute()
