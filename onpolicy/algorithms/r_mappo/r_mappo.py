@@ -185,8 +185,8 @@ class R_MAPPO():
                 train_info['critic_grad_norm'] += critic_grad_norm.item()
                 train_info['ratio'] += ratio.mean().item()
 
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
 
         num_updates = self.ppo_epoch * self.num_mini_batch
 
