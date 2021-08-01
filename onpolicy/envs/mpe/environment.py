@@ -124,7 +124,7 @@ class MultiAgentEnv(gym.Env):
         for i, agent in enumerate(self.agents):
             self._set_action(action_n[i], agent, self.action_space[i])
             if i == 0:
-                print('agent 0 x: ' + agent.state.p_pos[0])
+                print('agent 0 x: ' + str(agent.state.p_pos[0]))
         # advance world state
         self.world.step()  # core.step()
         # record observation for each agent
