@@ -61,7 +61,7 @@ class MultiAgentEnv(gym.Env):
             total_action_space = []
             # physical action space
             if self.discrete_action_space:
-                u_action_space = spaces.Discrete(world.dim_p * 2)
+                u_action_space = spaces.Discrete(world.dim_p * 2 + 1)
 
             else:
                 u_action_space = spaces.Box(
