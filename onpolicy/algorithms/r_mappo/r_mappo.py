@@ -172,6 +172,9 @@ class R_MAPPO():
 
             for sample in data_generator:
 
+                import pdb
+                pdb.set_trace()
+
                 value_loss, critic_grad_norm, policy_loss, dist_entropy, actor_grad_norm, ratio \
                     = self.ppo_update(sample, turn_on)
 
