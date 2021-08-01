@@ -172,8 +172,8 @@ class R_MAPPO():
 
             for sample in data_generator:
 
-                import pdb
-                pdb.set_trace()
+                # import pdb
+                # pdb.set_trace()
 
                 value_loss, critic_grad_norm, policy_loss, dist_entropy, actor_grad_norm, ratio \
                     = self.ppo_update(sample, turn_on)
@@ -184,6 +184,9 @@ class R_MAPPO():
                 train_info['actor_grad_norm'] += actor_grad_norm.item()
                 train_info['critic_grad_norm'] += critic_grad_norm.item()
                 train_info['ratio'] += ratio.mean().item()
+
+        import pdb
+        pdb.set_trace()
 
         num_updates = self.ppo_epoch * self.num_mini_batch
 
