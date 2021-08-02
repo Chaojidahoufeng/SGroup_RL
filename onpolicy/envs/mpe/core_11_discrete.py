@@ -286,19 +286,20 @@ class World(object):
         for i, entity in enumerate(self.entities):
             if not entity.movable:
                 continue
+            entity.state.p_vel = entity.state.p_vel * (1 - self.damping)
             if (p_force[i] is not None):
                 entity.state.p_omg += p_force[i][1]
 
-            entity.state.p_vel[0] = p_force[i][0] * np.cos(entity.state.p_omg)
-            entity.state.p_vel[1] = p_force[i][1] * np.sin(entity.state.p_omg)
+                entity.state.p_vel[0] = p_force[i][0] * np.cos(entity.state.p_omg)
+                entity.state.p_vel[1] = p_force[i][1] * np.sin(entity.state.p_omg)
             
             if entity.max_speed is not None:
                 speed = np.sqrt(np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
                                                                   np.square(entity.state.p_vel[1])) * entity.max_speed
-            entity.state.p_pos_prev = entity.state.p_pos
-            entity.state.p_ang_prev = entity.state.p_ang
+            # entity.state.p_pos_prev = entity.state.p_pos
+            # entity.state.p_ang_prev = entity.state.p_ang
             entity.state.p_pos += entity.state.p_vel * self.dt
             entity.state.p_ang -= entity.state.p_omg * self.dt
             if abs(entity.state.p_ang) >= np.pi:

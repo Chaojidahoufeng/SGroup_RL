@@ -69,8 +69,7 @@ class Categorical(nn.Module):
         x = self.linear(x)
         if available_actions is not None:
             x[available_actions == 0] = -1e10
-        #return FixedCategorical(logits=x)
-        return FixedNormal(logits=x)
+        return FixedCategorical(logits=x)
 
 '''
     ****************************************************************************
