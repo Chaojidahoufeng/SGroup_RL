@@ -65,7 +65,7 @@ class MultiAgentEnv(gym.Env):
 
             else:
                 u_action_space = spaces.Box(
-                    low=-agent.u_range, high=+agent.u_range, shape=(world.dim_p,), dtype=np.float32)  # [-1,1]
+                    low=-agent.u_range, high=+agent.u_range, shape=(4,), dtype=np.float32)  # [-1,1]
             if agent.movable:
                 total_action_space.append(u_action_space)
 
