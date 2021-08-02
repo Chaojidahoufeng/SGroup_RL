@@ -69,7 +69,7 @@ class Entity(object):
         # state: including internal/mental state p_pos, p_vel
         self.state = EntityState()
         # mass
-        self.initial_mass = 0.012
+        self.initial_mass = 0.0012
         # commu channel
         self.channel = None
 
