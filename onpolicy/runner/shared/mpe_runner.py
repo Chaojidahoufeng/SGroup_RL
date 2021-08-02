@@ -231,6 +231,8 @@ class MPERunner(Runner):
                             actions_env = np.concatenate((actions_env, uc_actions_env), axis=2)
                 elif envs.action_space[0].__class__.__name__ == 'Discrete':
                     actions_env = np.squeeze(np.eye(envs.action_space[0].n)[actions], 2)
+                elif self.envs.action_space[0].__class__.__name__ == 'Box':
+                    actions_env = actions
                 else:
                     raise NotImplementedError
 
