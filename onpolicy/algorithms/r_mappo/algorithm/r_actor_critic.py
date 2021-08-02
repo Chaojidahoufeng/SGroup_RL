@@ -81,8 +81,8 @@ class R_Actor(nn.Module):
             mlp_obs = self.mlp(obs)
             actor_features = torch.cat([actor_features, mlp_obs], dim=1)
 
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
 
         actions, action_log_probs = self.act(actor_features, available_actions, deterministic)
         
@@ -193,6 +193,9 @@ class R_Critic(nn.Module):
         masks = check(masks).to(**self.tpdv)
 
         critic_features = self.base(share_obs)
+
+        import pdb
+        pdb.set_trace()
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             critic_features, rnn_states = self.rnn(critic_features, rnn_states, masks)
