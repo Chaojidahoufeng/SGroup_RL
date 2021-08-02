@@ -224,8 +224,8 @@ class MultiAgentEnv(gym.Env):
                 d = self.world.dim_p
             else:
                 if self.discrete_action_space:
-                    import pdb
-                    pdb.set_trace()
+                    # import pdb
+                    # pdb.set_trace()
                     # agent.action.u[0] += action[0][1] - action[0][2]
                     # agent.action.u[1] += action[0][3] - action[0][4]
                     agent.action.u[0] += action[0][0] - action[0][1]  # omega
