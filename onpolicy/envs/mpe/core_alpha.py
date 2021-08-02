@@ -273,13 +273,20 @@ class World(object):
                 continue
             entity.state.p_vel = entity.state.p_vel * (1 - self.damping)
             if (p_force[i] is not None):
-                entity.state.p_vel += (p_force[i] / entity.mass) * self.dt
+                entity.state.p_omg = np.pi * p_force[i][0] / (800*entity.mass)
+                entity.state.p_vel[0] += (p_force[i][1] * np.cos(entity.state.p_ang) / entity.mass) * self.dt
+                entity.state.p_vel[1] += (p_force[i][1] * np.sin(entity.state.p_ang) / entity.mass) * self.dt
             if entity.max_speed is not None:
                 speed = np.sqrt(
                     np.square(entity.state.p_vel[0]) + np.square(entity.state.p_vel[1]))
                 if speed > entity.max_speed:
                     entity.state.p_vel = entity.state.p_vel / np.sqrt(np.square(entity.state.p_vel[0]) +
-                                                                      np.square(entity.state.p_vel[1])) * entity.max_speed
+                                                  np.square(entity.state.p_vel[1])) * entity.max_speed
+
+            entity.state.p_pos += entity.state.p_vel * self.dt
+            entity.state.p_ang -= entity.state.p_omg * self.dt
+            if abs(entity.state.p_ang) >= np.pi:
+                entity.state.p_ang -= np.sign(entity.state.p_ang) *2 * np.pi
 
     def update_agent_state(self, agent):
         # set communication state (directly for now)
