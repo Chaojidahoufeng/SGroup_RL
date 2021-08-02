@@ -81,6 +81,9 @@ class R_Actor(nn.Module):
             mlp_obs = self.mlp(obs)
             actor_features = torch.cat([actor_features, mlp_obs], dim=1)
 
+        import pdb
+        pdb.set_trace()
+
         actions, action_log_probs = self.act(actor_features, available_actions, deterministic)
         
         return actions, action_log_probs, rnn_states
