@@ -273,7 +273,7 @@ class World(object):
     def integrate_state(self, p_force):
         for i, entity in enumerate(self.entities):
             if i == 0:
-                print(entity.state.p_vel)
+                print(p_force[i])
             if not entity.movable:
                 continue
             entity.state.p_vel = entity.state.p_vel * (1 - self.damping)
