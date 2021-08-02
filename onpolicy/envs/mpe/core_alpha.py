@@ -69,7 +69,7 @@ class Entity(object):
         # state: including internal/mental state p_pos, p_vel
         self.state = EntityState()
         # mass
-        self.initial_mass = 1.0
+        self.initial_mass = 0.012
         # commu channel
         self.channel = None
 
@@ -208,6 +208,7 @@ class World(object):
     # update state of the world
     def step(self):
         # zoe 20200420
+
         self.world_step += 1
         # set actions for scripted agents
         for agent in self.scripted_agents:
