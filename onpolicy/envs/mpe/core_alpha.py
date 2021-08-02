@@ -208,6 +208,8 @@ class World(object):
     # update state of the world
     def step(self):
         # zoe 20200420
+        import pdb
+        pdb.set_trace()
         self.world_step += 1
         # set actions for scripted agents
         for agent in self.scripted_agents:
