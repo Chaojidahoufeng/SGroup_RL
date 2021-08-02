@@ -270,6 +270,8 @@ class World(object):
         
 
     def integrate_state(self, p_force):
+        import pdb
+        pdb.set_trace()
         for i, entity in enumerate(self.entities):
             if not entity.movable:
                 continue
