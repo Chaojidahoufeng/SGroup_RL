@@ -22,7 +22,7 @@ do
     --n_rollout_threads 1 \
     --use_render \
     --episode_length 250 \
-    --render_episodes 1 \
+    --render_episodes 5 \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-02-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run1/models" \
     --save_gifs \
     --eval_interval 250
