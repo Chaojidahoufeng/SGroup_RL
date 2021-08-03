@@ -194,9 +194,6 @@ class R_Critic(nn.Module):
 
         critic_features = self.base(share_obs)
 
-        import pdb
-        pdb.set_trace()
-
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             critic_features, rnn_states = self.rnn(critic_features, rnn_states, masks)
 
