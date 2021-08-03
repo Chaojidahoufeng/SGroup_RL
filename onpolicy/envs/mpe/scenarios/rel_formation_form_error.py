@@ -586,8 +586,8 @@ class Scenario(BaseScenario):
         navigation_reward = 0
         avoidance_reward = - avoid_rew_weight * self.collide_this_time
 
-        if avoidance_reward != 0:
-            print('Ops, collision exists. avoidance_reward = ' + str(avoidance_reward))
+        # if avoidance_reward != 0:
+        #     print('Ops, collision exists. avoidance_reward = ' + str(avoidance_reward))
         
         all_agents = world.agents
         agent_index = world.agents.index(agent)
