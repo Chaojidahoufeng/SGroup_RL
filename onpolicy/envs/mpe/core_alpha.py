@@ -82,6 +82,11 @@ class Landmark(Entity):
     def __init__(self):
         super(Landmark, self).__init__()
 
+class Static_obs(Entity):
+    def __init__(self):
+        super(Static_obs, self).__init__()
+        self.initial_mass = 50
+
 # properties of agent entities
 class Agent(Entity):
     def __init__(self):
