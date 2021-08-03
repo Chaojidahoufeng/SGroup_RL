@@ -37,6 +37,8 @@ def parse_args(args, parser):
     parser.add_argument("--num_landmarks", type=int, default=3)
     parser.add_argument('--num_agents', type=int,
                         default=2, help="number of players")
+    parser.add_argument('--num_static_obs', type=int,
+                        default=1, help="number of static obstacle")
 
     parser.add_argument("--map-max-size", type=int, default=1200)
     parser.add_argument("--agent-init-bound", type=int, default=400)
