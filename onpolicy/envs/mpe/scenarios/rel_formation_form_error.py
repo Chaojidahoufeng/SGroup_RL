@@ -34,6 +34,9 @@ class Scenario(BaseScenario):
         # add agents
         world.agents = [Agent() for _ in range(num_agents)]
 
+        import pdb
+        pdb.set_trace()
+
         # ideal formation topo side length
         world.ideal_side_len = self.args.ideal_side_len
         # calculate the ideal formation topo
