@@ -204,9 +204,14 @@ class Scenario(BaseScenario):
             while min_agt_dis < 1 or norm(s.state.p_pos-world.goal)/100 < 2:
                 s.state.p_pos = np.array([np.random.uniform(100, 1000), np.random.uniform(100, 1000)])
                 min_agt_dis = np.min([norm(s.state.p_pos - a.state.p_pos) / 100 for a in world.agents])
+        
+        import pdb
+        pdb.set_trace()
+        
         for i,landmark in enumerate(world.landmarks):
             if landmark.center:
                 landmark.state.p_pos = world.goal
+
         #np.random.seed()
     def benchmark_data(self, agent, world):
         if agent.adversary:
