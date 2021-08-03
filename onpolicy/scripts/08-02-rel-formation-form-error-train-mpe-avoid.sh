@@ -33,5 +33,5 @@ do
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
     --dist-rew-weight 0. \
-    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-02-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run1/models"
+    --model_dir "/home/yanyz/data/MARL-yuzi/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-02-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run1/models"
 done
