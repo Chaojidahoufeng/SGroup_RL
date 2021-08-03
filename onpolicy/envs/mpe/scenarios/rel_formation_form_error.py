@@ -14,9 +14,9 @@ class Scenario(BaseScenario):
     def make_world(self, arglist):
         self.args = arglist
         if self.args.use_11_discrete_action:
-            from onpolicy.envs.mpe.core_11_discrete import World, Agent, Landmark, Stat
+            from onpolicy.envs.mpe.core_11_discrete import World, Agent, Landmark, Static_obs
         else:
-            from onpolicy.envs.mpe.core_alpha import World, Agent, Landmark
+            from onpolicy.envs.mpe.core_alpha import World, Agent, Landmark, Static_obs
         #rendering unit is in centimeter
         world = World()
         # set any world properties first
