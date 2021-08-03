@@ -122,6 +122,8 @@ class World(object):
         # list of agents and entities (can change at execution-time!)
         self.agents = []
         self.landmarks = []
+        self.static_obs = []
+        self.dynamic_obs = []
         self.walls = []
         # communication channel dimensionality
         self.dim_c = 0
@@ -149,7 +151,7 @@ class World(object):
     # return all entities in the world
     @property
     def entities(self):
-        return self.agents + self.landmarks
+        return self.agents + self.landmarks + self.static_obs + self.dynamic_obs
 
     # return all agents controllable by external policies
     @property
