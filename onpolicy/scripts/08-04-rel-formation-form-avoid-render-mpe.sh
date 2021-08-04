@@ -12,27 +12,21 @@ for seed in `seq ${seed_max}`;
 do
     let "seed=$seed+1"
     echo "seed is ${seed}:"
-    CUDA_VISIBLE_DEVICES=1 python train/train_mpe.py \
+    CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
     --env_name ${env} \
     --algorithm_name ${algo} \
     --experiment_name ${exp} \
     --scenario_name ${scenario} \
     --num_agents ${num_agents} \
     --num_landmarks ${num_landmarks} \
-    --seed 50 \
-    --n_training_threads 4 \
-    --n_rollout_threads 32 \
-    --num_mini_batch 1 \
+    --seed ${seed} \
+    --n_training_threads 1 \
+    --n_rollout_threads 1 \
+    --use_render \
     --episode_length 250 \
-    --num_env_steps 25000000 \
-    --ppo_epoch 10 \
-    --gain 0.01 \
-    --lr 7e-4 \
-    --critic_lr 7e-4 \
-    --user_name "mapping" \
-    --avoid-rew-weight 5 \
-    --form-rew-weight 0.05 \
-    --dist-rew-weight 0. \
+    --render_episodes 5 \
     --num_static_obs 5 \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-04-rel-formation-avoid-5-form-0_05/run1/models"
+    --save_gifs \
+    --eval_interval 250
 done
