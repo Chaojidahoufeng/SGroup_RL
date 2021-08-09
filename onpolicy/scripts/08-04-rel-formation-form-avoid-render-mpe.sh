@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=4
 algo="rmappo"
 exp="08-04-rel-formation-avoid-5-form-0_05"
-seed_max=2
+seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 for seed in `seq ${seed_max}`;
