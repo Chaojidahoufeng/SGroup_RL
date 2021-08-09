@@ -329,9 +329,7 @@ class World(object):
         # softmax penetration
         k = self.contact_margin
         penetration = np.logaddexp(0, -(dist - dist_min)/k)*k
-        import pdb
-        pdb.set_trace()
-        force = self.contact_force * delta_pos / np.max(dist,0.01) * penetration
+        force = self.contact_force * delta_pos / np.max([dist,0.01]) * penetration
         if entity_a.movable and entity_b.movable:
             # consider mass in collisions
             force_ratio = entity_b.mass / entity_a.mass
