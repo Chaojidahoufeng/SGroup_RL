@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=4
 algo="rmappo"
 exp="08-04-rel-formation-avoid-5-form-0_05"
-seed_max=1
+seed_max=3
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 for seed in `seq ${seed_max}`;
@@ -24,7 +24,7 @@ do
     --n_rollout_threads 1 \
     --use_render \
     --episode_length 250 \
-    --render_episodes 5 \
+    --render_episodes 1 \
     --num_static_obs 5 \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-04-rel-formation-avoid-5-form-0_05/run1/models" \
     --save_gifs \
