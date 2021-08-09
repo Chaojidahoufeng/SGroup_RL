@@ -235,6 +235,8 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def render(self):        
+        import pdb
+        pdb.set_trace()
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             episode_rewards = []
