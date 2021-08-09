@@ -26,7 +26,7 @@ do
     --form-rew-weight 0.05 \
     --nav-rew-weight 5 \
     --num_static_obs 5
-    # --use_render \
+    --use_render \
     --episode_length 250 \
     --render_episodes 1 \
     --num_static_obs 5 \
