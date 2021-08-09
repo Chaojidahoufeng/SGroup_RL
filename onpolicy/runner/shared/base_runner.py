@@ -96,6 +96,9 @@ class Runner(object):
                             self.envs.action_space[0],
                             device = self.device)
 
+        import pdb
+        pdb.set_trace()
+
         if self.model_dir is not None:
             self.restore()
 
