@@ -578,8 +578,6 @@ class Scenario(BaseScenario):
         # Agents are rewarded based on the distance between itself and the navigation goal
         # TODO: to change the reward alpha and beta
         # TODO: 相对定位坐标
-        import pdb
-        pdb.set_trace()
         rew = 0
         nav_rew_weight = self.args.nav_rew_weight
         avoid_rew_weight = self.args.avoid_rew_weight
@@ -590,6 +588,8 @@ class Scenario(BaseScenario):
         navigation_reward = - nav_rew_weight * (dis2goal - agent.dis2goal_prev)
         #navigation_reward = 0
         avoidance_reward = - avoid_rew_weight * self.collide_this_time
+
+        print(navigation_reward)
 
         # if avoidance_reward != 0:
         #     print('Ops, collision exists. avoidance_reward = ' + str(avoidance_reward))
