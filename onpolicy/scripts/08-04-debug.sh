@@ -32,6 +32,6 @@ do
     --user_name "mapping" \
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
-    --dist-rew-weight 0. \
-    --num_static_obs 5
+    --dist-rew-weight 5 \
+    --num_static_obs 0
 done

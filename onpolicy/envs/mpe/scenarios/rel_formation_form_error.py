@@ -578,6 +578,8 @@ class Scenario(BaseScenario):
         # Agents are rewarded based on the distance between itself and the navigation goal
         # TODO: to change the reward alpha and beta
         # TODO: 相对定位坐标
+        import pdb
+        pdb.set_trace()
         rew = 0
         nav_rew_weight = self.args.nav_rew_weight
         avoid_rew_weight = self.args.avoid_rew_weight
