@@ -34,5 +34,5 @@ do
     --form-rew-weight 0.05 \
     --nav-rew-weight 5 \
     --num_static_obs 0 \
-    --model_dir "/home/yanyz/data/MARL-yuzi/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-03-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run1/models" \
+    --model_dir "/home/yanyz/data/MARL-yuzi/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-03-rel-formation-form-error-comm-avoid-5-form-0_05-dist-0/run1/models"
 done
