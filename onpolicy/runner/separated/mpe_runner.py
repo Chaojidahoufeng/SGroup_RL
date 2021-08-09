@@ -235,8 +235,6 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def render(self):        
-        import pdb
-        pdb.set_trace()
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             episode_rewards = []
@@ -304,7 +302,5 @@ class MPERunner(Runner):
                 average_episode_rewards = np.mean(np.sum(episode_rewards[:, :, agent_id], axis=0))
                 print("eval average episode rewards of agent%i: " % agent_id + str(average_episode_rewards))
         
-        import pdb
-        pdb.set_trace()
         if self.all_args.save_gifs:
             imageio.mimsave(str(self.gif_dir) + 'render.gif', all_frames, duration=self.all_args.ifi)

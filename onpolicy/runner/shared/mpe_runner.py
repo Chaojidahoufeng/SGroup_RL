@@ -195,6 +195,8 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def render(self):
+        import pdb
+        pdb.set_trace()
         envs = self.envs
         
         all_frames = []
