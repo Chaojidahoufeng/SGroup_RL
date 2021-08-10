@@ -1,6 +1,6 @@
-# place the agent at the center of map
 # only have formation reward and avoidance reward, no other reward
 # --map-max-size 2400 --save-dir "../policy/model_maddpg.ckpt"
+# form a trapezoid(梯形)
 import numpy as np
 import math as math
 import random as random
@@ -35,12 +35,23 @@ class Scenario(BaseScenario):
         world.agents = [Agent() for _ in range(num_agents)]
 
         # ideal formation topo side length
-        world.ideal_side_len = self.args.ideal_side_len
+        world.ideal_side_len = self.args.ideal_side_len # 底边边长
         # calculate the ideal formation topo
         world.ideal_topo_point = [[],[]]
-        for i in range(num_follower_agents):
-            world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_follower_agents*2*np.pi))
-            world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_follower_agents*2*np.pi))
+
+        world.ideal_topo_point[0].append(0)
+        world.ideal_topo_point[1].append(0)
+
+        world.ideal_topo_point[0].append(world.ideal_side_len)
+        world.ideal_topo_point[1].append(0)
+
+        world.ideal_topo_point[0].append(world.ideal_side_len / 4 * 3)
+        world.ideal_topo_point[1].append(world.ideal_side_len / 4 * np.sqrt(3))
+
+        world.ideal_topo_point[0].append(world.ideal_side_len / 4)
+        world.ideal_topo_point[1].append(world.ideal_side_len / 4 * np.sqrt(3))
+
+
 
 
         for i, agent in enumerate(world.agents):
