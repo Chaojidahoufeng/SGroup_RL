@@ -34,5 +34,5 @@ do
     --form-rew-weight 0.05 \
     --nav-rew-weight 0 \
     --num_static_obs 0 \
-    --share-policy
+    --share_policy
 done
