@@ -585,8 +585,6 @@ class Scenario(BaseScenario):
         dist_rew_weight = self.args.dist_rew_weight
 
         dis2goal = norm(agent.state.p_pos - world.landmarks[0].state.p_pos) / 100 # cm->m
-        import pdb
-        pdb.set_trace()
         navigation_reward = - nav_rew_weight * (dis2goal - agent.dis2goal_prev)
         #navigation_reward = 0
         avoidance_reward = - avoid_rew_weight * self.collide_this_time
