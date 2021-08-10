@@ -164,6 +164,8 @@ def main(args):
     }
 
     # run experiments
+    import pdb
+    pdb.set_trace()
     if all_args.share_policy:
         from onpolicy.runner.shared.mpe_runner import MPERunner as Runner
     else:
