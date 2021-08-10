@@ -1,6 +1,6 @@
 #!/bin/sh
 env="MPE"
-scenario="rel_formation_form_error" 
+scenario="rel_formation_form_error-trapezoid" 
 num_landmarks=1
 num_agents=4
 algo="rmappo"
