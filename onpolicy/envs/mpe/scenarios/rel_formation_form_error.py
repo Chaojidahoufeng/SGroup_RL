@@ -747,11 +747,13 @@ class Scenario(BaseScenario):
         current_agent_num = int(agent.name[-1])
         agt_dis = agt_dis[current_agent_num:] + agt_dis[:current_agent_num]
         agt_ang = agt_ang[current_agent_num:] + agt_ang[:current_agent_num]
+
+
         if True in collide:
             agent.crash += 1
         self.collide_this_time += np.sum(collide)
 
-        target_dis = [np.array([norm(world.landmarks[0].state.p_pos - p_pos) / 1000])] 
+        target_dis = [np.array([norm(world.landmarks[0].state.p_pos - p_pos) / 100])] 
         target_ang = [np.array([self.get_relAngle(agent, world.landmarks[0])])]
         self.set_agent_ray(agent, obs_dis, obs_ang, obs_size)
         #sensor_ray = [np.array([agent.ray[i][j]]) for i in range(len(agent.ray)) for j in range(len(agent.ray[i]))]
@@ -793,7 +795,7 @@ class Scenario(BaseScenario):
         #return np.concatenate(err + vel + omg + agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
         # TODO: target_dis can be represented as d_cur - d_pre?
         #return np.concatenate(agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
-        return np.concatenate(agt_dis + agt_ang + min_ray)
+        return np.concatenate(agt_dis + agt_ang + min_ray + target_dis + target_ang)
 
     def constraint(self, agent, world):
         return []
