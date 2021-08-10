@@ -121,6 +121,8 @@ class MPERunner(Runner):
                         action_env = np.concatenate((action_env, uc_action_env), axis=1)
             elif self.envs.action_space[agent_id].__class__.__name__ == 'Discrete':
                 action_env = np.squeeze(np.eye(self.envs.action_space[agent_id].n)[action], 1)
+            elif self.envs.action_space[0].__class__.__name__ == 'Box':
+                action_env = action
             else:
                 raise NotImplementedError
 
@@ -268,6 +270,8 @@ class MPERunner(Runner):
                                 action_env = np.concatenate((action_env, uc_action_env), axis=1)
                     elif self.envs.action_space[agent_id].__class__.__name__ == 'Discrete':
                         action_env = np.squeeze(np.eye(self.envs.action_space[agent_id].n)[action], 1)
+                    elif self.envs.action_space[0].__class__.__name__ == 'Box':
+                        action_env = action
                     else:
                         raise NotImplementedError
 
