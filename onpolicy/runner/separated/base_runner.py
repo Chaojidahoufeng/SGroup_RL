@@ -95,8 +95,6 @@ class Runner(object):
                         device = self.device)
             self.policy.append(po)
 
-        import pdb
-        pdb.set_trace()
 
         if self.model_dir is not None:
             self.restore()
