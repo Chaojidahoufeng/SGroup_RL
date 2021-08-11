@@ -5,6 +5,7 @@ import os
 import numpy as np
 from itertools import chain
 import torch
+import imageio
 
 from onpolicy.utils.util import update_linear_schedule
 from onpolicy.runner.separated.base_runner import Runner
@@ -302,7 +303,7 @@ class MPERunner(Runner):
                     calc_end = time.time()
                     elapsed = calc_end - calc_start
                     if elapsed < self.all_args.ifi:
-                        time.sleep(ifi - elapsed)
+                        time.sleep(self.all_args.ifi - elapsed)
 
             for agent_id in range(self.num_agents):
                 average_episode_rewards = np.mean(np.sum(episode_rewards[:, :, agent_id], axis=0))
