@@ -4,7 +4,7 @@ scenario="rel_formation_form_error_trapezoid"
 num_landmarks=1
 num_agents=4
 algo="rmappo"
-exp="08-11-rel-formation-form-nav-train-mpe-trapezoid-seperate"
+exp="08-12-rel-formation-form-nav-train-mpe-trapezoid-seperate"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
