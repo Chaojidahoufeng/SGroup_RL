@@ -250,6 +250,7 @@ class MPERunner(Runner):
             masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
 
             for step in range(self.episode_length):
+                calc_start = time.time()
                 temp_actions_env = []
                 for agent_id in range(self.num_agents):
                     if not self.use_centralized_V:
