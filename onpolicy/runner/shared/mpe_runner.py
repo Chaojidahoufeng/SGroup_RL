@@ -74,11 +74,26 @@ class MPERunner(Runner):
                     env_infos = {}
                     for agent_id in range(self.num_agents):
                         idv_rews = []
+                        form_rews = []
+                        avoi_rews = []
+                        nav_rews = []
                         for info in infos:
                             if 'individual_reward' in info[agent_id].keys():
                                 idv_rews.append(info[agent_id]['individual_reward'])
-                        agent_k = 'agent%i/individual_rewards' % agent_id
-                        env_infos[agent_k] = idv_rews
+                                agent_k = 'agent%i/individual_rewards' % agent_id
+                                env_infos[agent_k] = idv_rews
+                            if 'formation_reward' in info[agent_id].keys():
+                                form_rews.append(info[agent_id]['formation_reward'])
+                                agent_k_form = 'agent%i/formation_reward' % agent_id
+                                env_infos[agent_k_form] = form_rews
+                            if 'avoidance_reward' in info[agent_id].keys():
+                                avoi_rews.append(info[agent_id]['avoidance_reward'])
+                                agent_k_avoi = 'agent%i/avoidance_reward' % agent_id
+                                env_infos[agent_k_avoi] = avoi_rews
+                            if 'navigation_reward' in info[agent_id].keys():
+                                nav_rews.append(info[agent_id]['navigation_reward'])
+                                agent_k_nav = 'agent%i/navigation_reward' % agent_id
+                                env_infos[agent_k_nav] = nav_rews
 
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
