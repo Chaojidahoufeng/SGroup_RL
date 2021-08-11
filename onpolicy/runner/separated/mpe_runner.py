@@ -237,12 +237,13 @@ class MPERunner(Runner):
 
     @torch.no_grad()
     def render(self):        
+        envs = self.envs
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             episode_rewards = []
             obs = self.envs.reset()
             if self.all_args.save_gifs:
-                image = envs.render('rgb_array')[0][0]
+                image = self.envs.render('rgb_array')[0][0]
                 all_frames.append(image)
 
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents, self.recurrent_N, self.hidden_size), dtype=np.float32)
