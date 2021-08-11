@@ -34,7 +34,7 @@ do
     --form-rew-weight 0.05 \
     --nav-rew-weight 0 \
     --num_static_obs 0 \
-    --share_policy
+    --share_policy \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error_trapezoid/rmappo/08-11-rel-formation-form-nav-train-mpe-trapezoid-seperate/run3/models" \
     --save_gifs \
     --eval_interval 250
