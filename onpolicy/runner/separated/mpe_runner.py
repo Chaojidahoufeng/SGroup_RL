@@ -67,11 +67,24 @@ class MPERunner(Runner):
                 if self.env_name == "MPE":
                     for agent_id in range(self.num_agents):
                         idv_rews = []
+                        form_rews = []
+                        avoi_rews = []
+                        nav_rews = []
                         for info in infos:
                             if 'individual_reward' in info[agent_id].keys():
                                 idv_rews.append(info[agent_id]['individual_reward'])
+                            if 'formation_reward' in info[agent_id].keys():
+                                form_rews.append(info[agent_id]['formation_reward'])
+                            if 'avoidance_reward' in info[agent_id].keys():
+                                avoi_rews.append(info[agent_id]['avoidance_reward'])
+                            if 'navigation_reward' in info[agent_id].keys():
+                                nav_rews.append(info[agent_id]['navigation_reward'])
                         train_infos[agent_id].update({'individual_rewards': np.mean(idv_rews)})
                         train_infos[agent_id].update({"average_episode_rewards": np.mean(self.buffer[agent_id].rewards) * self.episode_length})
+
+                        train_infos[agent_id].update({'formation_reward': np.mean(form_rews)})
+                        train_infos[agent_id].update({'avoidance_reward': np.mean(avoi_rews)})
+                        train_infos[agent_id].update({'navigation_reward': np.mean(nav_rews)})
                 self.log_train(train_infos, total_num_steps)
 
             # eval

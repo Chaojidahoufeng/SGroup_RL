@@ -301,8 +301,12 @@ class Scenario(BaseScenario):
     def reward(self, agent, world):
         # Agents are rewarded based on minimum agent distance to each landmark
         #boundary_reward = -10 if self.outside_boundary(agent) else 0
-        main_reward = self.dis2goal_reward(agent, world)
+        formation_reward = self.formation_reward(agent, world)
+        avoidance_reward = self.avoidance_reward(agent, world)
+        navigation_reward = self.navigation_reward(agent, world)
         #main_reward = self.leader_reward(agent, world) if agent.leader else self.agent_reward(agent, world)
+        
+        main_reward = formation_reward + avoidance_reward + navigation_reward
         return main_reward
 
     def outside_boundary(self, entity):
@@ -584,6 +588,35 @@ class Scenario(BaseScenario):
         #print(rew)
         return -formation_err, -agent.stream_err
 
+
+    def navigation_reward(self, agent, world):
+        nav_rew_weight = self.args.nav_rew_weight
+        dis2goal_dis = norm(agent.state.p_pos - world.landmarks[0].state.p_pos) / 100 # cm->m
+        navigation_reward = - nav_rew_weight * (dis2goal_dis - agent.dis2goal_prev)
+        return navigation_reward
+
+    def avoidance_reward(self, agent, world):
+        avoid_rew_weight = self.args.avoid_rew_weight
+        avoidance_reward = - avoid_rew_weight * self.collide_this_time
+
+        return avoidance_reward
+
+    def formation_reward(self, agent, world):
+        form_reward_weight = self.args.form_rew_weight
+
+        all_agents = world.agents
+        agent_index = world.agents.index(agent)
+
+        pos_rel = [[],[]] # real relative position
+
+        for any_agent in world.agents:
+            pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
+            pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
+        
+        topo_err = MDS.error_rel_g(np.array(world.ideal_topo_point), np.array(pos_rel), len(world.agents))
+        formation_reward = - form_reward_weight * topo_err
+
+        return formation_reward
 
     def dis2goal_reward(self, agent, world):
         # Agents are rewarded based on the distance between itself and the navigation goal
