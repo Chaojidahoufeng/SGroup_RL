@@ -37,5 +37,6 @@ do
     --share_policy \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error_trapezoid/rmappo/08-11-rel-formation-form-nav-train-mpe-trapezoid-seperate/run3/models" \
     --save_gifs \
+    --use_render \
     --eval_interval 250
 done
