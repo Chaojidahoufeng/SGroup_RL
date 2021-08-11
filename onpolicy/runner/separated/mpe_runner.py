@@ -306,9 +306,7 @@ class MPERunner(Runner):
                         time.sleep(self.all_args.ifi - elapsed)
 
             for agent_id in range(self.num_agents):
-                import pdb
-                pdb.set_trace()
-                average_episode_rewards = np.mean(np.sum(episode_rewards[:, :, agent_id], axis=0))
+                average_episode_rewards = np.mean(np.sum(np.array(episode_rewards)[:, :, agent_id, :], axis=0))
                 print("eval average episode rewards of agent%i: " % agent_id + str(average_episode_rewards))
         
         if self.all_args.save_gifs:
