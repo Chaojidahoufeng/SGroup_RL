@@ -56,6 +56,8 @@ class MVERunner(Runner):
 
             # log information
             if episode % self.log_interval == 0:
+                import pdb
+                pdb.set_trace()
                 end = time.time()
                 print("\n Scenario {} Algo {} Exp {} updates {}/{} episodes, total num timesteps {}/{}, FPS {}.\n"
                         .format(self.all_args.scenario_name,
@@ -76,6 +78,7 @@ class MVERunner(Runner):
                     #            idv_rews.append(info[agent_id]['individual_reward'])
                     #    agent_k = 'agent%i/individual_rewards' % agent_id
                     #    env_infos[agent_k] = idv_rews
+
 
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
