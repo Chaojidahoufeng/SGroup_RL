@@ -97,10 +97,10 @@ class SharedReplayBuffer(object):
         #self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
         import pdb
         pdb.set_trace()
-        if rewards.ndim == 3:
+        if rewards.ndim == 2:
             self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
         else:
-            assert rewards.ndim == 2
+            assert rewards.ndim == 3
             self.rewards[self.step] = rewards.copy()
 
         self.masks[self.step + 1] = masks.copy()
