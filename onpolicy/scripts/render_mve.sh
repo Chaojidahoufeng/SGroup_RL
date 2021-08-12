@@ -25,5 +25,6 @@ do
     --episode_length 25 \
     --render_episodes 5 \
     --model_dir "/home/ubuntu/wandb_project/onpolicy/onpolicy/scripts/results/MVE/3p1t2f/mappo/MAPPO/run1/models" \
-    --use_recurrent_policy --usegui
+    --use_recurrent_policy \
+    --usegui
 done

@@ -2,31 +2,29 @@
 env="MVE"
 scenario="predator"  # predator-prey
 algo="mappo"
-exp="MVE-08-12-train-predator"
-seed_max=10
+exp="MVE-08-12-train-predator-R"
+seed_max=2
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 for seed in `seq ${seed_max}`;
 do
     echo "seed is ${seed}:"
-    CUDA_VISIBLE_DEVICES=0 python train/train_mve.py \
+    CUDA_VISIBLE_DEVICES=1 \
+    python render/render_mve.py \
     --env_name ${env} \
     --algorithm_name ${algo} \
     --experiment_name ${exp} \
     --scenario_name ${scenario} \
     --user_name "yuzi" \
     --seed ${seed} \
-    --n_training_threads 32 \
-    --n_rollout_threads 4 \
-    --num_mini_batch 1 \
+    --n_training_threads 1 \
+    --n_rollout_threads 1 \
+    --use_render \
     --episode_length 25 \
-    --num_env_steps 5000000 \
-    --ppo_epoch 10 \
-    --gain 0.01 \
-    --lr 7e-4 \
-    --critic_lr 7e-4 \
+    --render_episodes 5 \
+    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/predator/rmappo/MVE-08-12-train-predator/run13/models" \
     --use_recurrent_policy \
-    --direction_alpha 0.1 \
+    --usegui \
     --num_agents 1 \
     --num_landmarks 2 \
     --num_obstacles 2
