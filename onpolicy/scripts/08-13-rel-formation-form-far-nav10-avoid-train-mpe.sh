@@ -4,7 +4,7 @@ scenario="rel_formation_form_error_far"
 num_landmarks=1
 num_agents=4
 algo="rmappo"
-exp="08-13-rel-formation-form-far-nav10-train-mpe"
+exp="08-13-rel-formation-form-far-nav10-avoid-train-mpe"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -34,3 +34,4 @@ do
     --form-rew-weight 0.05 \
     --nav-rew-weight 10 \
     --num_static_obs 2
+done
