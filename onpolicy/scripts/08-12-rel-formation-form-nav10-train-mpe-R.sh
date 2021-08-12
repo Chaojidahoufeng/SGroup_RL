@@ -30,7 +30,7 @@ do
     --episode_length 250 \
     --render_episodes 5 \
     --num_static_obs 0 \
-    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-12-rel-formation-form-nav10-train-mpe/run2/models" \
+    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-12-rel-formation-form-nav10-train-mpe/run1/models" \
     --save_gifs \
     --eval_interval 250
 done
