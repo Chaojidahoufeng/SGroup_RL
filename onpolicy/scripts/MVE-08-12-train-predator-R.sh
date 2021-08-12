@@ -22,7 +22,7 @@ do
     --use_render \
     --episode_length 25 \
     --render_episodes 5 \
-    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/predator/rmappo/MVE-08-12-train-predator/run13/models" \
+    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/predator/mappo/MVE-08-12-train-predator/run13/models" \
     --use_recurrent_policy \
     --usegui \
     --num_agents 1 \
