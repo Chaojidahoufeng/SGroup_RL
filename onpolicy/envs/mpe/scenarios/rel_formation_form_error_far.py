@@ -12,7 +12,6 @@ import onpolicy.utils.MDS as MDS
 
 class Scenario(BaseScenario):
     def make_world(self, arglist):
-        self.target_dis_x = 10000
         self.args = arglist
         if self.args.use_11_discrete_action:
             from onpolicy.envs.mpe.core_11_discrete import World, Agent, Landmark, Static_obs
@@ -132,7 +131,7 @@ class Scenario(BaseScenario):
         # add Path
         path_type = 'line'
         world.start = agents_ctr
-        world.goal = agents_ctr + self.target_dis_x * np.array([1, 1]) #set the boundary range from 0,0 to 1000,1000
+        world.goal = agents_ctr + (self.args.map_max_size * 5/6) * np.array([1, 1]) #set the boundary range from 0,0 to 1000,1000
         #world.path = self.set_path(path_type, world.start)
 
         #world.station_num = len(world.path)

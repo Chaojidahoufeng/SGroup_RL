@@ -33,5 +33,6 @@ do
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
     --nav-rew-weight 10 \
-    --num_static_obs 0
+    --num_static_obs 0 \
+    --map_max_size 12000
 done
