@@ -367,7 +367,7 @@ class MultiAgentEnv(gym.Env):
             else:
                 pos = self.agents[i].state.p_pos'''
             pos = self.world.agents[0].state.p_pos
-            self.viewers[i].set_bounds(0, 1200, 0, 1200)
+            self.viewers[i].set_bounds(0, self.world.width, 0, self.world.width)
             # update geometry positions
             for e, entity in enumerate(entities_rearrange):
                 self.render_geoms_xform[e].set_translation(*entity.state.p_pos)
