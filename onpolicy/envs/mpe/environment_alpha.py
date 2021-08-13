@@ -457,7 +457,7 @@ class MultiAgentEnv(gym.Env):
                 #     self.viewers[i].add_label(agent_reward_text)
             time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
                                            x=agents_pos_center[0] - WINDOW_W // 1.5,
-                                           y=agents_pos_center[1] // 2 - WINDOW_H // 2.0,
+                                           y=agents_pos_center[1] - WINDOW_H // 2.0,
                                            anchor_x='left',
                                            color=(0, 0, 0, 255))
             distance = rendering.make_text(text='distance = %f meters' % self.world.distance, font_size=15,
