@@ -33,5 +33,5 @@ do
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-13-rel-formation-form-nav10-5avoid-train-mpe/run1/models" \
     --save_gifs \
     --eval_interval 250 \
-    --map-max-size 12000
+    --map-max-size 1200
 done
