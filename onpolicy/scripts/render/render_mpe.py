@@ -59,6 +59,8 @@ def parse_args(args, parser):
 
 
 def main(args):
+    import pdb
+    pdb.set_trace()
     parser = get_config()
     all_args = parse_args(args, parser)
 
