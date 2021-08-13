@@ -359,6 +359,8 @@ class MultiAgentEnv(gym.Env):
 
         results = []
         for i in range(len(self.viewers)):
+            import pdb
+            pdb.set_trace()
             from . import rendering
             # update bounds to center around agent
             cam_range = 500
