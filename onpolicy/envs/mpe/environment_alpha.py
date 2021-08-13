@@ -368,7 +368,8 @@ class MultiAgentEnv(gym.Env):
                 pos = np.zeros(self.world.dim_p)
             else:
                 pos = self.agents[i].state.p_pos'''
-            pos = self.world.agents[0].state.p_pos
+            agents_pos = np.array([self.world.agents[i].state.p_pos for i in range(len(self.world.agents))])
+            agents_pos_center = np.mean(agents_pos, axis=0)
             self.viewers[i].set_bounds(0, self.world.width, 0, self.world.width)
             # update geometry positions
             for e, entity in enumerate(entities_rearrange):
