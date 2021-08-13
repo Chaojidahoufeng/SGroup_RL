@@ -733,7 +733,8 @@ class Scenario(BaseScenario):
         return np.concatenate([agent.state.p_vel] + [agent.state.p_pos] + entity_pos + other_pos + other_vel)
 
     def observation(self, agent, world):
-        # update desire center position
+        import pdb
+        pdb.set_trace()
         self.outside_boundary(agent)
         p_pos = agent.state.p_pos
 
