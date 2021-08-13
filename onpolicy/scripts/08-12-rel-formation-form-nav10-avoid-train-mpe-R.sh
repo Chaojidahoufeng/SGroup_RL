@@ -4,7 +4,7 @@ scenario="rel_formation_form_error"
 num_landmarks=1
 num_agents=4
 algo="rmappo"
-exp="08-12-rel-formation-form-nav50-avoid-train-mpe-R"
+exp="08-12-rel-formation-form-nav10-avoid-train-mpe-R"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -30,7 +30,7 @@ do
     --episode_length 250 \
     --render_episodes 5 \
     --num_static_obs 2 \
-    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-12-rel-formation-form-nav50-avoid-train-mpe/run1/models" \
+    --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-12-rel-formation-form-nav10-avoid-train-mpe/run1/models" \
     --save_gifs \
     --eval_interval 250
 done
