@@ -582,7 +582,9 @@ class Scenario(BaseScenario):
 
     def navigation_reward(self, agent, world):
         nav_rew_weight = self.args.nav_rew_weight
-        dis2goal_dis = norm(agent.state.p_pos - world.landmarks[0].state.p_pos) / 100 # cm->m
+        agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
+        agents_pos_center = np.mean(agents_pos, axis=0)
+        dis2goal_dis = norm(agents_pos_center - world.landmarks[0].state.p_pos) / 100 # cm->m
         navigation_reward = - nav_rew_weight * (dis2goal_dis - agent.dis2goal_prev)
         return navigation_reward
 
