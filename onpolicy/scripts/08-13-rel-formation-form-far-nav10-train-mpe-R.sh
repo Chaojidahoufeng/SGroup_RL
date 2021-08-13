@@ -32,5 +32,6 @@ do
     --num_static_obs 0 \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error_far/rmappo/08-13-rel-formation-form-far-nav10-train-mpe/run1/models" \
     --save_gifs \
-    --eval_interval 250
+    --eval_interval 250 \
+    --map_max_size 12000
 done
