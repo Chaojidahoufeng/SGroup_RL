@@ -591,10 +591,7 @@ class Scenario(BaseScenario):
 
     def navigation_reward(self, agent, world):
         nav_rew_weight = self.args.nav_rew_weight
-        agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
-        agents_pos_center = np.mean(agents_pos, axis=0)
-        dis2goal_dis = norm(agents_pos_center - world.landmarks[0].state.p_pos) / 100 # cm->m
-        navigation_reward = - nav_rew_weight * (dis2goal_dis - agent.topo_center2goal_prev)
+        navigation_reward = - nav_rew_weight * (agent.topo_center2goal - agent.topo_center2goal_prev)
         return navigation_reward
 
     def avoidance_reward(self, agent, world):
@@ -633,7 +630,7 @@ class Scenario(BaseScenario):
         dist_rew_weight = self.args.dist_rew_weight
 
         dis2goal = norm(agent.state.p_pos - world.landmarks[0].state.p_pos) / 100 # cm->m
-        navigation_reward = - nav_rew_weight * (dis2goal - agent.dis2goal_prev)
+        navigation_reward = - nav_rew_weight * (dis2goal - agent.topo_center2goal_prev)
         #navigation_reward = 0
         avoidance_reward = - avoid_rew_weight * self.collide_this_time
 
