@@ -171,22 +171,13 @@ class Scenario(BaseScenario):
                 agent.dis2goal_prev = agent.dis2goal
                 agent.ang2goal_prev = agent.ang2goal
                 
-                import pdb
-                pdb.set_trace()
-                agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
-                agent.topo_center = np.mean(agents_pos, axis=0)
-                agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
-                agent.topo_center2goal_prev = agent.topo_center2goal
+
             else:
                 agent.dis2goal = norm(agent.state.p_pos - world.goal) / 100
                 agent.ang2goal = math.atan2(world.goal[1]-agent.state.p_pos[1],
                                               world.goal[0]-agent.state.p_pos[0]) - agent.state.p_ang
                 agent.dis2goal_prev = None
                 agent.ang2goal_prev = None
-                agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
-                agent.topo_center = np.mean(agents_pos, axis=0)
-                agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
-                agent.topo_center2goal_prev = agent.topo_center2goal
 
             agent.err = np.zeros(2)
             agent.err_prev = 0.0
@@ -198,6 +189,12 @@ class Scenario(BaseScenario):
             #     agent.state.p_pos += np.array([2*np.random.uniform(-10, 10), 2*np.random.uniform(-10, 10)])
             #     agent.state.p_ang += np.random.uniform(-np.pi/6,np.pi/6)
             self.set_agent_ray(agent)
+
+        for e, agent in enumerate(world.agents):
+                agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
+                agent.topo_center = np.mean(agents_pos, axis=0)
+                agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
+                agent.topo_center2goal_prev = agent.topo_center2goal
 
         for i, dynamic_obs in enumerate(world.dynamic_obs):
             dynamic_obs.name = 'dynamic_obs %d' % i
