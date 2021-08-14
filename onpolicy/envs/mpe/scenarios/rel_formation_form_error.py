@@ -170,7 +170,9 @@ class Scenario(BaseScenario):
                                               world.goal[0]-agent.state.p_pos[0]) - agent.state.p_ang
                 agent.dis2goal_prev = agent.dis2goal
                 agent.ang2goal_prev = agent.ang2goal
-
+                
+                import pdb
+                pdb.set_trace()
                 agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
                 agent.topo_center = np.mean(agents_pos, axis=0)
                 agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
