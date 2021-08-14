@@ -593,7 +593,6 @@ class Scenario(BaseScenario):
         nav_rew_weight = self.args.nav_rew_weight
         navigation_reward = - nav_rew_weight * (agent.topo_center2goal - agent.topo_center2goal_prev)
 
-        print(navigation_reward)
         return navigation_reward
 
     def avoidance_reward(self, agent, world):
@@ -847,7 +846,8 @@ class Scenario(BaseScenario):
         #return np.concatenate(err + vel + omg + agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
         # TODO: target_dis can be represented as d_cur - d_pre?
         #return np.concatenate(agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
-        return np.concatenate(agt_dis + agt_ang + min_ray + target_dis + target_ang)
+        #return np.concatenate(agt_dis + agt_ang + min_ray + target_dis + target_ang)
+        return np.concatenate(agt_dis + agt_ang + min_ray + target_ang)
 
     def constraint(self, agent, world):
         return []
