@@ -4,7 +4,7 @@ scenario="rel_formation_form_error"
 num_landmarks=1
 num_agents=4
 algo="rmappo"
-exp="08-15-rel-formation-form-nav10-train-mpe-3600"
+exp="08-15-rel-formation-form-nav100-train-mpe-3600"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -32,7 +32,7 @@ do
     --user_name "mapping" \
     --avoid-rew-weight 5 \
     --form-rew-weight 0.05 \
-    --nav-rew-weight 10 \
+    --nav-rew-weight 100 \
     --num_static_obs 0 \
     --map-max-size 3600
 done
