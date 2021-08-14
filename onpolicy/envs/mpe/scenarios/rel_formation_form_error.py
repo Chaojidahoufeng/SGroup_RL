@@ -71,6 +71,7 @@ class Scenario(BaseScenario):
             agent.C = np.array([0., 0.])
             agent.C_bound = np.array([0., 0.])
             agent.stream_err = np.array([0., 0.])
+            agent.topo_center = np.array([0., 0.])
 
         world.static_obs = [Static_obs() for _ in range(num_static_obs)]
         for i, static_obs in enumerate(world.static_obs):
@@ -169,12 +170,21 @@ class Scenario(BaseScenario):
                                               world.goal[0]-agent.state.p_pos[0]) - agent.state.p_ang
                 agent.dis2goal_prev = agent.dis2goal
                 agent.ang2goal_prev = agent.ang2goal
+
+                agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
+                agent.topo_center = np.mean(agents_pos, axis=0)
+                agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
+                agent.topo_center2goal_prev = agent.topo_center2goal
             else:
                 agent.dis2goal = norm(agent.state.p_pos - world.goal) / 100
                 agent.ang2goal = math.atan2(world.goal[1]-agent.state.p_pos[1],
                                               world.goal[0]-agent.state.p_pos[0]) - agent.state.p_ang
                 agent.dis2goal_prev = None
                 agent.ang2goal_prev = None
+                agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
+                agent.topo_center = np.mean(agents_pos, axis=0)
+                agent.topo_center2goal = norm(agent.topo_center - world.goal) / 100
+                agent.topo_center2goal_prev = agent.topo_center2goal
 
             agent.err = np.zeros(2)
             agent.err_prev = 0.0
@@ -585,7 +595,7 @@ class Scenario(BaseScenario):
         agents_pos = np.array([world.agents[i].state.p_pos for i in range(len(world.agents))])
         agents_pos_center = np.mean(agents_pos, axis=0)
         dis2goal_dis = norm(agents_pos_center - world.landmarks[0].state.p_pos) / 100 # cm->m
-        navigation_reward = - nav_rew_weight * (dis2goal_dis - agent.dis2goal_prev)
+        navigation_reward = - nav_rew_weight * (dis2goal_dis - agent.topo_center2goal_prev)
         return navigation_reward
 
     def avoidance_reward(self, agent, world):
@@ -753,6 +763,7 @@ class Scenario(BaseScenario):
             agent.dis2goal_prev = agent.dis2goal
             agent.dis2goal = norm(p_pos - world.landmarks[0].state.p_pos) / 100
             agent.ang2goal = self.get_relAngle(agent, world.landmarks[0])
+            agent.topo_center2goal_prev = agent.topo_center2goal
         # get distance and relative angle of all entities in this agent's reference frame
         agt_dis = []
         agt_ang = []
