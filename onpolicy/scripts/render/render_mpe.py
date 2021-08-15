@@ -50,7 +50,7 @@ def parse_args(args, parser):
     parser.add_argument("--form-rew-weight", type=float, default=0.005)
     parser.add_argument("--dist-rew-weight", type=float, default=0.002)
     parser.add_argument("--action_space_dim",  type=int, default=4)
-    parser.add_argument("--static_obs_intensity", type=float, default=0.1)
+    parser.add_argument("--static_obs_intensity", type=float, default=0.001)
 
     parser.add_argument("--use_11_discrete_action", action="store_true", default=False)
 
