@@ -33,5 +33,6 @@ do
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-15-rel-formation-form-nav50-train-mpe-3600/run1/models" \
     --save_gifs \
     --eval_interval 250 \
-    --map-max-size 3600
+    --map-max-size 3600 \
+    --render_sight 'first-person'
 done
