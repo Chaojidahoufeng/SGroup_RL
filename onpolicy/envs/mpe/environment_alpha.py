@@ -276,7 +276,13 @@ class MultiAgentEnv(gym.Env):
     ************************
     '''
 
-    def render(self, mode='human', close=False):
+    def render(self, mode='human', close=False, sight='global'):
+        # sight = 'global'： global perspective
+        # sight = 'first-person': first-person perspective
+        try:
+            assert sight in ['global', 'first-person']
+        except:
+            print(1/0)
         from . import rendering
         if mode == 'human':
             alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -369,8 +375,16 @@ class MultiAgentEnv(gym.Env):
             agents_pos = np.array([self.world.agents[i].state.p_pos for i in range(len(self.world.agents))])
             agents_pos_center = np.mean(agents_pos, axis=0)
             viewer_width = len(self.world.agents)*self.world.ideal_side_len
-            self.viewers[i].set_bounds(agents_pos_center[0]-viewer_width/2, agents_pos_center[0]+viewer_width/2, 
-                                       agents_pos_center[1]-viewer_width/2, agents_pos_center[1]+viewer_width/2)
+            
+            if sight == 'first-person':
+                self.viewers[i].set_bounds(agents_pos_center[0]-viewer_width/2, agents_pos_center[0]+viewer_width/2, 
+                                        agents_pos_center[1]-viewer_width/2, agents_pos_center[1]+viewer_width/2)
+            elif sight == 'global':
+                self.viewers[i].set_bounds(0, self.world.width, 
+                                           0, self.world.width)
+            else:
+                raise NotImplementedError
+
             # update geometry positions
             for e, entity in enumerate(entities_rearrange):
                 self.render_geoms_xform[e].set_translation(*entity.state.p_pos)
@@ -441,11 +455,18 @@ class MultiAgentEnv(gym.Env):
                 self.viewers[i].add_geom(head)
                 label = rendering.make_text(text='%d' % e, font_size=12, x=agent.state.p_pos[0], y=agent.state.p_pos[1], color=(0, 0, 0, 255))
                 self.viewers[i].add_label(label)
-                dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
-                                            x= agents_pos_center[0] - WINDOW_W // 1.5,
-                                            y= agents_pos_center[1] - WINDOW_H // 2.0 - 20 * (e + 2),
-                                            anchor_x='left',
-                                            color=(0, 0, 0, 255))
+                if sight == 'first-person':
+                    dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
+                                                x= agents_pos_center[0] - WINDOW_W // 1.5,
+                                                y= agents_pos_center[1] - WINDOW_H // 2.0 - 20 * (e + 2),
+                                                anchor_x='left',
+                                                color=(0, 0, 0, 255))
+                elif sight == 'global':
+                    dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
+                                                x= self.world.width // 2 - WINDOW_W // 1.5,
+                                                y= self.world.width // 2 - WINDOW_H // 2.0 - 20 * (e + 2),
+                                                anchor_x='left',
+                                                color=(0, 0, 0, 255))
                 self.viewers[i].add_label(dis_btw_agents)
 
                 # for name_num, name in enumerate(reward_names):
@@ -455,16 +476,29 @@ class MultiAgentEnv(gym.Env):
                 #                                         anchor_x='left',
                 #                                         color=(0, 0, 0, 255))
                 #     self.viewers[i].add_label(agent_reward_text)
-            time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
-                                           x=agents_pos_center[0] - WINDOW_W // 1.5,
-                                           y=agents_pos_center[1] - WINDOW_H // 2.0,
-                                           anchor_x='left',
-                                           color=(0, 0, 0, 255))
-            distance = rendering.make_text(text='distance = %f meters' % self.world.distance, font_size=15,
-                                           x=agents_pos_center[0] - WINDOW_W // 1.5,
-                                           y=agents_pos_center[1] - WINDOW_H // 2.0-20,
-                                           anchor_x='left',
-                                           color=(0, 0, 0, 255))
+
+            if sight == 'first-person':
+                time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
+                                            x=agents_pos_center[0] - WINDOW_W // 1.5,
+                                            y=agents_pos_center[1] - WINDOW_H // 2.0,
+                                            anchor_x='left',
+                                            color=(0, 0, 0, 255))
+                distance = rendering.make_text(text='distance = %f meters' % self.world.distance, font_size=15,
+                                            x=agents_pos_center[0] - WINDOW_W // 1.5,
+                                            y=agents_pos_center[1] - WINDOW_H // 2.0-20,
+                                            anchor_x='left',
+                                            color=(0, 0, 0, 255))
+            elif sight == 'global':
+                time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
+                                            x=self.world.width // 2 - WINDOW_W // 1.5,
+                                            y=self.world.width // 2 - WINDOW_H // 2.0,
+                                            anchor_x='left',
+                                            color=(0, 0, 0, 255))
+                distance = rendering.make_text(text='distance = %f meters' % self.world.distance, font_size=15,
+                                            x=self.world.width // 2 - WINDOW_W // 1.5,
+                                            y=self.world.width // 2 - WINDOW_H // 2.0-20,
+                                            anchor_x='left',
+                                            color=(0, 0, 0, 255))
             self.viewers[i].add_label(distance)
             self.viewers[i].add_label(time)
             # render to display or array
