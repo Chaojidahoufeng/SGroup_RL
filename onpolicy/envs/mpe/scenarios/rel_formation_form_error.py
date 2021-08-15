@@ -5,6 +5,7 @@ import numpy as np
 import math as math
 import random as random
 from numpy.linalg import norm
+from wandb import set_trace
 
 from onpolicy.envs.mpe.scenario import BaseScenario
 
@@ -73,6 +74,9 @@ class Scenario(BaseScenario):
             agent.stream_err = np.array([0., 0.])
             agent.topo_center = np.array([0., 0.])
 
+        obstacle_area = (self.args.map_max_size - self.agent_init_bound) ** 2
+        num_static_obs = obstacle_area * self.args.static_obs_intensity
+
         world.static_obs = [Static_obs() for _ in range(num_static_obs)]
         for i, static_obs in enumerate(world.static_obs):
             static_obs.name = 'static_obs %d' % i
@@ -82,6 +86,7 @@ class Scenario(BaseScenario):
             static_obs.color = np.array([0.8, 0.8, 0.8])
             static_obs.state.p_vel = np.zeros(world.dim_p)
             static_obs.state.p_ang = 0.0
+
         world.landmarks = [Landmark() for _ in range(num_landmarks)]
         for i, landmark in enumerate(world.landmarks):
             landmark.name = 'landmark %d' % i
@@ -208,10 +213,12 @@ class Scenario(BaseScenario):
 
         for s in world.static_obs:
             s.size = np.random.uniform(10.0, 50.0)
-            s.state.p_pos = np.array([np.random.uniform(100, 1000), np.random.uniform(100, 1000)])
+            s.state.p_pos = np.array([np.random.uniform(self.agent_init_bound, self.map_max_size), 
+                                        np.random.uniform(self.agent_init_bound, self.map_max_size)])
             min_agt_dis = np.min([norm(s.state.p_pos-a.state.p_pos)/100 for a in world.agents])
             while min_agt_dis < 1 or norm(s.state.p_pos-world.goal)/100 < 2:
-                s.state.p_pos = np.array([np.random.uniform(100, 1000), np.random.uniform(100, 1000)])
+                s.state.p_pos = np.array([np.random.uniform(self.agent_init_bound, self.map_max_size), 
+                                        np.random.uniform(self.agent_init_bound, self.map_max_size)])
                 min_agt_dis = np.min([norm(s.state.p_pos - a.state.p_pos) / 100 for a in world.agents])
 
         
