@@ -276,7 +276,7 @@ class MultiAgentEnv(gym.Env):
     ************************
     '''
 
-    def render(self, mode='human', close=False, sight='first-person'):
+    def render(self, mode='human', close=False, sight='global'):
         # sight = 'global'： global perspective
         # sight = 'first-person': first-person perspective
         try:
