@@ -74,7 +74,7 @@ class Scenario(BaseScenario):
             agent.stream_err = np.array([0., 0.])
             agent.topo_center = np.array([0., 0.])
 
-        obstacle_area = (self.args.map_max_size - self.agent_init_bound) ** 2
+        obstacle_area = (self.args.map_max_size - self.args.agent_init_bound) ** 2
         num_static_obs = obstacle_area * self.args.static_obs_intensity
 
         world.static_obs = [Static_obs() for _ in range(num_static_obs)]
@@ -213,12 +213,12 @@ class Scenario(BaseScenario):
 
         for s in world.static_obs:
             s.size = np.random.uniform(10.0, 50.0)
-            s.state.p_pos = np.array([np.random.uniform(self.agent_init_bound, self.map_max_size), 
-                                        np.random.uniform(self.agent_init_bound, self.map_max_size)])
+            s.state.p_pos = np.array([np.random.uniform(self.args.agent_init_bound, self.args.map_max_size), 
+                                        np.random.uniform(self.args.agent_init_bound, self.args.map_max_size)])
             min_agt_dis = np.min([norm(s.state.p_pos-a.state.p_pos)/100 for a in world.agents])
             while min_agt_dis < 1 or norm(s.state.p_pos-world.goal)/100 < 2:
-                s.state.p_pos = np.array([np.random.uniform(self.agent_init_bound, self.map_max_size), 
-                                        np.random.uniform(self.agent_init_bound, self.map_max_size)])
+                s.state.p_pos = np.array([np.random.uniform(self.args.agent_init_bound, self.args.map_max_size), 
+                                        np.random.uniform(self.args.agent_init_bound, self.args.map_max_size)])
                 min_agt_dis = np.min([norm(s.state.p_pos - a.state.p_pos) / 100 for a in world.agents])
 
         
