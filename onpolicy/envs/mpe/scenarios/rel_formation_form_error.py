@@ -77,7 +77,7 @@ class Scenario(BaseScenario):
         obstacle_area = (self.args.map_max_size - self.args.agent_init_bound) ** 2
         num_static_obs = obstacle_area * self.args.static_obs_intensity
 
-        world.static_obs = [Static_obs() for _ in range(num_static_obs)]
+        world.static_obs = [Static_obs() for _ in range(round(num_static_obs))]
         for i, static_obs in enumerate(world.static_obs):
             static_obs.name = 'static_obs %d' % i
             static_obs.collide = True
