@@ -35,5 +35,5 @@ do
     --nav-rew-weight 50 \
     --num_static_obs 0 \
     --map-max-size 3600 \
-    --static_obs_intensity 3e-6 \
+    --static_obs_intensity 3e-6
 done
