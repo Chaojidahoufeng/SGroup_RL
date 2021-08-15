@@ -74,6 +74,8 @@ class Scenario(BaseScenario):
             agent.stream_err = np.array([0., 0.])
             agent.topo_center = np.array([0., 0.])
 
+        import pdb
+        pdb.set_trace()
         obstacle_area = (self.args.map_max_size - self.args.agent_init_bound) ** 2
         num_static_obs = obstacle_area * self.args.static_obs_intensity
 
