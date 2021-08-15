@@ -220,18 +220,23 @@ class MPERunner(Runner):
             import pdb
             pdb.set_trace()
             obs = envs.reset()
-            if self.all_args.render_sight == 'first-person':
-                if self.all_args.save_gifs:
-                    image = envs.render(mode='rgb_array', sight='first-person')[0][0]
-                    all_frames.append(image)
-                else:
-                    envs.render(mode='human',sight='first-person')
+            # if self.all_args.render_sight == 'first-person':
+            #     if self.all_args.save_gifs:
+            #         image = envs.render(mode='rgb_array', sight='first-person')[0][0]
+            #         all_frames.append(image)
+            #     else:
+            #         envs.render(mode='human',sight='first-person')
+            # else:
+            #     if self.all_args.save_gifs:
+            #         image = envs.render(mode='rgb_array', sight='global')[0][0]
+            #         all_frames.append(image)
+            #     else:
+            #         envs.render(mode='human',sight='globals')
+            if self.all_args.save_gifs:
+                image = envs.render(mode='rgb_array')[0][0]
+                all_frames.append(image)
             else:
-                if self.all_args.save_gifs:
-                    image = envs.render(mode='rgb_array', sight='global')[0][0]
-                    all_frames.append(image)
-                else:
-                    envs.render(mode='human',sight='globals')
+                envs.render(mode='human')
 
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
@@ -271,21 +276,26 @@ class MPERunner(Runner):
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
                 masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
 
+                # if self.all_args.save_gifs:
+                #     if self.all_args.render_sight == 'first-person':
+                #         image = envs.render(mode='rgb_array', sight='first-person')[0][0]
+                #     else:
+                #         image = envs.render(mode='rgb_array', sight='global')[0][0]
+                #     all_frames.append(image)
+                #     calc_end = time.time()
+                #     elapsed = calc_end - calc_start
+                #     if elapsed < self.all_args.ifi:
+                #         time.sleep(self.all_args.ifi - elapsed)
+                # else:
+                #     if self.all_args.render_sight == 'first-person':
+                #         image = envs.render(mode='human', sight='first-person')[0][0]
+                #     else:
+                #         image = envs.render(mode='human', sight='global')[0][0]
                 if self.all_args.save_gifs:
-                    if self.all_args.render_sight == 'first-person':
-                        image = envs.render(mode='rgb_array', sight='first-person')[0][0]
-                    else:
-                        image = envs.render(mode='rgb_array', sight='global')[0][0]
+                    image = envs.render(mode='rgb_array')[0][0]
                     all_frames.append(image)
-                    calc_end = time.time()
-                    elapsed = calc_end - calc_start
-                    if elapsed < self.all_args.ifi:
-                        time.sleep(self.all_args.ifi - elapsed)
                 else:
-                    if self.all_args.render_sight == 'first-person':
-                        image = envs.render(mode='human', sight='first-person')[0][0]
-                    else:
-                        image = envs.render(mode='human', sight='global')[0][0]
+                    envs.render(mode='human')
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
