@@ -218,11 +218,18 @@ class MPERunner(Runner):
         all_frames = []
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
-            if self.all_args.save_gifs:
-                image = envs.render('rgb_array')[0][0]
-                all_frames.append(image)
+            if self.all_args.render_sight == 'first-person':
+                if self.all_args.save_gifs:
+                    image = envs.render(mode='rgb_array', sight='first-person')[0][0]
+                    all_frames.append(image)
+                else:
+                    envs.render(mode='human',sight='first-person')
             else:
-                envs.render('human')
+                if self.all_args.save_gifs:
+                    image = envs.render(mode='rgb_array', sight='global')[0][0]
+                    all_frames.append(image)
+                else:
+                    envs.render(mode='human',sight='globals')
 
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
@@ -263,14 +270,20 @@ class MPERunner(Runner):
                 masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
 
                 if self.all_args.save_gifs:
-                    image = envs.render('rgb_array')[0][0]
+                    if self.all_args.render_sight == 'first-person':
+                        image = envs.render(mode='rgb_array', sight='first-person')[0][0]
+                    else:
+                        image = envs.render(mode='rgb_array', sight='global')[0][0]
                     all_frames.append(image)
                     calc_end = time.time()
                     elapsed = calc_end - calc_start
                     if elapsed < self.all_args.ifi:
                         time.sleep(self.all_args.ifi - elapsed)
                 else:
-                    envs.render('human')
+                    if self.all_args.render_sight == 'first-person':
+                        image = envs.render(mode='human', sight='first-person')[0][0]
+                    else:
+                        image = envs.render(mode='human', sight='global')[0][0]
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
