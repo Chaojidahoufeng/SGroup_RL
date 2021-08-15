@@ -150,7 +150,7 @@ class Scenario(BaseScenario):
             if agent.leader:
                 agent.state.p_pos = agents_ctr
             else:
-                agent.state.p_pos = np.array([self.args.map_max_size/2, self.args.map_max_size/2]) + ( np.random.rand(2) - np.array([1,1]) ) * self.args.agent_init_bound # randomly initialize position range from (0,0) to (100, 100)
+                agent.state.p_pos =  (np.array([1,1])-np.random.rand(2)) * self.args.agent_init_bound * 2# randomly initialize position range from (0,0) to (100, 100)
             
             #TODO: 这里到底需要计算什么东西
             if not agent.leader:
