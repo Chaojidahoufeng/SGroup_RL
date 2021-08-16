@@ -77,6 +77,7 @@ class MPERunner(Runner):
                         form_rews = []
                         avoi_rews = []
                         nav_rews = []
+                        self_nav_rews = []
                         for info in infos:
                             if 'individual_reward' in info[agent_id].keys():
                                 idv_rews.append(info[agent_id]['individual_reward'])
@@ -94,6 +95,11 @@ class MPERunner(Runner):
                                 nav_rews.append(info[agent_id]['navigation_reward'])
                                 agent_k_nav = 'agent%i/navigation_reward' % agent_id
                                 env_infos[agent_k_nav] = nav_rews
+                            if 'self_navigation_reward' in info[agent_id].keys():
+                                self_nav_rews.append(info[agent_id]['self_navigation_reward'])
+                                agent_k_selfnav = 'agent%i/self_navigation_reward' % agent_id
+                                env_infos[agent_k_selfnav] = self_nav_rews
+
 
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
