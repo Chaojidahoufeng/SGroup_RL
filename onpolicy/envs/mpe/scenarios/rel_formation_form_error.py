@@ -861,7 +861,7 @@ class Scenario(BaseScenario):
         # TODO: target_dis can be represented as d_cur - d_pre?
         #return np.concatenate(agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
         #return np.concatenate(agt_dis + agt_ang + min_ray + target_dis + target_ang)
-        return np.concatenate(agt_dis + agt_ang + min_ray + target_ang)
+        return np.concatenate(agt_dis + agt_ang + min_ray + target_ang + target_dis)
 
     def constraint(self, agent, world):
         return []
