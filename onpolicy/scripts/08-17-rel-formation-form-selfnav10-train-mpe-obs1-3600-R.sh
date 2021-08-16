@@ -35,5 +35,5 @@ do
     --save_gifs \
     --eval_interval 250 \
     --map-max-size 3600 \
-    --static_obs_intensity 1e-5
+    --static_obs_intensity 10e-5
 done
