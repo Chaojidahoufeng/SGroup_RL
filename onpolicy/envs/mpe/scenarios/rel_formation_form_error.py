@@ -856,12 +856,15 @@ class Scenario(BaseScenario):
         omg.append(np.array([agent.state.p_omg / np.pi]))
         err = [np.array([agent.err[i]]) for i in range(len(agent.err))]
 
+        formation_reward = self.formation_reward(agent, world)
+        formation_err = - formation_reward * self.args.form_rew_weight
+
         #return np.concatenate([np.array([agent.dis2leader - agent.d_des])] + ang + vel + omg + agt_dis + agt_ang + sensor_ray)
         #return np.concatenate(err + vel + omg + agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
         # TODO: target_dis can be represented as d_cur - d_pre?
         #return np.concatenate(agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r + target_dis + target_ang)
         #return np.concatenate(agt_dis + agt_ang + min_ray + target_dis + target_ang)
-        return np.concatenate(agt_dis + agt_ang + min_ray + target_ang + target_dis)
+        return np.concatenate(agt_dis + agt_ang + min_ray + target_ang + target_dis + formation_err)
 
     def constraint(self, agent, world):
         return []
