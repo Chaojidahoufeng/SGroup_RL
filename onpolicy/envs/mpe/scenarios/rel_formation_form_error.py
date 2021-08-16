@@ -312,8 +312,9 @@ class Scenario(BaseScenario):
         formation_reward = self.formation_reward(agent, world)
         avoidance_reward = self.avoidance_reward(agent, world)
         navigation_reward = self.navigation_reward(agent, world)
+        self_navigation_reward = self.self_navigation_reward(agent, world)
 
-        main_reward = formation_reward + avoidance_reward + navigation_reward
+        main_reward = formation_reward + avoidance_reward + navigation_reward + self_navigation_reward
 
         return main_reward
 
@@ -596,6 +597,12 @@ class Scenario(BaseScenario):
         #print(rew)
         return -formation_err, -agent.stream_err
 
+    def self_navigation_reward(self, agent, world):
+        self_nav_rew_weight = self.args.self_nav_rew_weight
+        dis2goal_dis = norm(agent.state.p_pos - world.landmarks[0].state.p_pos) / 100 # cm->m
+        self_navigation_reward = - self_nav_rew_weight * (dis2goal_dis - agent.dis2goal_prev)
+        return self_navigation_reward
+
     def navigation_reward(self, agent, world):
         nav_rew_weight = self.args.nav_rew_weight
         navigation_reward = - nav_rew_weight * (agent.topo_center2goal - agent.topo_center2goal_prev)
@@ -866,4 +873,5 @@ class Scenario(BaseScenario):
     def info(self, agent, world):
         return {'formation_reward': self.formation_reward(agent, world),
                 'avoidance_reward': self.avoidance_reward(agent, world),
-                'navigation_reward': self.navigation_reward(agent, world)}
+                'navigation_reward': self.navigation_reward(agent, world),
+                'self_navigation_reward': self.self_navigation_reward(agent, world)}

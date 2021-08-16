@@ -69,6 +69,7 @@ def parse_args(args, parser):
     parser.add_argument("--static_obs_intensity", type=float, default=3e-6)
 
     parser.add_argument("--nav-rew-weight", type=float, default=1)
+    parser.add_argument("--self-nav-rew-weight", type=float, default=0)
     parser.add_argument("--avoid-rew-weight", type=float, default=5)
     parser.add_argument("--form-rew-weight", type=float, default=0.005)
     parser.add_argument("--dist-rew-weight", type=float, default=0.002)
