@@ -213,12 +213,14 @@ class Scenario(BaseScenario):
 
         for s in world.static_obs:
             s.size = np.random.uniform(10.0, 50.0)
-            s.state.p_pos = np.array([np.random.uniform(self.args.agent_init_bound, world.goal[0]), 
-                                        np.random.uniform(self.args.agent_init_bound, world.goal[1])])
+            s.state.p_pos = np.array([np.random.uniform(0, world.goal[0]), 
+                                        np.random.uniform(0, world.goal[1])])
+            s.state.p_pos = np.array([np.random.uniform(0, world.goal[0]), 
+                                          np.random.uniform(0, world.goal[1])])
             min_agt_dis = np.min([norm(s.state.p_pos-a.state.p_pos)/100 for a in world.agents])
-            while min_agt_dis < 1 or norm(s.state.p_pos-world.goal)/100 < 2:
-                s.state.p_pos = np.array([np.random.uniform(self.args.agent_init_bound, world.goal[0]), 
-                                        np.random.uniform(self.args.agent_init_bound, world.goal[1])])
+            while (min_agt_dis < 1 or norm(s.state.p_pos-world.goal)/100 < 2) and (s.state.p_pos[0] < self.args.agent_init_bound and s.state.p_pos[1] < self.args.agent_init_bound):
+                s.state.p_pos = np.array([np.random.uniform(0, world.goal[0]), 
+                                        np.random.uniform(0, world.goal[1])])
                 min_agt_dis = np.min([norm(s.state.p_pos - a.state.p_pos) / 100 for a in world.agents])
 
         
