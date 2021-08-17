@@ -67,7 +67,7 @@ def parse_args(args, parser):
     parser.add_argument("--ideal-side-len", type=int, default=400)
     parser.add_argument("--num-static-obs", type=int, default=0)
     parser.add_argument("--static_obs_intensity", type=float, default=3e-6)
-    parser.add_argument("--topo_type", type=int, default='square')
+    parser.add_argument("--topo_type", type=str, default='square')
     
 
     parser.add_argument("--nav-rew-weight", type=float, default=1)
