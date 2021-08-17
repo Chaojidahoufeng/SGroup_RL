@@ -39,9 +39,27 @@ class Scenario(BaseScenario):
         world.ideal_side_len = self.args.ideal_side_len
         # calculate the ideal formation topo
         world.ideal_topo_point = [[],[]]
-        for i in range(num_follower_agents):
-            world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_follower_agents*2*np.pi))
-            world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_follower_agents*2*np.pi))
+        if self.args.topo_type == 'square':
+            for i in range(num_follower_agents):
+                world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_follower_agents*2*np.pi))
+                world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_follower_agents*2*np.pi))
+        elif self.args.topo_type == 'trapezoid':
+            world.ideal_topo_point = [[],[]]
+
+            world.ideal_topo_point[0].append(0)
+            world.ideal_topo_point[1].append(0)
+
+            world.ideal_topo_point[0].append(world.ideal_side_len)
+            world.ideal_topo_point[1].append(0)
+
+            world.ideal_topo_point[0].append(world.ideal_side_len / 4 * 3)
+            world.ideal_topo_point[1].append(world.ideal_side_len / 4 * np.sqrt(3))
+
+            world.ideal_topo_point[0].append(world.ideal_side_len / 4)
+            world.ideal_topo_point[1].append(world.ideal_side_len / 4 * np.sqrt(3))
+        else:
+            raise NotImplementedError
+
 
 
         for i, agent in enumerate(world.agents):
