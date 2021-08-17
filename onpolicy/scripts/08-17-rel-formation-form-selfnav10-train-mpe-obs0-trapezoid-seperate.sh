@@ -37,5 +37,6 @@ do
     --num_static_obs 0 \
     --map-max-size 3600 \
     --static_obs_intensity 0e-6 \
-    --topo_type 'trapezoid'
+    --topo_type 'trapezoid' \
+    --share_policy
 done
