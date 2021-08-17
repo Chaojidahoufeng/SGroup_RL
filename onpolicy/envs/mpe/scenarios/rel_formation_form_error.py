@@ -60,6 +60,8 @@ class Scenario(BaseScenario):
         else:
             raise NotImplementedError
 
+        import pdb
+        pdb.set_trace()
 
 
         for i, agent in enumerate(world.agents):
