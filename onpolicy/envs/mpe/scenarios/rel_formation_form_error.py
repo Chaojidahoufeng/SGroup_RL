@@ -26,7 +26,7 @@ class Scenario(BaseScenario):
 
         world.width = self.args.map_max_size
 
-        num_follower_agents = 4
+        num_follower_agents = self.args.num_agents
         num_leader_agent = 0
         num_agents = num_leader_agent + num_follower_agents
         num_static_obs = self.args.num_static_obs
