@@ -29,7 +29,7 @@ do
     --num_static_obs 10 \
     --use_render \
     --episode_length 250 \
-    --render_episodes 5 \
+    --render_episodes 1 \
     --num_static_obs 0 \
     --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-3600-newobs/run1/models" \
     --save_gifs \
