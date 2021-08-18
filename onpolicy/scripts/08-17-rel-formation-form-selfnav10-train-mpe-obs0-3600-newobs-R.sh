@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=4
 algo="rmappo"
 exp="08-17-rel-formation-form-selfnav10-train-mpe-obs0-3600-newobs-R"
-seed=25
+seed=50
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 
@@ -34,4 +34,4 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --save_gifs \
 --eval_interval 250 \
 --map-max-size 3600 \
---static_obs_intensity 0e-6
+--static_obs_intensity 3e-6
