@@ -656,12 +656,8 @@ class Scenario(BaseScenario):
             pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
             pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
 
-        if len(pos_rel[0]) != num_living_agent or len(world.ideal_topo_point[0]) != num_living_agent:
-            print('bad')
-            import pdb
-            pdb.set_trace()
         
-        topo_err = MDS.error_rel_g(np.array(world.ideal_topo_point), np.array(pos_rel), len(world.agents))
+        topo_err = MDS.error_rel_g(np.array(world.ideal_topo_point), np.array(pos_rel), num_living_agent)
         formation_reward = - form_reward_weight * topo_err
 
         return formation_reward
