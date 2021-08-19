@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=5
 algo="rmappo"
 exp="08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5-R"
-seed=2
+seed=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 let "seed=$seed+1"
