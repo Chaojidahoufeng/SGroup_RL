@@ -268,6 +268,9 @@ class MPERunner(Runner):
                                 device = self.device)
 
             self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
+
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models"
+            self.restore()
             
             for step in range(self.episode_length_1):
                 calc_start = time.time()
