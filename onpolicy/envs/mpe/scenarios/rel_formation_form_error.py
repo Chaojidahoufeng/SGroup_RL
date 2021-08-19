@@ -814,6 +814,9 @@ class Scenario(BaseScenario):
             collide.append(self.is_collision(agent, entity))
             dis2obs = (norm(entity.state.p_pos - p_pos) - entity.size - agent.size)/100
             ang = self.get_relAngle(agent, entity)
+            if 'agent' in entity.name and entity.dead == True:
+                continue
+            
             if 'agent' in entity.name and entity != agent:
                 # TODO: 这个地方怎么设计比较好（目前的做法是设计了一个最大通信距离）
                 dis2agt = np.array([min(norm(entity.state.p_pos - p_pos)/100, 50*agent.size/100)])
