@@ -409,8 +409,12 @@ class MultiAgentEnv(gym.Env):
             self.render_geoms_xform.append(xform)
 
         import copy
-        agents_end = agents
-        agents_begin = copy.deepcopy(agents)
+        living_agents = []
+        for agent in agents:
+            if not agent.dead:
+                living_agents.append(agent)
+        agents_end = living_agents
+        agents_begin = copy.deepcopy(living_agents)
         agents_begin.insert(0, agents_begin.pop())
         lines = []
         lines_length_text = []
