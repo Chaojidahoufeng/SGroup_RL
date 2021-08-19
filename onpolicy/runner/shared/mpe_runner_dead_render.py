@@ -247,7 +247,7 @@ class MPERunner(Runner):
             
             episode_rewards = []
 
-            self.episode_length_1 = 150
+            self.episode_length_1 = 10
             self.episode_length_2 = 150
             self.episode_length_3 = 150
 
@@ -255,9 +255,6 @@ class MPERunner(Runner):
             from onpolicy.algorithms.r_mappo.algorithm.rMAPPOPolicy import R_MAPPOPolicy as Policy
 
             # First Stage
-
-            import pdb
-            pdb.set_trace()
 
             share_observation_space = self.envs.share_observation_space[0] if self.use_centralized_V else self.envs.observation_space[0]
 
@@ -325,6 +322,24 @@ class MPERunner(Runner):
                     all_frames.append(image)
                 else:
                     envs.render(mode='human')
+
+            self.policy = Policy(self.all_args,
+                                 self.envs.observation_space[0],
+                                 share_observation_space,
+                                 self.envs.action_space[0],
+                                 device = self.device)
+
+            self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
+
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-triangle/run1/models"
+            self.restore()
+
+            for step in range(self.episode_length_2):
+                pass
+
+            
+            for step in range(self.episode_length_3):
+                pass
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
