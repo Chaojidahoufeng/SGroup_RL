@@ -393,9 +393,70 @@ class MPERunner(Runner):
             import pdb
             pdb.set_trace()
 
+
+            self.envs.envs[0].agents[-2].dead = True
+
+            self.envs.renew()
+
+            share_observation_space = self.envs.share_observation_space[0] if self.use_centralized_V else self.envs.observation_space[0]
             
+            self.policy = Policy(self.all_args,
+                                 self.envs.observation_space[0],
+                                 share_observation_space,
+                                 self.envs.action_space[0],
+                                 device = self.device)
+
+            self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
+
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-triangle/run1/models"
+            self.restore()
+
+            obs, rewards, dones, infos = envs.step(actions_env)
+            self.num_agents_living = 3
+            rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
+            masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
+
+            import pdb
+            pdb.set_trace()
+
             for step in range(self.episode_length_3):
-                pass
+                self.trainer.prep_rollout()
+                action, rnn_states = self.trainer.policy.act(np.concatenate(obs),
+                                                    np.concatenate(rnn_states),
+                                                    np.concatenate(masks),
+                                                    deterministic=True)
+                actions = np.array(np.split(_t2n(action), self.n_rollout_threads))
+                rnn_states = np.array(np.split(_t2n(rnn_states), self.n_rollout_threads))
+
+                if envs.action_space[0].__class__.__name__ == 'MultiDiscrete':
+                      for i in range(envs.action_space[0].shape):
+                        uc_actions_env = np.eye(envs.action_space[0].high[i]+1)[actions[:, :, i]]
+                        if i == 0:
+                            actions_env = uc_actions_env
+                        else:
+                            actions_env = np.concatenate((actions_env, uc_actions_env), axis=2)
+                elif envs.action_space[0].__class__.__name__ == 'Discrete':
+                    actions_env = np.squeeze(np.eye(envs.action_space[0].n)[actions], 2)
+                elif self.envs.action_space[0].__class__.__name__ == 'Box':
+                    actions_env = actions
+                else:
+                    raise NotImplementedError
+
+                # Obser reward and next obs
+                if step != self.episode_length_3 - 1:
+                    obs, rewards, dones, infos = envs.step(actions_env)
+                episode_rewards.append(rewards)
+
+                rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
+                masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
+                masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
+
+                if self.all_args.save_gifs:
+                    image = envs.render(mode='rgb_array')[0][0]
+                    all_frames.append(image)
+                else:
+                    envs.render(mode='human')
+
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
