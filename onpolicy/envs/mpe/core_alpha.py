@@ -280,6 +280,8 @@ class World(object):
         for i, entity in enumerate(self.entities):
             if not entity.movable:
                 continue
+            if 'agent' in entity.name and entity.dead:
+                continue
             entity.state.p_vel = entity.state.p_vel * (1 - self.damping)
             if (p_force[i] is not None):
                 entity.state.p_omg = np.pi * p_force[i][0] / (800*entity.mass)
