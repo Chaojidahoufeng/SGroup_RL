@@ -876,6 +876,13 @@ class DummyVecEnv(ShareVecEnv):
             env_fns), env.observation_space, env.share_observation_space, env.action_space)
         self.actions = None
 
+    def renew(self):
+        env = self.envs[0]
+        env.renew()
+        self.observation_space = env.observation_space
+        self.share_observation_space = env.share_observation_space
+        self.action_space = env.action_space
+
     def step_async(self, actions):
         self.actions = actions
 

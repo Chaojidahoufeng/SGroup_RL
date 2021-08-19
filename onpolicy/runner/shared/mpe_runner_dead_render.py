@@ -328,9 +328,9 @@ class MPERunner(Runner):
 
             self.envs.envs[0].agents[-1].dead = True
 
-            self.envs.envs[0].renew()
-
-
+            self.envs.renew()
+            share_observation_space = self.envs.share_observation_space[0] if self.use_centralized_V else self.envs.observation_space[0]
+            
             self.policy = Policy(self.all_args,
                                  self.envs.observation_space[0],
                                  share_observation_space,
