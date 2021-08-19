@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=5
 algo="rmappo"
 exp="08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5-R"
-seed=1
+seed=2
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 let "seed=$seed+1"
@@ -26,7 +26,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --self-nav-rew-weight 10 \
 --num_static_obs 10 \
 --use_render \
---episode_length 400 \
+--episode_length 200 \
 --render_episodes 1 \
 --num_static_obs 0 \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models" \
