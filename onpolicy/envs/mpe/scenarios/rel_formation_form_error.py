@@ -169,6 +169,7 @@ class Scenario(BaseScenario):
             agent.state.p_vel = np.zeros(world.dim_p)
             agent.state.p_omg = 0.0
             agent.state.c = np.zeros(world.dim_c)
+            agent.dead = False
 
             if agent.leader:
                 agent.state.p_pos = agents_ctr
