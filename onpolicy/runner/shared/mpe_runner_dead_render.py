@@ -295,7 +295,8 @@ class MPERunner(Runner):
                     raise NotImplementedError
 
                 # Obser reward and next obs
-                obs, rewards, dones, infos = envs.step(actions_env)
+                if step != self.episode_length_1 - 1:
+                    obs, rewards, dones, infos = envs.step(actions_env)
                 episode_rewards.append(rewards)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
@@ -329,6 +330,8 @@ class MPERunner(Runner):
             self.envs.envs[0].agents[-1].dead = True
 
             self.envs.renew()
+            obs, rewards, dones, infos = envs.step(actions_env)
+            
             share_observation_space = self.envs.share_observation_space[0] if self.use_centralized_V else self.envs.observation_space[0]
             
             self.policy = Policy(self.all_args,
@@ -342,8 +345,14 @@ class MPERunner(Runner):
             self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-3600-newobs/run1/models"
             self.restore()
 
+            obs, rewards, dones, infos = envs.step(actions_env)
 
             for step in range(self.episode_length_2):
+                self.trainer.prep_rollout()
+                action, rnn_states = self.trainer.policy.act(np.concatenate(obs),
+                                                    np.concatenate(rnn_states),
+                                                    np.concatenate(masks),
+                                                    deterministic=True)
                 pass
 
             
