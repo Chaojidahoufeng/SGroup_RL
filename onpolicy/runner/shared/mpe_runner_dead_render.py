@@ -326,9 +326,8 @@ class MPERunner(Runner):
             import pdb
             pdb.set_trace()
 
-            self.envs.agents[-1].dead = True
+            self.envs.envs[0].agents[-1].dead = True
 
-            self.envs.observation_space = []
 
             self.policy = Policy(self.all_args,
                                  self.envs.observation_space[0],
