@@ -400,7 +400,11 @@ class MultiAgentEnv(gym.Env):
 
             import pdb
             pdb.set_trace()
-            geom.set_color(*entity.color)
+            if 'agent' in entity.name and entity.dead == True:
+                tmp_color = np.array([1.,1.,0.5])
+                geom.set_color(*tmp_color)
+            else:
+                geom.set_color(*entity.color)
             xform = rendering.Transform()
             geom.add_attr(xform)
             self.render_geoms.append(geom)
