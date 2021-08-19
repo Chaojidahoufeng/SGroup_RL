@@ -247,7 +247,7 @@ class MPERunner(Runner):
             
             episode_rewards = []
 
-            self.episode_length_1 = 10
+            self.episode_length_1 = 300
             self.episode_length_2 = 150
             self.episode_length_3 = 150
 
