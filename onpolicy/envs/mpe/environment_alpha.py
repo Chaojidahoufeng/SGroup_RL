@@ -179,10 +179,16 @@ class MultiAgentEnv(gym.Env):
         done_n = []
         info_n = []
         self.agents = self.world.policy_agents
+        self.living_agents = []
+        for agent in self.world.policy_agents:
+            if not agent.dead:
+                self.living_agents.append(agent)
+        
         # set action for each agent
-        for i, agent in enumerate(self.agents):
+        for i, agent in enumerate(self.living_agents):
             self._set_action(action_n[i], agent, self.action_space[i])
         # advance world state
+        
         self.world.step()  # core.step()
         # record observation for each agent
         for i, agent in enumerate(self.agents):
