@@ -1,6 +1,6 @@
 #!/bin/sh
 env="MPE"
-scenario="rel_formation_form_error" 
+scenario="rel_formation_form_error"
 num_landmarks=1
 num_agents=3
 algo="rmappo"
