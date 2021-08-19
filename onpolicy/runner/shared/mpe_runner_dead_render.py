@@ -269,8 +269,6 @@ class MPERunner(Runner):
             self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models"
             self.restore()
 
-            import pdb
-            pdb.set_trace()
             
             for step in range(self.episode_length_1):
                 calc_start = time.time()
@@ -349,8 +347,6 @@ class MPERunner(Runner):
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
 
-            import pdb
-            pdb.set_trace()
 
             for step in range(self.episode_length_2):
                 self.trainer.prep_rollout()
@@ -390,10 +386,6 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
-            import pdb
-            pdb.set_trace()
-
-
             self.envs.envs[0].agents[-2].dead = True
 
             self.envs.renew()
@@ -415,9 +407,7 @@ class MPERunner(Runner):
             self.num_agents_living = 3
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
-
-            import pdb
-            pdb.set_trace()
+            
 
             for step in range(self.episode_length_3):
                 self.trainer.prep_rollout()
