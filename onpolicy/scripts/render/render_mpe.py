@@ -59,7 +59,7 @@ def parse_args(args, parser):
 
     parser.add_argument("--render_sight", type=str, default='global')
 
-    parser.add_argument("--render_dead", action='store_false', default=False))
+    parser.add_argument("--render_dead", action='store_false', default=False)
 
     all_args = parser.parse_known_args(args)[0]
 
