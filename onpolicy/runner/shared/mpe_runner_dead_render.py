@@ -347,6 +347,7 @@ class MPERunner(Runner):
             obs, rewards, dones, infos = envs.step(actions_env)
             self.num_agents_living = 4
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
+            masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
 
             import pdb
             pdb.set_trace()
@@ -374,7 +375,7 @@ class MPERunner(Runner):
                     raise NotImplementedError
 
                 # Obser reward and next obs
-                if step != self.episode_length_1 - 1:
+                if step != self.episode_length_2 - 1:
                     obs, rewards, dones, infos = envs.step(actions_env)
                 episode_rewards.append(rewards)
 
@@ -387,6 +388,9 @@ class MPERunner(Runner):
                     all_frames.append(image)
                 else:
                     envs.render(mode='human')
+
+            import pdb
+            pdb.set_trace()
 
             
             for step in range(self.episode_length_3):
