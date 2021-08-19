@@ -397,6 +397,9 @@ class MultiAgentEnv(gym.Env):
                     geom = rendering.make_circle(entity.size)
             else:
                 geom = rendering.make_circle(entity.size)
+
+            import pdb
+            pdb.set_trace()
             geom.set_color(*entity.color)
             xform = rendering.Transform()
             geom.add_attr(xform)
