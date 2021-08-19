@@ -651,7 +651,7 @@ class Scenario(BaseScenario):
 
         pos_rel = [[],[]] # real relative position
 
-        for any_agent in world.agents[0:num_living_agent-1]:
+        for any_agent in world.agents[0:num_living_agent]:
             pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
             pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
         
