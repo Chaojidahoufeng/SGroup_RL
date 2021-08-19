@@ -635,15 +635,6 @@ class Scenario(BaseScenario):
         return avoidance_reward
 
     def formation_reward(self, agent, world):
-        num_living_agent = 0
-        for agent in world.agents:
-            if not agent.dead:
-                num_living_agent += 1
-
-        world.ideal_topo_point = [[],[]]
-        for i in range(num_living_agent):
-            world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_living_agent*2*np.pi))
-            world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_living_agent*2*np.pi))
         form_reward_weight = self.args.form_rew_weight
 
         all_agents = world.agents
@@ -651,7 +642,7 @@ class Scenario(BaseScenario):
 
         pos_rel = [[],[]] # real relative position
 
-        for any_agent in world.agents[0:num_living_agent]:
+        for any_agent in world.agents:
             pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
             pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
         
