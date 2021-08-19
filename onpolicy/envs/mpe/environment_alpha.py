@@ -188,10 +188,14 @@ class MultiAgentEnv(gym.Env):
         for i, agent in enumerate(self.living_agents):
             self._set_action(action_n[i], agent, self.action_space[i])
         # advance world state
-        
+
         self.world.step()  # core.step()
         # record observation for each agent
-        for i, agent in enumerate(self.agents):
+
+
+        import pdb
+        pdb.set_trace()
+        for i, agent in enumerate(self.living_agents):
             obs_n.append(self._get_obs(agent))
             reward_n.append([self._get_reward(agent)])
             done_n.append(self._get_done(agent))

@@ -324,14 +324,12 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
-            import pdb
-            pdb.set_trace()
-
             self.envs.envs[0].agents[-1].dead = True
 
             self.envs.renew()
+
             obs, rewards, dones, infos = envs.step(actions_env)
-            
+
             share_observation_space = self.envs.share_observation_space[0] if self.use_centralized_V else self.envs.observation_space[0]
             
             self.policy = Policy(self.all_args,
