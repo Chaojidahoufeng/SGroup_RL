@@ -530,19 +530,20 @@ class MultiAgentEnv(gym.Env):
                 self.viewers[i].add_geom(head)
                 label = rendering.make_text(text='%d' % e, font_size=12, x=agent.state.p_pos[0], y=agent.state.p_pos[1], color=(0, 0, 0, 255))
                 self.viewers[i].add_label(label)
-                if sight == 'first-person':
-                    dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
-                                                x= agents_pos_center[0] - WINDOW_W // 1.5,
-                                                y= agents_pos_center[1] - WINDOW_H // 2.0 - 20 * (e + 2),
-                                                anchor_x='left',
-                                                color=(0, 0, 0, 255))
-                elif sight == 'global':
-                    dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
-                                                x= self.world.width // 2 - WINDOW_W // 1.5,
-                                                y= self.world.width // 2 - WINDOW_H // 2.0 - 20 * (e + 2),
-                                                anchor_x='left',
-                                                color=(0, 0, 0, 255))
-                self.viewers[i].add_label(dis_btw_agents)
+                
+                # if sight == 'first-person':
+                #     dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
+                #                                 x= agents_pos_center[0] - WINDOW_W // 1.5,
+                #                                 y= agents_pos_center[1] - WINDOW_H // 2.0 - 20 * (e + 2),
+                #                                 anchor_x='left',
+                #                                 color=(0, 0, 0, 255))
+                # elif sight == 'global':
+                #     dis_btw_agents = rendering.make_text(text=lines_length_text[e], font_size=15,
+                #                                 x= self.world.width // 2 - WINDOW_W // 1.5,
+                #                                 y= self.world.width // 2 - WINDOW_H // 2.0 - 20 * (e + 2),
+                #                                 anchor_x='left',
+                #                                 color=(0, 0, 0, 255))
+                # self.viewers[i].add_label(dis_btw_agents)
 
                 # for name_num, name in enumerate(reward_names):
                 #     agent_reward_text = rendering.make_text(text=name + ' '+str(np.around(reward_dict[name][e], decimals=2)), font_size=15,
