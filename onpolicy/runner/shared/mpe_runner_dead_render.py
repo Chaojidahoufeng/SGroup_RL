@@ -323,6 +323,9 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
+            import pdb
+            pdb.set_trace()
+
             self.policy = Policy(self.all_args,
                                  self.envs.observation_space[0],
                                  share_observation_space,
