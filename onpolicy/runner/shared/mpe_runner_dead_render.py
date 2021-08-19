@@ -345,6 +345,8 @@ class MPERunner(Runner):
             self.restore()
 
             obs, rewards, dones, infos = envs.step(actions_env)
+            self.num_agents_living = 4
+            rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
 
             import pdb
             pdb.set_trace()
@@ -355,7 +357,36 @@ class MPERunner(Runner):
                                                     np.concatenate(rnn_states),
                                                     np.concatenate(masks),
                                                     deterministic=True)
-                pass
+                rnn_states = np.array(np.split(_t2n(rnn_states), self.n_rollout_threads))
+
+                if envs.action_space[0].__class__.__name__ == 'MultiDiscrete':
+                      for i in range(envs.action_space[0].shape):
+                        uc_actions_env = np.eye(envs.action_space[0].high[i]+1)[actions[:, :, i]]
+                        if i == 0:
+                            actions_env = uc_actions_env
+                        else:
+                            actions_env = np.concatenate((actions_env, uc_actions_env), axis=2)
+                elif envs.action_space[0].__class__.__name__ == 'Discrete':
+                    actions_env = np.squeeze(np.eye(envs.action_space[0].n)[actions], 2)
+                elif self.envs.action_space[0].__class__.__name__ == 'Box':
+                    actions_env = actions
+                else:
+                    raise NotImplementedError
+
+                # Obser reward and next obs
+                if step != self.episode_length_1 - 1:
+                    obs, rewards, dones, infos = envs.step(actions_env)
+                episode_rewards.append(rewards)
+
+                rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
+                masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
+                masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
+
+                if self.all_args.save_gifs:
+                    image = envs.render(mode='rgb_array')[0][0]
+                    all_frames.append(image)
+                else:
+                    envs.render(mode='human')
 
             
             for step in range(self.episode_length_3):
