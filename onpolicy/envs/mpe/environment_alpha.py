@@ -398,8 +398,6 @@ class MultiAgentEnv(gym.Env):
             else:
                 geom = rendering.make_circle(entity.size)
 
-            import pdb
-            pdb.set_trace()
             if 'agent' in entity.name and entity.dead == True:
                 tmp_color = np.array([1.,1.,0.5])
                 geom.set_color(*tmp_color)
