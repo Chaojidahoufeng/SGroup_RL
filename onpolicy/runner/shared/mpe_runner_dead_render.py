@@ -248,8 +248,8 @@ class MPERunner(Runner):
             episode_rewards = []
 
             self.episode_length_1 = 100
-            self.episode_length_2 = 150
-            self.episode_length_3 = 100
+            self.episode_length_2 = 175
+            self.episode_length_3 = 125
 
             from onpolicy.algorithms.r_mappo.r_mappo import R_MAPPO as TrainAlgo
             from onpolicy.algorithms.r_mappo.algorithm.rMAPPOPolicy import R_MAPPOPolicy as Policy
