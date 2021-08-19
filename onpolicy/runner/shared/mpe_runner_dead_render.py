@@ -326,6 +326,8 @@ class MPERunner(Runner):
             import pdb
             pdb.set_trace()
 
+            self.envs.envs[0].renew()
+
             self.envs.envs[0].agents[-1].dead = True
 
 

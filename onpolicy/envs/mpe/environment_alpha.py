@@ -116,7 +116,7 @@ class MultiAgentEnv(gym.Env):
     '''
     def renew(self):
         living_agent = len(self.agents)
-        self.observation = []
+        self.observation_space = []
         share_obs_dim = 0
         for i, agent in enumerate(self.agents):
             if agent.dead:
