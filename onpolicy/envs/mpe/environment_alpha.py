@@ -106,6 +106,30 @@ class MultiAgentEnv(gym.Env):
             self.viewers = [None] * self.n
         self._reset_render()
 
+    '''
+    ************************
+    renew
+    Author: Yuzi Yan
+    Date: 2021.8.19
+    Function: renew observation space when agent die
+    ************************
+    '''
+    def renew(self):
+        living_agent = len(self.agents)
+        self.observation = []
+        share_obs_dim = 0
+        for i, agent in enumerate(self.agents):
+            if agent.dead:
+                living_agent -= 1
+
+            obs_dim = len(self.observation_callback(agent, self.world))
+            share_obs_dim += obs_dim
+            self.observation_space.append(spaces.Box(
+                low=-np.inf, high=+np.inf, shape=(obs_dim,), dtype=np.float32))  # [-inf,inf]
+
+        self.share_observation_space = [spaces.Box(
+            low=-np.inf, high=+np.inf, shape=(share_obs_dim,), dtype=np.float32)] * living_agent
+
     def seed(self, seed=None):
         if seed is None:
             np.random.seed(1)

@@ -326,6 +326,10 @@ class MPERunner(Runner):
             import pdb
             pdb.set_trace()
 
+            self.envs.agents[-1].dead = True
+
+            self.envs.observation_space = []
+
             self.policy = Policy(self.all_args,
                                  self.envs.observation_space[0],
                                  share_observation_space,
@@ -336,6 +340,7 @@ class MPERunner(Runner):
 
             self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-triangle/run1/models"
             self.restore()
+
 
             for step in range(self.episode_length_2):
                 pass
