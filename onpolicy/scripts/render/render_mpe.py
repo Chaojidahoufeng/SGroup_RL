@@ -59,6 +59,8 @@ def parse_args(args, parser):
 
     parser.add_argument("--render_sight", type=str, default='global')
 
+    parser.add_argument("--render_dead", action='store_false', default=False))
+
     all_args = parser.parse_known_args(args)[0]
 
     return all_args
@@ -137,10 +139,14 @@ def main(args):
     }
 
     # run experiments
-    if all_args.share_policy:
-        from onpolicy.runner.shared.mpe_runner import MPERunner as Runner
+    if not all_args.render_dead:
+        if all_args.share_policy:
+            from onpolicy.runner.shared.mpe_runner import MPERunner as Runner
+        else:
+            from onpolicy.runner.separated.mpe_runner import MPERunner as Runner
     else:
-        from onpolicy.runner.separated.mpe_runner import MPERunner as Runner
+        from onpolicy.runner.shared.mpe_runner_dead_render import MPERunner as Runner
+
 
     runner = Runner(config)
     runner.render()
