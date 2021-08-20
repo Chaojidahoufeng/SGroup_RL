@@ -29,7 +29,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --episode_length 400 \
 --render_episodes 1 \
 --num_static_obs 0 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/formation_stream_avoidance_4/rmappo/08-19-baseline-formation-stream-avoidance-4/run1/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/formation_stream_avoidance_4/rmappo/08-19-baseline-formation-stream-avoidance-4/run2/models" \
 --save_gifs \
 --eval_interval 250 \
 --map-max-size 3600 \
