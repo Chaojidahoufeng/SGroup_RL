@@ -184,8 +184,7 @@ class MultiAgentEnv(gym.Env):
             if not agent.dead:
                 self.living_agents.append(agent)
 
-        import pdb
-        pdb.set_trace()
+        print(np.mean(action_n))
         
         # set action for each agent
         for i, agent in enumerate(self.living_agents):
