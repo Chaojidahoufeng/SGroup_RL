@@ -178,11 +178,6 @@ class MultiAgentEnv(gym.Env):
     # get dones for a particular agent
     # unused right now -- agents are allowed to go beyond the viewing screen
     def _get_done(self, agent):
-        if self.done_callback is None:
-            if self.current_step >= self.world_length:
-                return True
-            else:
-                return False
         return self.done_callback(agent, self.world)
 
     # get reward for a particular agent
@@ -193,79 +188,62 @@ class MultiAgentEnv(gym.Env):
 
     # set env action for a particular agent
     def _set_action(self, action, agent, action_space, time=None):
-        agent.action.u = np.zeros(self.world.dim_p)
-        agent.action.c = np.zeros(self.world.dim_c)
-        # process action
-        if isinstance(action_space, MultiDiscrete):
-            act = []
-            size = action_space.high - action_space.low + 1
-            index = 0
-            for s in size:
-                act.append(action[index:(index+s)])
-                index += s
-            action = act
+    agent.action.u = np.zeros(self.world.dim_p)
+    agent.action.c = np.zeros(self.world.dim_c)
+    agent.action.u[1] = 0.
+    agent.agents_ctr_prev = agent.agents_ctr # record previous state
+    # process action
+    if isinstance(action_space, MultiDiscrete):
+        act = []
+        size = action_space.high - action_space.low + 1
+        index = 0
+        for s in size:
+            act.append(action[index:(index+s)])
+            index += s
+        action = act
+    else:
+        action = [action]
+
+    #print(action)
+    #action = [action]
+
+
+    if agent.movable:
+        # physical action
+        if self.discrete_action_input:
+            agent.action.u = np.zeros(self.world.dim_p)
+            # process discrete action
+            if action[0] == 1: agent.action.u[0] = -1.0
+            if action[0] == 2: agent.action.u[0] = +1.0
+            if action[0] == 3: agent.action.u[1] = -1.0
+            if action[0] == 4: agent.action.u[1] = +1.0
         else:
-            action = [action]
-        if agent.movable:
-            # physical action
-            if self.discrete_action_input:
-                agent.action.u = np.zeros(self.world.dim_p)
-                # process discrete action
-                if action[0] == 1:
-                    agent.action.u[0] = -1.0
-                if action[0] == 2:
-                    agent.action.u[0] = +1.0
-                if action[0] == 3:
-                    agent.action.u[1] = -1.0
-                if action[0] == 4:
-                    agent.action.u[1] = +1.0
-                d = self.world.dim_p
+            if agent.leader:
+                agent.action.u[0] += 0.3*(action[0][0] - action[0][1])  # omega
+                #agent.action.u[0] += 0.3*(action[0][0])  # omega
+                agent.action.u[1] += 0.35
+                #agent.action.u[1] += 0.35*(action[0][1])
             else:
-                if self.discrete_action_space:
-                    # import pdb
-                    # pdb.set_trace()
-                    # agent.action.u[0] += action[0][1] - action[0][2]
-                    # agent.action.u[1] += action[0][3] - action[0][4]
-                    if agent.leader:
-                        agent.action.u[0] += 0.0  # omega
-                        #agent.action.u[0] += 0.3*(action[0][0])  # omega
-                        agent.action.u[1] += 0.35
-                        #agent.action.u[1] += 0.35*(action[0][1])
-                    else:
-                        agent.action.u[0] += action[0][0] - action[0][1]  # omega
-                        #agent.action.u[0] += action[0][0]  # omega
-                        agent.action.u[1] += 0.5 * (action[0][2])
-                        #agent.action.u[1] += 0.5 * (action[0][1])
-                else:
-                    if self.force_discrete_action:
-                        p = np.argmax(action[0][0:self.world.dim_p])
-                        action[0][:] = 0.0
-                        action[0][p] = 1.0
-                    agent.action.u = action[0][0:self.world.dim_p]
-                    d = self.world.dim_p
-
-            sensitivity = 5.0
-            if agent.accel is not None:
-                sensitivity = agent.accel
-            agent.action.u *= sensitivity
-
-            if (not agent.silent) and (not isinstance(action_space, MultiDiscrete)):
-                action[0] = action[0][d:]
-            else:
-                action = action[1:]
-
-        if not agent.silent:
-            # communication action
-            if self.discrete_action_input:
-                agent.action.c = np.zeros(self.world.dim_c)
-                agent.action.c[action[0]] = 1.0
-            else:
-                agent.action.c = action[0]
-
-            action = action[1:]
-
-        # make sure we used all elements of action
-        assert len(action) == 0
+                agent.action.u[0] += action[0][0] - action[0][1]  # omega
+                #agent.action.u[0] += action[0][0]  # omega
+                agent.action.u[1] += 0.5 * (action[0][2])
+                #agent.action.u[1] += 0.5 * (action[0][1])
+        #print(agent.action.u)
+        sensitivity = 5.0
+        if agent.accel is not None:
+            sensitivity = agent.accel
+        agent.action.u *= sensitivity
+        action = action[1:]
+    if not agent.silent:
+        # communication action
+        if self.discrete_action_input:
+            agent.action.c = np.zeros(self.world.dim_c)
+            agent.action.c[action[0]] = 1.0
+        else:
+            agent.action.c = action[0]
+        action = action[1:]
+    # make sure we used all elements of action
+    assert len(action) == 0
 
     # reset rendering assets
     def _reset_render(self):
@@ -282,14 +260,7 @@ class MultiAgentEnv(gym.Env):
     ************************
     '''
 
-    def render(self, mode='human', close=False, sight='first-person'):
-        # sight = 'global'： global perspective
-        # sight = 'first-person': first-person perspective
-        try:
-            assert sight in ['global', 'first-person']
-        except:
-            print(1/0)
-        from . import rendering
+    def render(self, mode='human', sight=None):
         if mode == 'human':
             alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             message = ''
@@ -303,8 +274,6 @@ class MultiAgentEnv(gym.Env):
                         word = alphabet[np.argmax(other.state.c)]
                     message += (other.name + ' to ' + agent.name + ': ' + word + '   ')
             #print(message)
-        
-
         for i in range(len(self.viewers)):
             # create viewers (if necessary)
             WINDOW_W = 700
@@ -312,8 +281,14 @@ class MultiAgentEnv(gym.Env):
             if self.viewers[i] is None:
                 # import rendering only if we need it (and don't import for headless machines)
                 #from gym.envs.classic_control import rendering
-                from . import rendering
+                from multiagent import rendering
                 self.viewers[i] = rendering.Viewer(WINDOW_W, WINDOW_H)
+
+        # create rendering geometry
+        #if self.render_geoms is None:
+        # import rendering only if we need it (and don't import for headless machines)
+        #from gym.envs.classic_control import rendering
+        from multiagent import rendering
 
         self.agents_geoms = []
         self.agents_geoms_xform = []
@@ -326,7 +301,6 @@ class MultiAgentEnv(gym.Env):
                 agents.append(entity)
                 entities_rearrange.pop(0)
         entities_rearrange += agents
-
         for entity in entities_rearrange:
             if 'agent' in entity.name:
                 geom = rendering.make_square(entity.size, angle=entity.state.p_ang+np.pi/4)
@@ -362,7 +336,6 @@ class MultiAgentEnv(gym.Env):
             tmp_text = tmp_text + str(length)
             lines_length_text.append(tmp_text)
 
-
         # add geoms to viewer
         for viewer in self.viewers:
             viewer.geoms = []
@@ -373,26 +346,15 @@ class MultiAgentEnv(gym.Env):
 
         results = []
         for i in range(len(self.viewers)):
-            from . import rendering
+            from multiagent import rendering
             # update bounds to center around agent
-            # update bounds to center around agent
-            agent_x_max = max([agent.state.p_pos[0] for agent in self.agents])
-            agent_x_min = min([agent.state.p_pos[0] for agent in self.agents])
-            agent_y_max = max([agent.state.p_pos[1] for agent in self.agents])
-            agent_y_min = min([agent.state.p_pos[1] for agent in self.agents])
-            cam_range_width = agent_x_max - agent_x_min + 300
-            cam_range_height = agent_y_max - agent_y_min + 300
+            cam_range = 500
             '''if self.shared_viewer:
                 pos = np.zeros(self.world.dim_p)
             else:
                 pos = self.agents[i].state.p_pos'''
             pos = self.world.agents[0].state.p_pos
-            # self.viewers[i].set_bounds(self.agents[0].agents_ctr[0]-cam_range_width/2, 
-            #                            self.agents[0].agents_ctr[0]+cam_range_width/2, 
-            #                            self.agents[0].agents_ctr[1]-cam_range_height/2, 
-            #                            self.agents[0].agents_ctr[1]+cam_range_height/2)
-            self.viewers[i].set_bounds(0, 1200, 0, 1200)
-
+            self.viewers[i].set_bounds(pos[0]-cam_range, pos[0]+cam_range, pos[1]-cam_range, pos[1]+cam_range)
             # update geometry positions
             for e, entity in enumerate(entities_rearrange):
                 self.render_geoms_xform[e].set_translation(*entity.state.p_pos)
@@ -434,26 +396,33 @@ class MultiAgentEnv(gym.Env):
 
             # add head to agents
             for e, agent in enumerate(self.agents):
-                for j in range(agent.start_ray[0], agent.end_ray[0] + 1):
-                    # 105 for compensating square's rendering error
-                    if 100 * agent.ray[j][0] < 200:
-                        ray_pos = 105 * agent.ray[j][0] * np.array(
-                            [np.cos(agent.ray[j][1] + agent.state.p_ang), np.sin(agent.ray[j][1] + agent.state.p_ang)])
-                        ray = rendering.make_line(agent.state.p_pos, agent.state.p_pos + ray_pos)
-                        ray.set_color(1., 0., 0.)
-                        ray_xform = rendering.Transform()
-                        ray.add_attr(ray_xform)
-                        self.viewers[i].add_geom(ray)
-                for j in range(agent.start_ray[1], agent.end_ray[1] + 1):
-                    # 105 for compensating square's rendering error
-                    if 100 * agent.ray[j][0] < 200:
-                        ray_pos = 105 * agent.ray[j][0] * np.array(
-                            [np.cos(agent.ray[j][1] + agent.state.p_ang), np.sin(agent.ray[j][1] + agent.state.p_ang)])
-                        ray = rendering.make_line(agent.state.p_pos, agent.state.p_pos + ray_pos)
-                        ray.set_color(1., 0., 0.)
-                        ray_xform = rendering.Transform()
-                        ray.add_attr(ray_xform)
-                        self.viewers[i].add_geom(ray)
+                if e > 0:
+                    for j in range(agent.start_ray[0], agent.end_ray[0] + 1):
+                        # 105 for compensating square's rendering error
+                        if 100 * agent.ray[j][0] < 200:
+                            ray_pos = 105 * agent.ray[j][0] * np.array(
+                                [np.cos(agent.ray[j][1] + agent.state.p_ang), np.sin(agent.ray[j][1] + agent.state.p_ang)])
+                            ray = rendering.make_line(agent.state.p_pos, agent.state.p_pos + ray_pos)
+                            ray.set_color(1., 0., 0.)
+                            ray_xform = rendering.Transform()
+                            ray.add_attr(ray_xform)
+                            self.viewers[i].add_geom(ray)
+                    for j in range(agent.start_ray[1], agent.end_ray[1] + 1):
+                        # 105 for compensating square's rendering error
+                        if 100 * agent.ray[j][0] < 200:
+                            ray_pos = 105 * agent.ray[j][0] * np.array(
+                                [np.cos(agent.ray[j][1] + agent.state.p_ang), np.sin(agent.ray[j][1] + agent.state.p_ang)])
+                            ray = rendering.make_line(agent.state.p_pos, agent.state.p_pos + ray_pos)
+                            ray.set_color(1., 0., 0.)
+                            ray_xform = rendering.Transform()
+                            ray.add_attr(ray_xform)
+                            self.viewers[i].add_geom(ray)
+                    err = rendering.make_text(text='error of agent %d = %f meters' % (e, np.linalg.norm(agent.err)), font_size=15,
+                                              x=self.world.agents[0].state.p_pos[0] - WINDOW_W // 1.5,
+                                              y=self.world.agents[0].state.p_pos[1] - WINDOW_H // 2.0 - 20 * (e + 1),
+                                              anchor_x='left',
+                                              color=(0, 0, 0, 255))
+                    self.viewers[i].add_label(err)
                 head = rendering.make_circle(agent.size / 8)
                 head_xform = rendering.Transform()
                 head.set_color(0.0, .0, 1.0)
@@ -463,8 +432,7 @@ class MultiAgentEnv(gym.Env):
                 self.viewers[i].add_geom(head)
                 label = rendering.make_text(text='%d' % e, font_size=12, x=agent.state.p_pos[0], y=agent.state.p_pos[1], color=(0, 0, 0, 255))
                 self.viewers[i].add_label(label)
-                
-
+                    
             time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
                                            x=self.world.agents[0].state.p_pos[0] - WINDOW_W // 1.5,
                                            y=self.world.agents[0].state.p_pos[1] - WINDOW_H // 2.0,
