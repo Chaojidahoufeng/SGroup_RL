@@ -172,9 +172,6 @@ class MPERunner(Runner):
         else:
             share_obs = obs
 
-        import pdb
-        pdb.set_trace()
-
         self.buffer.insert(share_obs, obs, rnn_states, rnn_states_critic, actions, action_log_probs, values, rewards, masks)
 
     @torch.no_grad()
