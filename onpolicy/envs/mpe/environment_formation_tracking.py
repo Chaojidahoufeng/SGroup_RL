@@ -188,67 +188,67 @@ class MultiAgentEnv(gym.Env):
 
     # set env action for a particular agent
     def _set_action(self, action, agent, action_space, time=None):
-    agent.action.u = np.zeros(self.world.dim_p)
-    agent.action.c = np.zeros(self.world.dim_c)
-    agent.action.u[1] = 0.
-    agent.agents_ctr_prev = agent.agents_ctr # record previous state
-    # process action
-    if isinstance(action_space, MultiDiscrete):
-        act = []
-        size = action_space.high - action_space.low + 1
-        index = 0
-        for s in size:
-            act.append(action[index:(index+s)])
-            index += s
-        action = act
-    else:
-        action = [action]
-
-    #print(action)
-    #action = [action]
-
-
-    if agent.movable:
-        # physical action
-        if self.discrete_action_input:
-            agent.action.u = np.zeros(self.world.dim_p)
-            # process discrete action
-            if action[0] == 1: agent.action.u[0] = -1.0
-            if action[0] == 2: agent.action.u[0] = +1.0
-            if action[0] == 3: agent.action.u[1] = -1.0
-            if action[0] == 4: agent.action.u[1] = +1.0
+        agent.action.u = np.zeros(self.world.dim_p)
+        agent.action.c = np.zeros(self.world.dim_c)
+        agent.action.u[1] = 0.
+        agent.agents_ctr_prev = agent.agents_ctr # record previous state
+        # process action
+        if isinstance(action_space, MultiDiscrete):
+            act = []
+            size = action_space.high - action_space.low + 1
+            index = 0
+            for s in size:
+                act.append(action[index:(index+s)])
+                index += s
+            action = act
         else:
-            if agent.leader:
-                agent.action.u[0] += 0.3*(action[0][0] - action[0][1])  # omega
-                #agent.action.u[0] += 0.3*(action[0][0])  # omega
-                agent.action.u[1] += 0.35
-                #agent.action.u[1] += 0.35*(action[0][1])
+            action = [action]
+
+        #print(action)
+        #action = [action]
+
+
+        if agent.movable:
+            # physical action
+            if self.discrete_action_input:
+                agent.action.u = np.zeros(self.world.dim_p)
+                # process discrete action
+                if action[0] == 1: agent.action.u[0] = -1.0
+                if action[0] == 2: agent.action.u[0] = +1.0
+                if action[0] == 3: agent.action.u[1] = -1.0
+                if action[0] == 4: agent.action.u[1] = +1.0
             else:
-                agent.action.u[0] += action[0][0] - action[0][1]  # omega
-                #agent.action.u[0] += action[0][0]  # omega
-                agent.action.u[1] += 0.5 * (action[0][2])
-                #agent.action.u[1] += 0.5 * (action[0][1])
-        #print(agent.action.u)
-        sensitivity = 5.0
-        if agent.accel is not None:
-            sensitivity = agent.accel
-        agent.action.u *= sensitivity
-        action = action[1:]
-    if not agent.silent:
-        # communication action
-        if self.discrete_action_input:
-            agent.action.c = np.zeros(self.world.dim_c)
-            agent.action.c[action[0]] = 1.0
-        else:
-            agent.action.c = action[0]
-        action = action[1:]
-    # make sure we used all elements of action
-    assert len(action) == 0
+                if agent.leader:
+                    agent.action.u[0] += 0.3*(action[0][0] - action[0][1])  # omega
+                    #agent.action.u[0] += 0.3*(action[0][0])  # omega
+                    agent.action.u[1] += 0.35
+                    #agent.action.u[1] += 0.35*(action[0][1])
+                else:
+                    agent.action.u[0] += action[0][0] - action[0][1]  # omega
+                    #agent.action.u[0] += action[0][0]  # omega
+                    agent.action.u[1] += 0.5 * (action[0][2])
+                    #agent.action.u[1] += 0.5 * (action[0][1])
+            #print(agent.action.u)
+            sensitivity = 5.0
+            if agent.accel is not None:
+                sensitivity = agent.accel
+            agent.action.u *= sensitivity
+            action = action[1:]
+        if not agent.silent:
+            # communication action
+            if self.discrete_action_input:
+                agent.action.c = np.zeros(self.world.dim_c)
+                agent.action.c[action[0]] = 1.0
+            else:
+                agent.action.c = action[0]
+            action = action[1:]
+        # make sure we used all elements of action
+        assert len(action) == 0
 
-    # reset rendering assets
-    def _reset_render(self):
-        self.render_geoms = None
-        self.render_geoms_xform = None
+        # reset rendering assets
+        def _reset_render(self):
+            self.render_geoms = None
+            self.render_geoms_xform = None
 
     '''
     ************************
