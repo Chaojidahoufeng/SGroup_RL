@@ -114,6 +114,9 @@ class MPERunner(Runner):
         # reset env
         obs = self.envs.reset()
 
+        import pdb
+        pdb.set_trace()
+
         # replay buffer
         if self.use_centralized_V:
             share_obs = obs.reshape(self.n_rollout_threads, -1)
