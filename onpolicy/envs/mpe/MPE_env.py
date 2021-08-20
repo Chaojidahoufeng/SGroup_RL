@@ -33,6 +33,9 @@ def MPEEnv(args):
     if args.use_11_discrete_action:
         env = MultiAgentEnv(world, scenario.reset_world,
                         scenario.reward, scenario.observation, scenario.info, scenario.done, discrete_action=True)
+    elif args.scenario_name == 'formation_stream_avoidance_4':
+        env = MultiAgentEnv(world, scenario.reset_world,
+                        scenario.reward, scenario.observation, scenario.info, scenario.done, discrete_action=False)
     else:
         env = MultiAgentEnv(world, scenario.reset_world,
                         scenario.reward, scenario.observation, scenario.info, scenario.done, discrete_action=False)

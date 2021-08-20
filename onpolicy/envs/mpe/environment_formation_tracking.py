@@ -16,7 +16,7 @@ class MultiAgentEnv(gym.Env):
 
     def __init__(self, world, reset_callback=None, reward_callback=None,
                  observation_callback=None, constraint_callback=None, info_callback=None,
-                 done_callback=None, shared_viewer=True):
+                 done_callback=None, shared_viewer=True, discrete_action=False):
 
         self.world = world
         self.agents = self.world.policy_agents
