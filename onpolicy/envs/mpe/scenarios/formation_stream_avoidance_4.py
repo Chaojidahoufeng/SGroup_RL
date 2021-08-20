@@ -565,7 +565,7 @@ class Scenario(BaseScenario):
         # leader's task is to navigate toward the goal
         sigma = 100
         rew -= sigma*(leader.dis2goal - leader.dis2goal_prev)*abs(np.cos(leader.ang2goal))
-        return rew, 0.
+        return rew
 
     def kalman_filter(self, world, agent):
         '''
