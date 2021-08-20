@@ -1,8 +1,8 @@
 #!/bin/sh
 env="MPE"
-scenario="rel_formation_form_error" 
+scenario="formation_stream_avoidance_4" 
 num_landmarks=1
-num_agents=3
+num_agents=4
 algo="rmappo"
 exp="08-19-baseline-formation-stream-avoidance-4"
 seed_max=1

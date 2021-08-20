@@ -13,10 +13,10 @@ class Scenario(BaseScenario):
         world.dim_c = 0
         #world.damping = 1
 
-        num_follower_agents = arglist.agent_num - 1
+        num_follower_agents = 4
         num_leader_agent = 1
         num_agents = num_leader_agent + num_follower_agents
-        num_static_obs = arglist.static_obstacle_num
+        num_static_obs = 10
         num_landmarks = 1# tracking center and side barrier indicators
         num_agent_ray = 60
         # add agents
