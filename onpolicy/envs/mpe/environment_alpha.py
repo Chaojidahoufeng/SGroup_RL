@@ -183,6 +183,9 @@ class MultiAgentEnv(gym.Env):
         for agent in self.world.policy_agents:
             if not agent.dead:
                 self.living_agents.append(agent)
+
+        import pdb
+        pdb.set_trace()
         
         # set action for each agent
         for i, agent in enumerate(self.living_agents):
