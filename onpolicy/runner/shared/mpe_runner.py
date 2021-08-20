@@ -114,9 +114,6 @@ class MPERunner(Runner):
         # reset env
         obs = self.envs.reset()
 
-        import pdb
-        pdb.set_trace()
-
         # replay buffer
         if self.use_centralized_V:
             share_obs = obs.reshape(self.n_rollout_threads, -1)
@@ -174,6 +171,9 @@ class MPERunner(Runner):
             share_obs = np.expand_dims(share_obs, 1).repeat(self.num_agents, axis=1)
         else:
             share_obs = obs
+
+        import pdb
+        pdb.set_trace()
 
         self.buffer.insert(share_obs, obs, rnn_states, rnn_states_critic, actions, action_log_probs, values, rewards, masks)
 
