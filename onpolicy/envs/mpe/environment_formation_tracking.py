@@ -21,6 +21,7 @@ class MultiAgentEnv(gym.Env):
 
 
         self.world = world
+        self.world_length = self.world.world_length
         self.current_step = 0
         self.agents = self.world.policy_agents
         # set required vectorized gym env property
@@ -465,22 +466,14 @@ class MultiAgentEnv(gym.Env):
                 self.viewers[i].add_label(label)
                 
 
-                # for name_num, name in enumerate(reward_names):
-                #     agent_reward_text = rendering.make_text(text=name + ' '+str(np.around(reward_dict[name][e], decimals=2)), font_size=15,
-                #                                         x= self.world.width // 2 - WINDOW_W // 1.5 + 200 * name_num,
-                #                                         y= self.world.width // 2 + WINDOW_H // 2.0 - 20 * (e + 2),
-                #                                         anchor_x='left',
-                #                                         color=(0, 0, 0, 255))
-                #     self.viewers[i].add_label(agent_reward_text)
-
             time = rendering.make_text(text='time = %f sec' % self.world.time, font_size=15,
-                                           x=self.world.width // 2 - WINDOW_W // 1.5,
-                                           y=self.world.width // 2 - WINDOW_H // 2.0,
+                                           x=self.world.agents[0].state.p_pos[0] - WINDOW_W // 1.5,
+                                           y=self.world.agents[0].state.p_pos[1] - WINDOW_H // 2.0,
                                            anchor_x='left',
                                            color=(0, 0, 0, 255))
             distance = rendering.make_text(text='distance = %f meters' % self.world.distance, font_size=15,
-                                           x=self.world.width // 2 - WINDOW_W // 1.5,
-                                           y=self.world.width // 2 - WINDOW_H // 2.0-20,
+                                           x=self.world.agents[0].state.p_pos[0] - WINDOW_W // 1.5,
+                                           y=self.world.agents[0].state.p_pos[1] - WINDOW_H // 2.0-20,
                                            anchor_x='left',
                                            color=(0, 0, 0, 255))
             self.viewers[i].add_label(distance)
