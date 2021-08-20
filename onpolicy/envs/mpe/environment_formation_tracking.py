@@ -245,10 +245,10 @@ class MultiAgentEnv(gym.Env):
         # make sure we used all elements of action
         assert len(action) == 0
 
-        # reset rendering assets
-        def _reset_render(self):
-            self.render_geoms = None
-            self.render_geoms_xform = None
+    # reset rendering assets
+    def _reset_render(self):
+        self.render_geoms = None
+        self.render_geoms_xform = None
 
     '''
     ************************
