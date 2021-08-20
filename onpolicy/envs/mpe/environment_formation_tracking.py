@@ -21,7 +21,6 @@ class MultiAgentEnv(gym.Env):
 
 
         self.world = world
-        self.world_length = self.world.world_length
         self.current_step = 0
         self.agents = self.world.policy_agents
         # set required vectorized gym env property
