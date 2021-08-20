@@ -18,6 +18,9 @@ def MPEEnv(args):
     if args.use_11_discrete_action:
         from .environment_11_discrete_action import MultiAgentEnv
         from .scenarios import load
+    elif args.scenario_name == 'formation_stream_avoidance_4':
+        from .environment_formation_tracking import MultiAgentEnv
+        from .scenarios import load
     else:
         from .environment_alpha import MultiAgentEnv
         from .scenarios import load
