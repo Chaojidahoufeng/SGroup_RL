@@ -43,6 +43,7 @@ class MultiAgentEnv(gym.Env):
         self.action_space = []
         self.observation_space = []
         self.constraint_space = []
+        share_obs_dim = 0
         for agent in self.agents:
             total_action_space = []
             # physical action space
@@ -73,6 +74,9 @@ class MultiAgentEnv(gym.Env):
             obs_dim = len(observation_callback(agent, self.world))
             self.observation_space.append(spaces.Box(low=-np.inf, high=+np.inf, shape=(obs_dim,), dtype=np.float32))
             agent.action.c = np.zeros(self.world.dim_c)
+            share_obs_dim += obs_dim
+        self.share_observation_space = [spaces.Box(
+            low=-np.inf, high=+np.inf, shape=(share_obs_dim,), dtype=np.float32)] * self.n
         #2020/02/20 add constraint space
         con_dim = len(constraint_callback(agent, self.world))
         self.constraint_space.append(spaces.Box(low=0, high=+np.inf, shape=(con_dim,), dtype=np.float32))
