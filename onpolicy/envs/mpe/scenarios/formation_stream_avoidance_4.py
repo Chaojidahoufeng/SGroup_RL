@@ -696,12 +696,8 @@ class Scenario(BaseScenario):
         vel.append(np.array([norm(agent.state.p_vel)/100]))
         omg.append(np.array([agent.state.p_omg / np.pi]))
         err = [np.array([agent.err[i]]) for i in range(len(agent.err))]
-        if agent.leader:
-            return np.concatenate([np.array([100*(agent.dis2goal - agent.dis2goal_prev)])] + ang + vel + omg + agt_dis + agt_ang)
-            #return np.concatenate([np.array([100 * (agent.dis2goal - agent.dis2goal_prev)])] + ang + vel + omg + sensor_ray)
-        else:
-            #return np.concatenate([np.array([agent.dis2leader - agent.d_des])] + ang + vel + omg + agt_dis + agt_ang + sensor_ray)
-            return np.concatenate(err + vel + omg + agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r)
+        
+        return np.concatenate(err + vel + omg + agt_dis + agt_ang + start_ray + end_ray + min_ray + obs_dis + obs_ang + obs_r)
 
     def constraint(self, agent, world):
         return []
