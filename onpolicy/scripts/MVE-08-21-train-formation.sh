@@ -22,17 +22,17 @@ do
     --num_landmarks ${num_landmarks} \
     --num_obstacles ${num_obstacles}\
     --seed ${seed} \
-    --n_training_threads 1 \
-    --n_rollout_threads 1 \
+    --n_training_threads 4 \
+    --n_rollout_threads 32 \
     --num_mini_batch 1 \
     --episode_length 25 \
-    --num_env_steps 500000 \
+    --num_env_steps 10000000 \
     --ppo_epoch 10 --gain 0.01 \
     --lr 7e-4 \
     --critic_lr 7e-4 \
     --use_recurrent_policy \
-    --direction_alpha 0.1 \
-    --usegui
+    --direction_alpha 0.1 
+    # --usegui
     #--wandb_name "tartrl"
     #--use_wandb
 done
