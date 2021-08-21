@@ -2,7 +2,7 @@
 env="MPE"
 scenario="rel_formation_form_error" 
 num_landmarks=1
-num_agents=5
+num_agents=4
 algo="rmappo"
 exp="08-20-rel-formation-form-selfnav10-train-mpe-obs0-square-R"
 seed=1
