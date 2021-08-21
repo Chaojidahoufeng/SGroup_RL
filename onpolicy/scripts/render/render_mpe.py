@@ -56,6 +56,7 @@ def parse_args(args, parser):
 
 
     parser.add_argument("--use_11_discrete_action", action="store_true", default=False)
+    parser.add_argument("--use_softmax_last", action='store_true', default=False)
 
     parser.add_argument("--render_sight", type=str, default='global')
 

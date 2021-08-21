@@ -26,6 +26,7 @@ class R_Model(nn.Module):
         self.hidden_size = args.hidden_size
         self.device = device
         self.tpdv = dict(dtype=torch.float32, device=device)
+        self.use_softmax_last = args.use_softmax_last
         init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][self._use_orthogonal]
 
         # obs space
@@ -54,6 +55,8 @@ class R_Model(nn.Module):
         # action
         self.act = ACTLayer(action_space, self.hidden_size, self._use_orthogonal, self._gain)
 
+        self.softmax_layer = F.softmax(dim=1)
+
         self.to(self.device)
 
     def get_actions(self, obs, rnn_states, masks, available_actions=None, deterministic=False):
@@ -70,6 +73,9 @@ class R_Model(nn.Module):
         actor_features = self.common(x)
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
             actor_features, rnn_states = self.rnn(actor_features, rnn_states, masks)
+
+        if self.use_softmax_last:
+            actor_features = self.softmax_layer(actor_features)
 
         actions, action_log_probs = self.act(actor_features, available_actions, deterministic)
 

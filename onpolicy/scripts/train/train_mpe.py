@@ -78,6 +78,7 @@ def parse_args(args, parser):
     parser.add_argument("--action_space_dim",  type=int, default=4)
 
     parser.add_argument("--use_11_discrete_action", action="store_true", default=False)
+    parser.add_argument("--use_softmax_last", action='store_true', default=False)
 
 
 
