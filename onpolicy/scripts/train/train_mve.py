@@ -182,8 +182,8 @@ def main(args):
         from onpolicy.runner.separated.mve_runner import MVERunner as Runner
 
     runner = Runner(config)
-    runner.run()
-    # runner.render()
+    #runner.run()
+    runner.render()
     
     # post process
     envs.close()
