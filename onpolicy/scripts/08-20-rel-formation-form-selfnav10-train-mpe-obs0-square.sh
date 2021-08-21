@@ -37,5 +37,6 @@ do
     --num_static_obs 0 \
     --map-max-size 3600 \
     --static_obs_intensity 0e-6 \
-    --topo_type "square"
+    --topo_type "square" \
+    --use_softmax_last
 done
