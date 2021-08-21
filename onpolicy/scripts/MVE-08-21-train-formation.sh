@@ -31,7 +31,8 @@ do
     --lr 7e-4 \
     --critic_lr 7e-4 \
     --use_recurrent_policy \
-    --direction_alpha 0.1 
+    --direction_alpha 0.1 \
+    --usegui
     #--wandb_name "tartrl"
     #--use_wandb
 done
