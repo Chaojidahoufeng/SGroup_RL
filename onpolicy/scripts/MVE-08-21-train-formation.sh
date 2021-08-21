@@ -1,7 +1,7 @@
 #!/bin/sh
 env="MVE"
 scenario="relative_formation"  # simple_speaker_listener # simple_spread
-num_landmarks=0
+num_landmarks=1
 num_agents=3
 num_obstacles=0
 algo="mappo"
