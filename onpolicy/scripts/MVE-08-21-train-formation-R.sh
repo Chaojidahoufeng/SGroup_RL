@@ -2,7 +2,7 @@
 env="MVE"
 scenario="relative_formation"  # predator-prey
 algo="mappo"
-exp="MVE-08-12-train-formation-R"
+exp="MVE-08-21-train-formation-R"
 num_landmarks=1
 num_agents=3
 num_obstacles=0
@@ -23,7 +23,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-12-train-formation/run2/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-21-train-formation/run2/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
