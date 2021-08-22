@@ -23,7 +23,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-12-train-formation/run1/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-12-train-formation/run2/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
