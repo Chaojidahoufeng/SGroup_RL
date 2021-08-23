@@ -274,8 +274,8 @@ class MVERunner(Runner):
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
                 masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
 
-                import pdb
-                pdb.set_trace()
+                # import pdb
+                # pdb.set_trace()
 
                 if self.all_args.save_gifs:
                     image = envs.render('rgb_array')[0][0]
