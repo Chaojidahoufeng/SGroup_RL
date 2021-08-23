@@ -11,6 +11,7 @@ seed=1
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed}"
 echo "seed is ${seed}:"
 CUDA_VISIBLE_DEVICES=1 \
+xvfb-run -s "-screen 0 1400x900x24" \
 python render/render_mve.py \
 --env_name ${env} \
 --algorithm_name ${algo} \
@@ -23,7 +24,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/data/MARL-yuzi/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-22-train-formation/run3/models" \
+--model_dir "/home/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-22-train-formation/run3/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
