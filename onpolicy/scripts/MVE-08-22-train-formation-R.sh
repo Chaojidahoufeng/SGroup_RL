@@ -29,6 +29,7 @@ python render/render_mve.py \
 --usegui \
 --num_agents ${num_agents} \
 --num_landmarks ${num_landmarks} \
---num_obstacles ${num_obstacles}
+--num_obstacles ${num_obstacles} \
+--ideal_side_len 5.0
 #--wandb_name "tartrl"
 #--use_wandb
