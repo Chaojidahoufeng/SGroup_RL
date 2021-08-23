@@ -11,7 +11,6 @@ seed=1
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed}"
 echo "seed is ${seed}:"
 CUDA_VISIBLE_DEVICES=1 \
-xvfb-run -s "-screen 0 1400x900x24" \
 python render/render_mve.py \
 --env_name ${env} \
 --algorithm_name ${algo} \
