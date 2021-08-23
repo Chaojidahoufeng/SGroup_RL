@@ -32,7 +32,7 @@ do
     --critic_lr 7e-4 \
     --use_recurrent_policy \
     --direction_alpha 0.1 \
-    --ideal_side_len 2.0
+    --ideal_side_len 5.0
     # --usegui
     #--wandb_name "tartrl"
     #--use_wandb
