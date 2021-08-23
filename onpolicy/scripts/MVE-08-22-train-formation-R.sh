@@ -24,7 +24,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-22-train-formation/run3/models" \
+--model_dir "/home/yanyz/yanyz/data/MARL-yuzi/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-22-train-formation/run3/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
