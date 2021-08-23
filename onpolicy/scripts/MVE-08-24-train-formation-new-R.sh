@@ -27,6 +27,7 @@ python render/render_mve.py \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/relative_formation/mappo/MVE-08-24-train-formation-new/run1/models" \
 --use_recurrent_policy \
 --usegui \
+--save_gifs \
 --num_agents ${num_agents} \
 --num_landmarks ${num_landmarks} \
 --num_obstacles ${num_obstacles} \
