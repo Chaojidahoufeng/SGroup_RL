@@ -231,8 +231,6 @@ class MVERunner(Runner):
         for episode in range(self.all_args.render_episodes):
             obs = envs.reset()
             if self.all_args.save_gifs:
-                import pdb
-                pdb.set_trace()
                 image = envs.render('rgb_array')[0][0]
                 all_frames.append(image)
             else:
@@ -275,6 +273,9 @@ class MVERunner(Runner):
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
                 masks[dones == True] = np.zeros(((dones == True).sum(), 1), dtype=np.float32)
+
+                import pdb
+                pdb.set_trace()
 
                 if self.all_args.save_gifs:
                     image = envs.render('rgb_array')[0][0]
