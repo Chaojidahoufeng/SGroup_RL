@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=3
 num_obstacles=0
 algo="mappo"
-exp="MVE-08-23-train-formation-new"
+exp="MVE-08-24-train-formation-nav10"
 seed_max=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -32,7 +32,8 @@ do
     --critic_lr 7e-4 \
     --use_recurrent_policy \
     --direction_alpha 0.1 \
-    --ideal_side_len 5.0
+    --ideal_side_len 5.0 \
+    --nav-rew-weight 10.0
     # --usegui
     #--wandb_name "tartrl"
     #--use_wandb
