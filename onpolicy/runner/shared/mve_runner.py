@@ -242,8 +242,6 @@ class MVERunner(Runner):
             episode_rewards = []
             
             for step in range(self.episode_length):
-                import pdb
-                pdb.set_trace()
                 calc_start = time.time()
 
                 self.trainer.prep_rollout()
