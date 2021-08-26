@@ -245,8 +245,6 @@ class MVERunner(Runner):
                 calc_start = time.time()
 
                 self.trainer.prep_rollout()
-                import pdb
-                pdb.set_trace()
                 action, rnn_states = self.trainer.policy.act(np.concatenate(obs),
                                                     np.concatenate(rnn_states),
                                                     np.concatenate(masks),
