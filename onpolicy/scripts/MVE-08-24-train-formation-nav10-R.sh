@@ -1,6 +1,6 @@
 #!/bin/sh
 env="MVE"
-scenario="relative_formation"  # predator-prey
+scenario="relative_formation_easy"  # predator-prey
 algo="mappo"
 exp="MVE-08-24-train-formation-nav10-R"
 num_landmarks=1
