@@ -5,8 +5,8 @@ num_landmarks=1
 num_agents=3
 num_obstacles=0
 algo="mappo"
-exp="MVE-08-26-train-formation-easy"
-seed=2
+exp="MVE-08-26-train-formation-extend"
+seed=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
     echo "seed is ${seed}:"
