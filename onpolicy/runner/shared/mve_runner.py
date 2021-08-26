@@ -229,6 +229,8 @@ class MVERunner(Runner):
         # import pdb
         # pdb.set_trace()
         for episode in range(self.all_args.render_episodes):
+            import pdb
+            pdb.set_trace()
             obs = envs.reset()
             if self.all_args.save_gifs:
                 image = envs.render('rgb_array')[0][0]
