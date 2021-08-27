@@ -33,7 +33,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --use_render \
 --eval_interval 250 \
 --map-max-size 3600 \
---static_obs_intensity 1e-6 \
+--static_obs_intensity 0e-6 \
 --topo_type "square" \
 --use_softmax_last #\
 #--use_render
