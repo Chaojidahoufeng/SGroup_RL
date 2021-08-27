@@ -30,6 +30,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --num_static_obs 0 \
 --model_dir "/home/yanyz/data/08-26-rel-formation-form-selfnav10-train-mpe-obs0-poly5/run1/models" \
 --save_gifs \
+--use_render \
 --eval_interval 250 \
 --map-max-size 3600 \
 --static_obs_intensity 1e-6 \
