@@ -36,7 +36,7 @@ do
     --self-nav-rew-weight 10 \
     --num_static_obs 0 \
     --map-max-size 3600 \
-    --static_obs_intensity 5e-6 \
+    --static_obs_intensity 0e-6 \
     --topo_type "square" \
     --use_softmax_last
 done
