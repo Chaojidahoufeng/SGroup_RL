@@ -25,9 +25,9 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --self-nav-rew-weight 10 \
 --num_static_obs 10 \
 --episode_length 250 \
---render_episodes 5 \
+--render_episodes 1 \
 --num_static_obs 0 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-26-rel-formation-form-selfnav10-train-mpe-obs0-poly5/run3/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-26-rel-formation-form-selfnav10-train-mpe-obs0-poly5/run1/models" \
 --save_gifs \
 --use_render \
 --eval_interval 250 \
