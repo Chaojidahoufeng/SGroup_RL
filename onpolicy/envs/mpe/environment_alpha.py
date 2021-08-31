@@ -577,8 +577,8 @@ class MultiAgentEnv(gym.Env):
                                             y=self.world.width // 2 - WINDOW_H // 2.0-20,
                                             anchor_x='left',
                                             color=(0, 0, 0, 255))
-            self.viewers[i].add_label(distance)
-            self.viewers[i].add_label(time)
+            #self.viewers[i].add_label(distance)
+            #self.viewers[i].add_label(time)
             # render to display or array
             for line in lines:
                 self.viewers[i].add_geom(line)
@@ -587,7 +587,6 @@ class MultiAgentEnv(gym.Env):
 
             '''for j in range(len(self.viewers)):
                 self.viewers[i].geoms.pop(-1)'''
-        #print(pos[0])
         return results
 
     def render_origin(self, mode='human', close=False):
