@@ -451,7 +451,12 @@ class MultiAgentEnv(gym.Env):
                 pos = self.agents[i].state.p_pos'''
             agents_pos = np.array([self.world.agents[i].state.p_pos for i in range(len(self.world.agents))])
             agents_pos_center = np.mean(agents_pos, axis=0)
-            viewer_width = (len(self.world.agents)-0.5)*self.world.ideal_side_len
+            if len(self.world.agents) == 3:
+                viewer_width = (len(self.world.agents)-0.5)*self.world.ideal_side_len
+            elif len(self.world.agents) == 4:
+                viewer_width = (len(self.world.agents)-1.5)*self.world.ideal_side_len
+            elif len(self.world.agents) == 5:
+                viewer_width = (len(self.world.agents)-2.5)*self.world.ideal_side_len
             
             if sight == 'first-person':
                 self.viewers[i].set_bounds(agents_pos_center[0]-viewer_width/2, agents_pos_center[0]+viewer_width/2, 
