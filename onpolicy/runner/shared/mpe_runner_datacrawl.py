@@ -292,7 +292,7 @@ class MPERunner(Runner):
                 import pdb
                 pdb.set_trace()
                 for i in range(len(infos[0])):
-                    mean_navigation_rewards += infos[0][i]['navigation_reward']
+                    mean_navigation_rewards += infos[0][i]['self_navigation_reward']
                 mean_navigation_rewards /= len(infos[0])
                 print(mean_navigation_rewards)
                 navigation_rewards.append(mean_navigation_rewards/self.all_args.nav_rew_weight)
