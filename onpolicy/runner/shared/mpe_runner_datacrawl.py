@@ -7,6 +7,7 @@ from itertools import chain
 import torch
 import imageio
 import pickle
+from matplotlib import pyplot as plt 
 
 from onpolicy.utils.util import update_linear_schedule
 from onpolicy.runner.shared.base_runner import Runner
@@ -311,6 +312,10 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
+            x = np.arange(250)
+            y = formation_rewards
+            plt.plot(x,y) 
+            plt.show()
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
         if self.all_args.save_gifs:
