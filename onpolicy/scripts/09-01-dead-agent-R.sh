@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=5
 algo="rmappo"
 exp="09-01-dead-agent-R"
-seed=4
+seed=11
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 let "seed=$seed"
@@ -32,7 +32,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models" \
 --save_gifs \
 --eval_interval 250 \
---map-max-size 3600 \
+--map-max-size 10000 \
 --static_obs_intensity 0e-6 \
 --topo_type "square" \
 --use_softmax_last \
