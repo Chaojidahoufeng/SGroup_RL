@@ -32,7 +32,7 @@ CUDA_VISIBLE_DEVICES=0 python render/render_mpe.py \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models" \
 --save_gifs \
 --eval_interval 250 \
---map-max-size 10000 \
+--map-max-size 3600 \
 --static_obs_intensity 0e-6 \
 --topo_type "square" \
 --use_softmax_last \
