@@ -20,9 +20,9 @@ class MPERunner(Runner):
     def __init__(self, config):
         self.data_dir = './data/our_model/'
         if not os.path.exists(self.data_dir+'formation_reward'):
-            os.makedirs(self.data_dir, exist_ok=True)
+            os.makedirs(self.data_dir+'formation_reward', exist_ok=True)
         if not os.path.exists(self.data_dir+'navigation_reward'):
-            os.makedirs(self.data_dir, exist_ok=True)
+            os.makedirs(self.data_dir+'navigation_reward', exist_ok=True)
         super(MPERunner, self).__init__(config)
 
     def run(self):
