@@ -444,6 +444,8 @@ class MPERunner(Runner):
                     raise NotImplementedError
 
                 # Obser reward and next obs
+                import pdb
+                pdb.set_trace()
                 if step != self.episode_length_3 - 1:
                     obs, rewards, dones, infos = envs.step(actions_env)
                     formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
