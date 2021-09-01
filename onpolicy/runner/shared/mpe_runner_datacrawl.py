@@ -17,8 +17,10 @@ def _t2n(x):
 
 class MPERunner(Runner):
     def __init__(self, config):
-        self.data_dir = './data/for_benchmark'
-        if not os.path.exists(self.data_dir):
+        self.data_dir = './data/our_model/'
+        if not os.path.exists(self.data_dir+'formation_reward'):
+            os.makedirs(self.data_dir)
+        if not os.path.exists(self.data_dir+'navigation_reward'):
             os.makedirs(self.data_dir)
         super(MPERunner, self).__init__(config)
 
@@ -285,6 +287,11 @@ class MPERunner(Runner):
                 episode_rewards.append(rewards)
 
                 formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
+                mean_navigation_rewards = 0
+                for i in range(len(infos[0])):
+                    mean_navigation_rewards += infos[0][i]['navigation_reward']
+                mean_navigation_rewards /= len(infos[0])
+                navigation_rewards.append(mean_navigation_rewards/self.args.nav_rew_weight)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
@@ -316,6 +323,14 @@ class MPERunner(Runner):
             plt.plot(x,y) 
             plt.show()
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
+
+        file_name = self.data_dir + "/" + 'formation_reward/our_model' + str(self.all_args.seed) + '_eval_formation_reward.pkl'
+        with open(file_name, 'wb') as fp:
+            pickle.dump(formation_rewards, fp)
+
+        file_name = self.data_dir + "/" + 'navigation_reward/our_model' + str(self.all_args.seed) + '_eval_navigation_reward.pkl'
+        with open(file_name, 'wb') as fp:
+            pickle.dump(navigation_rewards, fp)
 
         if self.all_args.save_gifs:
             imageio.mimsave(str(self.gif_dir) + '/render.gif', all_frames, duration=self.all_args.ifi)

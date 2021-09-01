@@ -468,8 +468,6 @@ class MPERunner(Runner):
         with open(file_name, 'wb') as fp:
             pickle.dump(formation_rewards, fp)
 
-
-
             #print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
         if self.all_args.save_gifs:
