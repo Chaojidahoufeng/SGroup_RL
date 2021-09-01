@@ -418,9 +418,7 @@ class MPERunner(Runner):
             self.num_agents_living = 3
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
-            
-            import pdb
-            pdb.set_trace()
+
 
             for step in range(self.episode_length_3):
                 self.trainer.prep_rollout()
@@ -446,9 +444,9 @@ class MPERunner(Runner):
                     raise NotImplementedError
 
                 # Obser reward and next obs
-                if step != self.episode_length_3 - 1:
-                    obs, rewards, dones, infos = envs.step(actions_env)
-                    formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
+                # if step != self.episode_length_3 - 1:
+                obs, rewards, dones, infos = envs.step(actions_env)
+                formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
                 episode_rewards.append(rewards)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
