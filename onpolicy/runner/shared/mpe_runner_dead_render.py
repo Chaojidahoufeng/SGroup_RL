@@ -459,10 +459,10 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
-                x = np.arange(len(formation_rewards))
-                y = formation_rewards
-                plt.plot(x,y)
-                plt.show()
+        x = np.arange(len(formation_rewards))
+        y = formation_rewards
+        plt.plot(x,y)
+        plt.show()
 
 
             #print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
