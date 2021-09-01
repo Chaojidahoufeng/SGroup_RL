@@ -289,6 +289,8 @@ class MPERunner(Runner):
 
                 formation_rewards.append(infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
                 mean_navigation_rewards = 0
+                import pdb
+                pdb.set_trace()
                 for i in range(len(infos[0])):
                     mean_navigation_rewards += infos[0][i]['navigation_reward']
                 mean_navigation_rewards /= len(infos[0])
