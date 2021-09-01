@@ -60,7 +60,7 @@ def parse_args(args, parser):
 
     parser.add_argument("--render_sight", type=str, default='global')
 
-    parser.add_argument("--render_dead", action='store_true', default=False)
+    parser.add_argument("--showing_mode", type=str, default='default')
 
     all_args = parser.parse_known_args(args)[0]
 
@@ -140,13 +140,17 @@ def main(args):
     }
 
     # run experiments
-    if not all_args.render_dead:
+    assert all_args.showing_mode in ['render_dead', 'data_crawl', 'default']
+
+    if all_args.showing_mode == 'render_dead':
+        from onpolicy.runner.shared.mpe_runner_dead_render import MPERunner as Runner
+    elif all_args.showing_mode == 'data_crawl':
+        from onpolicy.runner.shared.mpe_runner_datacrawl import MPERunner as Runner
+    else:
         if all_args.share_policy:
             from onpolicy.runner.shared.mpe_runner import MPERunner as Runner
         else:
             from onpolicy.runner.separated.mpe_runner import MPERunner as Runner
-    else:
-        from onpolicy.runner.shared.mpe_runner_dead_render import MPERunner as Runner
 
 
     runner = Runner(config)
