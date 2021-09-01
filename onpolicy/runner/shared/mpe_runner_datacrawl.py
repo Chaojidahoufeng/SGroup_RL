@@ -325,11 +325,11 @@ class MPERunner(Runner):
             plt.show()
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
-        file_name = self.data_dir + "/" + 'formation_reward/our_model' + str(self.all_args.seed) + '_eval_formation_reward.pkl'
+        file_name = self.data_dir + 'formation_reward/our_model' + str(self.all_args.seed) + '_eval_formation_reward.pkl'
         with open(file_name, 'wb') as fp:
             pickle.dump(formation_rewards, fp)
 
-        file_name = self.data_dir + "/" + 'navigation_reward/our_model' + str(self.all_args.seed) + '_eval_navigation_reward.pkl'
+        file_name = self.data_dir  + 'navigation_reward/our_model' + str(self.all_args.seed) + '_eval_navigation_reward.pkl'
         with open(file_name, 'wb') as fp:
             pickle.dump(navigation_rewards, fp)
 
