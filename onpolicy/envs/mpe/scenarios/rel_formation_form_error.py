@@ -642,10 +642,10 @@ class Scenario(BaseScenario):
 
         world.ideal_topo_point = [[],[]]
         for i in range(num_living_agent):
-            # world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_living_agent*2*np.pi))
-            # world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_living_agent*2*np.pi))
-            world.ideal_topo_point[0].append((world.ideal_side_len / np.sqrt(2) * np.cos(i/num_living_agent*2*np.pi))/100)
-            world.ideal_topo_point[1].append((world.ideal_side_len / np.sqrt(2) * np.sin(i/num_living_agent*2*np.pi))/100)
+            world.ideal_topo_point[0].append(world.ideal_side_len / np.sqrt(2) * np.cos(i/num_living_agent*2*np.pi))
+            world.ideal_topo_point[1].append(world.ideal_side_len / np.sqrt(2) * np.sin(i/num_living_agent*2*np.pi))
+            #world.ideal_topo_point[0].append((world.ideal_side_len / np.sqrt(2) * np.cos(i/num_living_agent*2*np.pi))/100)
+            #world.ideal_topo_point[1].append((world.ideal_side_len / np.sqrt(2) * np.sin(i/num_living_agent*2*np.pi))/100)
         
         form_reward_weight = self.args.form_rew_weight
 
@@ -655,11 +655,10 @@ class Scenario(BaseScenario):
         pos_rel = [[],[]] # real relative position
 
         for any_agent in world.agents[0:num_living_agent]:
-            pos_rel[0].append((any_agent.state.p_pos[0] - agent.state.p_pos[0])/100)
-            pos_rel[1].append((any_agent.state.p_pos[1] - agent.state.p_pos[1])/100)
-            # pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
-            # pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
-
+            pos_rel[0].append(any_agent.state.p_pos[0] - agent.state.p_pos[0])
+            pos_rel[1].append(any_agent.state.p_pos[1] - agent.state.p_pos[1])
+            #pos_rel[0].append((any_agent.state.p_pos[0] - agent.state.p_pos[0])/100)
+            #pos_rel[1].append((any_agent.state.p_pos[1] - agent.state.p_pos[1])/100)
         
         topo_err = MDS.error_rel_g(np.array(world.ideal_topo_point), np.array(pos_rel), num_living_agent)
         formation_reward = - form_reward_weight * topo_err

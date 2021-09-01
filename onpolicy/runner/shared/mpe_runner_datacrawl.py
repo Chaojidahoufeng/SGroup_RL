@@ -17,7 +17,7 @@ def _t2n(x):
 
 class MPERunner(Runner):
     def __init__(self, config):
-        self.data_dir = './data_orig'
+        self.data_dir = './data/for_benchmark'
         if not os.path.exists(self.data_dir):
             os.makedirs(self.data_dir)
         super(MPERunner, self).__init__(config)
@@ -285,7 +285,6 @@ class MPERunner(Runner):
                 episode_rewards.append(rewards)
 
                 formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
-                print(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)

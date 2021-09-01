@@ -10,11 +10,17 @@ import imageio
 from onpolicy.utils.util import update_linear_schedule
 from onpolicy.runner.shared.base_runner import Runner
 
+import pickle
+from matplotlib import pyplot as plt 
+
 def _t2n(x):
     return x.detach().cpu().numpy()
 
 class MPERunner(Runner):
     def __init__(self, config):
+        self.data_dir = './data/formation_change'
+        if not os.path.exists(self.data_dir):
+            os.makedirs(self.data_dir)
         super(MPERunner, self).__init__(config)
 
     def run(self):
@@ -220,6 +226,8 @@ class MPERunner(Runner):
     @torch.no_grad()
     def render(self):
         envs = self.envs
+
+        formation_rewards = []
         
         all_frames = []
         for episode in range(self.all_args.render_episodes):
@@ -298,6 +306,8 @@ class MPERunner(Runner):
                 # Obser reward and next obs
                 if step != self.episode_length_1 - 1:
                     obs, rewards, dones, infos = envs.step(actions_env)
+                    formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
+
                 episode_rewards.append(rewards)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
@@ -374,6 +384,7 @@ class MPERunner(Runner):
                 # Obser reward and next obs
                 if step != self.episode_length_2 - 1:
                     obs, rewards, dones, infos = envs.step(actions_env)
+                    formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
                 episode_rewards.append(rewards)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
@@ -435,6 +446,7 @@ class MPERunner(Runner):
                 # Obser reward and next obs
                 if step != self.episode_length_3 - 1:
                     obs, rewards, dones, infos = envs.step(actions_env)
+                    formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
                 episode_rewards.append(rewards)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
@@ -446,6 +458,11 @@ class MPERunner(Runner):
                     all_frames.append(image)
                 else:
                     envs.render(mode='human')
+
+                x = np.arange(len(formation_rewards))
+                y = formation_rewards
+                plt.plot(x,y)
+                plt.show()
 
 
             #print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
