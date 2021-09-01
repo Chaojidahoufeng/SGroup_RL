@@ -292,6 +292,7 @@ class MPERunner(Runner):
                 for i in range(len(infos[0])):
                     mean_navigation_rewards += infos[0][i]['navigation_reward']
                 mean_navigation_rewards /= len(infos[0])
+                print(mean_navigation_rewards)
                 navigation_rewards.append(mean_navigation_rewards/self.all_args.nav_rew_weight)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
@@ -319,10 +320,10 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
-            x = np.arange(250)
-            y = formation_rewards
-            plt.plot(x,y) 
-            plt.show()
+            # x = np.arange(250)
+            # y = formation_rewards
+            # plt.plot(x,y) 
+            # plt.show()
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
         file_name = self.data_dir + 'formation_reward/our_model_' + str(self.all_args.seed) + '_eval_formation_reward.pkl'
