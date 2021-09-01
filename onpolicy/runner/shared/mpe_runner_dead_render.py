@@ -419,6 +419,8 @@ class MPERunner(Runner):
             rnn_states = np.zeros((self.n_rollout_threads, self.num_agents_living, self.recurrent_N, self.hidden_size), dtype=np.float32)
             masks = np.ones((self.n_rollout_threads, self.num_agents_living, 1), dtype=np.float32)
             
+            import pdb
+            pdb.set_trace()
 
             for step in range(self.episode_length_3):
                 self.trainer.prep_rollout()
