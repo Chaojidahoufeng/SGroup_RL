@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=5
 algo="rmappo"
 exp="09-01-dead-agent-R"
-seed=3
+seed=4
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 let "seed=$seed"
