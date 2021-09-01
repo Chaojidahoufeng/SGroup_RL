@@ -292,7 +292,7 @@ class MPERunner(Runner):
                 for i in range(len(infos[0])):
                     mean_navigation_rewards += infos[0][i]['navigation_reward']
                 mean_navigation_rewards /= len(infos[0])
-                navigation_rewards.append(mean_navigation_rewards/self.args.nav_rew_weight)
+                navigation_rewards.append(mean_navigation_rewards/self.all_args.nav_rew_weight)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
