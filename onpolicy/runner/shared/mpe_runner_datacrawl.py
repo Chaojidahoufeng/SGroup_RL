@@ -281,9 +281,10 @@ class MPERunner(Runner):
 
                 # Obser reward and next obs
                 obs, rewards, dones, infos = envs.step(actions_env)
-                import pdb
-                pdb.set_trace()
                 episode_rewards.append(rewards)
+
+                formation_rewards.append(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
+                print(-infos[0][0]['formation_reward']/self.all_args.form_rew_weight)
 
                 rnn_states[dones == True] = np.zeros(((dones == True).sum(), self.recurrent_N, self.hidden_size), dtype=np.float32)
                 masks = np.ones((self.n_rollout_threads, self.num_agents, 1), dtype=np.float32)
