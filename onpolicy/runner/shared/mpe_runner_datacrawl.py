@@ -1,4 +1,5 @@
     
+from genericpath import exists
 import time
 import wandb
 import os
@@ -19,9 +20,9 @@ class MPERunner(Runner):
     def __init__(self, config):
         self.data_dir = './data/our_model/'
         if not os.path.exists(self.data_dir+'formation_reward'):
-            os.makedirs(self.data_dir)
+            os.makedirs(self.data_dir, exists_ok=True)
         if not os.path.exists(self.data_dir+'navigation_reward'):
-            os.makedirs(self.data_dir)
+            os.makedirs(self.data_dir, exists_ok=True)
         super(MPERunner, self).__init__(config)
 
     def run(self):
