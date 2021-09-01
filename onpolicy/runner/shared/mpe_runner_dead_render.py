@@ -274,7 +274,7 @@ class MPERunner(Runner):
 
             self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
 
-            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-18-rel-formation-form-selfnav10-train-mpe-obs1-poly5/run1/models"
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-26-rel-formation-form-selfnav10-train-mpe-obs0-poly5/run2/models"
             self.restore()
 
             
@@ -349,7 +349,7 @@ class MPERunner(Runner):
 
             self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
 
-            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-3600-newobs/run1/models"
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-26-rel-formation-form-selfnav10-train-mpe-obs0-square/run1/models"
             self.restore()
 
             obs, rewards, dones, infos = envs.step(actions_env)
@@ -411,7 +411,7 @@ class MPERunner(Runner):
 
             self.trainer = TrainAlgo(self.all_args, self.policy, device = self.device)
 
-            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-17-rel-formation-form-selfnav10-train-mpe-obs0-triangle/run1/models"
+            self.model_dir = "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MPE/rel_formation_form_error/rmappo/08-26-rel-formation-form-selfnav10-train-mpe-obs0-triangle/run1/models"
             self.restore()
 
             obs, rewards, dones, infos = envs.step(actions_env)
