@@ -24,7 +24,7 @@ do
   --avoid-rew-weight 5 \
   --form-rew-weight 0.05 \
   --nav-rew-weight 0 \
-  --self-nav-rew-weight 10 \
+  --self-nav-rew-weight 1 \
   --num_static_obs 10 \
   --use_render \
   --episode_length 250 \
@@ -34,7 +34,7 @@ do
   --save_gifs \
   --eval_interval 250 \
   --map-max-size 3600 \
-  --static_obs_intensity 1e-6 \
+  --static_obs_intensity 3e-6 \
   --topo_type "square" \
   --use_softmax_last \
   --showing_mode "data_crawl"
