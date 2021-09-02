@@ -459,13 +459,13 @@ class MPERunner(Runner):
                 else:
                     envs.render(mode='human')
 
-        x = np.arange(len(formation_rewards))
-        y = formation_rewards
-        plt.plot(x,y)
-        plt.show()
+        # x = np.arange(len(formation_rewards))
+        # y = formation_rewards
+        # plt.plot(x,y)
+        # plt.show()
 
             
-        file_name = self.data_dir + 'formation_change/our_model_' + str(self.all_args.seed) + '_eval_formation_change.pkl'
+        file_name = self.data_dir + 'our_model_' + str(self.all_args.seed) + '_eval_formation_change.pkl'
         with open(file_name, 'wb') as fp:
             pickle.dump(formation_rewards, fp)
 
