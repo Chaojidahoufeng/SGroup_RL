@@ -18,7 +18,7 @@ def _t2n(x):
 
 class MPERunner(Runner):
     def __init__(self, config):
-        self.data_dir = './data/formation_change'
+        self.data_dir = './data/formation_change/'
         if not os.path.exists(self.data_dir):
             os.makedirs(self.data_dir)
         super(MPERunner, self).__init__(config)
@@ -464,9 +464,12 @@ class MPERunner(Runner):
         plt.plot(x,y)
         plt.show()
 
-        file_name = self.data_dir + "/" + 'formation_change' + '.pkl'
+            
+        file_name = self.data_dir + 'formation_change/our_model_' + str(self.all_args.seed) + '_eval_formation_change.pkl'
         with open(file_name, 'wb') as fp:
             pickle.dump(formation_rewards, fp)
+
+
 
             #print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
