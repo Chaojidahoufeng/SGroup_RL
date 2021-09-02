@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=4
 algo="rmappo"
 exp="09-01-square-data-crawl"
-seed_max=3
+seed_max=20
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
 for seed in `seq ${seed_max}`;
