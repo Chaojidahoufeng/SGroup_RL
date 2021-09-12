@@ -30,6 +30,7 @@ class MVERunner(Runner):
                 self.trainer.policy.lr_decay(episode, episodes)
 
             for step in range(self.episode_length):
+                print(self.envs.envs[0].world.vehicle_list[0].state.coordinate)
 
                 # Sample actions
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
@@ -111,7 +112,7 @@ class MVERunner(Runner):
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
 
                 # if previous_average_episode == train_infos["average_episode_rewards"]:
-                print(self.envs.envs[0].world.vehicle_list[0].state.coordinate)
+                
                 previous_average_episode = train_infos["average_episode_rewards"]
 
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
