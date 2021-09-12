@@ -5,7 +5,7 @@ algo="mappo"
 exp="MVE-09-13-train-form-avoid-3agent-R"
 num_landmarks=1
 num_agents=3
-num_obstacles=0
+num_obstacles=2
 seed=1
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed}"
@@ -23,7 +23,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/form_avoid/mappo/MVE-09-12-train-form-avoid-3agent/run1/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/form_avoid/mappo/MVE-09-12-train-form-avoid-3agent/run4/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
