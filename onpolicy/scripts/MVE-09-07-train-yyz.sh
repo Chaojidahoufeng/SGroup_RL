@@ -30,7 +30,7 @@ echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, ma
     --critic_lr 7e-4 \
     --use_recurrent_policy \
     --direction_alpha 0.1 \
-    --ideal_side_len 2.5
-# --usegui
+    --ideal_side_len 2.5 \
+    --usegui
 #--wandb_name "tartrl"
 #--use_wandb
