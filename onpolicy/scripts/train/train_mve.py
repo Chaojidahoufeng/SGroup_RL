@@ -79,7 +79,7 @@ def parse_args(args, parser):
     parser.add_argument('--num_agents', type=int,
                         default=4, help="number of players")
     parser.add_argument('--num_obstacles', type=int, default=2)
-    parser.add_argument('--guiport',type=str,default='/dev/shm/gui_port2')
+    parser.add_argument('--gui_port',type=str,default='/dev/shm/gui_port2')
     parser.add_argument('--usegui', action='store_true', default=False)
     parser.add_argument('--step-t',type=float,default=1.0)
     parser.add_argument('--sim-step',type=int,default=100)
