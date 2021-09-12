@@ -20,8 +20,8 @@ echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, ma
     --num_landmarks ${num_landmarks} \
     --num_obstacles ${num_obstacles}\
     --seed ${seed} \
-    --n_training_threads 1 \
-    --n_rollout_threads 1 \
+    --n_training_threads 4 \
+    --n_rollout_threads 32 \
     --num_mini_batch 1 \
     --episode_length 25 \
     --num_env_steps 10000000 \
