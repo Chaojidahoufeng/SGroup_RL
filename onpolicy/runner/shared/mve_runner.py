@@ -26,11 +26,11 @@ class MVERunner(Runner):
         episodes = int(self.num_env_steps) // self.episode_length // self.n_rollout_threads
 
         for episode in range(episodes):
+            self.envs.reset()
             if self.use_linear_lr_decay:
                 self.trainer.policy.lr_decay(episode, episodes)
 
             for step in range(self.episode_length):
-                print(self.envs.envs[0].world.vehicle_list[0].state.coordinate)
 
                 # Sample actions
                 values, actions, action_log_probs, rnn_states, rnn_states_critic, actions_env = self.collect(step)
