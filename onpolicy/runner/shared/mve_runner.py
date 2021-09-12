@@ -19,6 +19,7 @@ class MVERunner(Runner):
         super(MVERunner, self).__init__(config)
 
     def run(self):
+        previous_average_episode = 0
         self.warmup()   
 
         start = time.time()
@@ -107,9 +108,13 @@ class MVERunner(Runner):
                     #    agent_k = 'agent%i/individual_rewards' % agent_id
                     #    env_infos[agent_k] = idv_rews
 
-                import pdb
-                pdb.set_trace()
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
+
+                if previous_average_episode == train_infos["average_episode_rewards"]:
+                    import pdb
+                    pdb.set_trace()
+                previous_average_episode = train_infos["average_episode_rewards"]
+
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
                 self.log_train(train_infos, total_num_steps)
                 self.log_env(env_infos, total_num_steps)
