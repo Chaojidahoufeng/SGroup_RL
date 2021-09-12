@@ -95,6 +95,8 @@ class SharedReplayBuffer(object):
         self.action_log_probs[self.step] = action_log_probs.copy()
         self.value_preds[self.step] = value_preds.copy()
         #self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
+        import pdb
+        pdb.set_trace()
         if rewards.ndim == 2:
             self.rewards[self.step] = np.expand_dims(rewards.copy(), axis=-1)
         else:
