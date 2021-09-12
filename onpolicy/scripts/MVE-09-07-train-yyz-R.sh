@@ -25,7 +25,7 @@ python render/render_mve.py \
 --render_episodes 5 \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/yyz/mappo/MVE-09-07-train-yyz/run4/models" \
 --use_recurrent_policy \
---use_gui \
+--usegui \
 --num_agents ${num_agents} \
 --num_landmarks ${num_landmarks} \
 --num_obstacles ${num_obstacles} \
