@@ -35,6 +35,8 @@ class MVERunner(Runner):
                 # Obser reward and next obs
                 # import pdb
                 # pdb.set_trace()
+                import pdb
+                pdb.set_trace()
                 obs, rewards, dones, infos = self.envs.step(actions_env)
                 # pdb.set_trace()
 
