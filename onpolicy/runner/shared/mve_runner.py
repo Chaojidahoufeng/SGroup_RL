@@ -106,7 +106,8 @@ class MVERunner(Runner):
                     #    agent_k = 'agent%i/individual_rewards' % agent_id
                     #    env_infos[agent_k] = idv_rews
 
-
+                import pdb
+                pdb.set_trace()
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
                 self.log_train(train_infos, total_num_steps)
