@@ -25,7 +25,7 @@ def make_env(args):
     world:World = scenario.make_world(args)
     # create multiagent environment
 
-    env = MultiVehicleEnv(world, scenario.reset_world, scenario.reward, scenario.observation,scenario.info)
+    env = MultiVehicleEnv(world, scenario.reset_world, scenario.reward, scenario.observation,scenario.info,GUI_port=args.gui_port)
     obs_dim = env.observation_space[0].shape[0]*len(world.vehicle_list)
     env.share_observation_space = [spaces.Box(low=-np.inf, high=+np.inf, shape=(obs_dim,), dtype=np.float32)]
     return env
