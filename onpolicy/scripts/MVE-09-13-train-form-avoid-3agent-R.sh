@@ -1,6 +1,6 @@
 #!/bin/sh
 env="MVE"
-scenario="form-avoid"  # predator-prey
+scenario="form_avoid"  # predator-prey
 algo="mappo"
 exp="MVE-09-13-train-form-avoid-3agent-R"
 num_landmarks=1
