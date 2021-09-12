@@ -110,9 +110,8 @@ class MVERunner(Runner):
 
                 train_infos["average_episode_rewards"] = np.mean(self.buffer.rewards) * self.episode_length
 
-                if previous_average_episode == train_infos["average_episode_rewards"]:
-                    import pdb
-                    pdb.set_trace()
+                # if previous_average_episode == train_infos["average_episode_rewards"]:
+                print(self.envs.envs[0].world.vehicle_list[0].state.coordinate)
                 previous_average_episode = train_infos["average_episode_rewards"]
 
                 print("average episode rewards is {}".format(train_infos["average_episode_rewards"]))
