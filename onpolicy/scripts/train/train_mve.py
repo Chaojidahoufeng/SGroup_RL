@@ -87,7 +87,9 @@ def parse_args(args, parser):
     parser.add_argument('--add_direction_encoder',type=str, default='train')
 
     parser.add_argument('--ideal_side_len', type=float, default=1.0)
-    parser.add_argument("--nav-rew-weight", type=float, default=1.0)
+    parser.add_argument("--nav_rew_weight", type=float, default=1.0)
+    parser.add_argument("--form_rew_weight", type=float, default=10.0)
+    parser.add_argument("--spring_rew_weight", type=float, default=0.0)
     all_args = parser.parse_known_args(args)[0]
 
     return all_args

@@ -2,10 +2,10 @@
 env="MVE"
 scenario="yyz3"  # simple_speaker_listener # simple_spread
 num_landmarks=1
-num_agents=3
+num_agents=4
 num_obstacles=0
 algo="mappo"
-exp="MVE-09-12-train-yyz3"
+exp="MVE-09-12-train-yyz3-4agent"
 seed=2
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
