@@ -74,6 +74,9 @@ def main(args):
     parser = get_config()
     all_args = parse_args(args, parser)
 
+    import pdb
+    pdb.set_trace()
+
     if all_args.algorithm_name == "rmappo" or all_args.algorithm_name == "rmappg":
         assert (
             all_args.use_recurrent_policy or all_args.use_naive_recurrent_policy), ("check recurrent policy!")
