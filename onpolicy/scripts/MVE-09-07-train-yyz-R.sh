@@ -30,6 +30,6 @@ python render/render_mve.py \
 --num_landmarks ${num_landmarks} \
 --num_obstacles ${num_obstacles} \
 --ideal_side_len 2.5 \
---save_gifs
+#--save_gifs
 #--wandb_name "tartrl"
 #--use_wandb
