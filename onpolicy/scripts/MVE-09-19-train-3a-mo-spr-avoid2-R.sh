@@ -21,7 +21,7 @@ python render/render_mve.py \
 --n_training_threads 1 \
 --n_rollout_threads 1 \
 --use_render \
---episode_length 25 \
+--episode_length 10 \
 --render_episodes 5 \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/yyz3-avoid/mappo/MVE-09-19-train-3a-mo-spr-avoid2/run5/models" \
 --use_recurrent_policy \
