@@ -330,7 +330,7 @@ class MultiAgentEnv(gym.Env):
         assert len(action) == 0
 
     # reset rendering assets
-    def _reset_render(self):
+    def _ß_render(self):
         self.render_geoms = None
         self.render_geoms_xform = None
 
