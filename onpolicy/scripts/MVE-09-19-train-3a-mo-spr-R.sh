@@ -2,7 +2,7 @@
 env="MVE"
 scenario="yyz3"  # predator-prey
 algo="mappo"
-exp="MVE-09-19-train-4a-mo-spr-R"
+exp="MVE-09-19-train-3a-mo-spr-R"
 num_landmarks=1
 num_agents=3
 num_obstacles=0
@@ -23,7 +23,7 @@ python render/render_mve.py \
 --use_render \
 --episode_length 25 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/yyz3/mappo/MVE-09-19-train-4a-mo-spr/run1/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/yyz3/mappo/MVE-09-19-train-3a-mo-spr/run1/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
