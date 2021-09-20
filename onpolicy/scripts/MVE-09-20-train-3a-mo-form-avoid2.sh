@@ -5,7 +5,7 @@ num_landmarks=1
 num_agents=3
 num_obstacles=2
 algo="mappo"
-exp="MVE-09-20-train-3a-mo-spr-avoid2"
+exp="MVE-09-20-train-3a-mo-form-avoid2"
 seed=2
 
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed_max}"
@@ -23,16 +23,16 @@ echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, ma
     --n_training_threads 4 \
     --n_rollout_threads 32 \
     --num_mini_batch 1 \
-    --episode_length 10 \
-    --num_env_steps 2000000 \
+    --episode_length 25 \
+    --num_env_steps 1000000 \
     --ppo_epoch 10 --gain 0.01 \
     --lr 7e-4 \
     --critic_lr 7e-4 \
     --use_recurrent_policy \
     --direction_alpha 0.1 \
     --ideal_side_len 2 \
-    --form_rew_weight 0.0 \
-    --spring_rew_weight 1.0 \
+    --form_rew_weight 20.0 \
+    --spring_rew_weight 0.0 \
     --motion_rew_weight 2.0
     # --usegui
 #--wandb_name "tartrl"
