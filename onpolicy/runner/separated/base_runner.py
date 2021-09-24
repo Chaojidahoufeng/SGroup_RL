@@ -85,6 +85,8 @@ class Runner(object):
             raise NotImplementedError
 
         self.policy = []
+        import pdb
+        pdb.set_trace()
         for agent_id in range(self.num_agents):
             share_observation_space = self.envs.share_observation_space[agent_id] if self.use_centralized_V else self.envs.observation_space[agent_id]
             # policy network
