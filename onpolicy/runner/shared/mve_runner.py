@@ -294,7 +294,7 @@ class MVERunner(Runner):
 
             print("average episode rewards is: " + str(np.mean(np.sum(np.array(episode_rewards), axis=0))))
 
-        # import pdb
-        # pdb.set_trace()
+        import pdb
+        pdb.set_trace()
         if self.all_args.save_gifs:
             imageio.mimsave(str(self.gif_dir) + '/render.gif', all_frames, duration=self.all_args.ifi)
