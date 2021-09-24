@@ -11,7 +11,7 @@ seed=1
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed}"
 echo "seed is ${seed}:"
 CUDA_VISIBLE_DEVICES=1 \
-python render/render_mve.py \
+python ../render/render_mve.py \
 --env_name ${env} \
 --algorithm_name ${algo} \
 --experiment_name ${exp} \
