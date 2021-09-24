@@ -23,7 +23,7 @@ python ../render/render_mve.py \
 --use_render \
 --episode_length 10 \
 --render_episodes 5 \
---model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/formation_hd_boundless_env/mappo/MVE-09-20-formation-hd-boundless-env-test/run1/models" \
+--model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/formation_hd_boundless_env/mappo/MVE-09-20-formation-hd-boundless-env-test/run14/models" \
 --use_recurrent_policy \
 --usegui \
 --num_agents ${num_agents} \
