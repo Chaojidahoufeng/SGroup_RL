@@ -11,7 +11,7 @@ seed=1
 echo "env is ${env}, scenario is ${scenario}, algo is ${algo}, exp is ${exp}, max seed is ${seed}"
 echo "seed is ${seed}:"
 CUDA_VISIBLE_DEVICES=1 \
-python render/render_mve.py \
+python ../render/render_mve.py \
 --env_name ${env} \
 --algorithm_name ${algo} \
 --experiment_name ${exp} \
@@ -22,7 +22,7 @@ python render/render_mve.py \
 --n_rollout_threads 1 \
 --use_render \
 --episode_length 10 \
---render_episodes 5 \
+--render_episodes 1 \
 --model_dir "/home/yanyz/yanyz/gitlab/onpolicy/onpolicy/scripts/results/MVE/yyz3-avoid/mappo/MVE-09-20-train-3a-mo-spr-avoid2/run1/models" \
 --use_recurrent_policy \
 --usegui \
